@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">learncrypto</string>
+    <string name="app_name">learn crypto</string>
+
+    <!--  Navigation items  -->
+    <string name="nav_home">Home</string>
+    <string name="nav_learn">Learn</string>
+    <string name="nav_encrypt">Encrypt</string>
+    <string name="nav_more">More</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -25,6 +25,12 @@ android {
             )
         }
     }
+
+    // enable view binding to work w/ Fragments instead of Activities
+    buildFeatures{
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

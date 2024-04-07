@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Basic Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#000000FF</color>
+
+    <!-- theme Colors -->
+    <color name="primary">#11999E</color>
+    <color name="accent">#30E3CA</color>
+    <color name="muted">#97B1AB</color>
+    <color name="background">#40514E</color>
+    <color name="nav_background">#211f26</color>
+    <color name="foreground">#E4F9F5</color>
+
 </resources>
