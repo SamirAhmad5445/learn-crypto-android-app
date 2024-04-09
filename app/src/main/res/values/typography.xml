@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- using sp for typography dimensions is best practice due to responsive reasons -->
+    <!-- Smaller text size -->
+    <dimen name="text_xs">12sp</dimen>
+    <dimen name="text_sm">14sp</dimen>
+    <!-- Base font size -->
+    <dimen name="text_base">16sp</dimen>
+    <!-- Larger text sizes -->
+    <dimen name="text_lg">18sp</dimen>
+    <dimen name="text_xl">20sp</dimen>
+    <dimen name="text_2xl">24sp</dimen>
+    <dimen name="text_3xl">30sp</dimen>
+    <dimen name="text_4xl">36sp</dimen>
+    <dimen name="text_5xl">48sp</dimen>
+</resources>

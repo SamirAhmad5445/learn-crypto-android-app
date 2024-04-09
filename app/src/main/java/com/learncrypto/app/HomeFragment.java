@@ -3,8 +3,6 @@ package com.learncrypto.app;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,23 +20,22 @@ public class HomeFragment extends Fragment {
 
         getStartedBtn = view.findViewById(R.id.get_started_btn);
 
-        getStartedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        getStartedBtn.setOnClickListener(v -> {
                 // get the main activity which ia the parent activity
                 MainActivity mainActivity = (MainActivity)getActivity();
 
-                // new learnFragment is needed to navigate to
+                // new learnFragment is needed to navigate to it
                 Fragment learnFragment = new LearnFragment();
 
                 // use the updateFragment to replace fragments + use setSelected to update the bottom nav item id
-                mainActivity.updateFragment(learnFragment);
-                mainActivity.binding.bottomNavigationView.setSelectedItemId(R.id.navItemLearn);
+                if (mainActivity != null) {
+                    mainActivity.updateFragment(learnFragment);
+                    mainActivity.binding.bottomNavigationView.setSelectedItemId(R.id.navItemLearn);
+                }
             }
-        });
+        );
 
         return view;
-
     }
 
 }

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">learn crypto</string>
 
+    <!-- Titles -->
+    <string name="home_title">Learn Crypto</string>
+
     <!--  Navigation items  -->
     <string name="nav_home">Home</string>
     <string name="nav_learn">Learn</string>

@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Learn About Cryptography"
-            android:textColor="@color/foreground"
+            android:textColor="@color/primary_50"
             android:textSize="30sp" />
     </ScrollView>
 </FrameLayout>

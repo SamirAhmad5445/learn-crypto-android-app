@@ -6,11 +6,45 @@
     <color name="transparent">#000000FF</color>
 
     <!-- theme Colors -->
-    <color name="primary">#11999E</color>
-    <color name="accent">#30E3CA</color>
-    <color name="muted">#97B1AB</color>
-    <color name="background">#40514E</color>
-    <color name="nav_background">#211f26</color>
-    <color name="foreground">#E4F9F5</color>
+    <!-- Primary -->
+    <color name="primary_50">#f0fdfc</color>
+    <color name="primary_100">#cdfaf6</color>
+    <color name="primary_200">#9bf4ee</color>
+    <color name="primary_300">#61e7e3</color>
+    <color name="primary_400">#30d1d1</color>
+    <color name="primary_500">#17b3b5</color>
+    <color name="primary_600">#11999e</color>
+    <color name="primary_700">#117074</color>
+    <color name="primary_800">#13575c</color>
+    <color name="primary_900">#144a4d</color>
+    <color name="primary_950">#052a2e</color>
 
+    <!-- neutral -->
+    <color name="neutral_50">#f7f6f9</color>
+    <color name="neutral_100">#eeecf2</color>
+    <color name="neutral_200">#d9d6e1</color>
+    <color name="neutral_300">#b6b1c8</color>
+    <color name="neutral_400">#8f87a9</color>
+    <color name="neutral_500">#71688f</color>
+    <color name="neutral_600">#5d5376</color>
+    <color name="neutral_700">#4c4460</color>
+    <color name="neutral_800">#423b51</color>
+    <color name="neutral_900">#201f25</color>
+    <color name="neutral_950">#141218</color>
+
+    <!-- muted -->
+    <color name="muted_50">#f5f8f7</color>
+    <color name="muted_100">#dfe8e5</color>
+    <color name="muted_200">#bfd0cc</color>
+    <color name="muted_300">#97b1ab</color>
+    <color name="muted_400">#71908a</color>
+    <color name="muted_500">#577570</color>
+    <color name="muted_600">#445d59</color>
+    <color name="muted_700">#394c4a</color>
+    <color name="muted_800">#303f3d</color>
+    <color name="muted_900">#2b3634</color>
+    <color name="muted_950">#161d1c</color>
+
+    <!-- custom values -->
+    <color name="text_neutal">@color/neutral_100</color>
 </resources>

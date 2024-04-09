@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base spacing -->
+    <dimen name="space_1">4dp</dimen>
+    <!-- Smaller spacing -->
+    <dimen name="space_0_5">2dp</dimen>
+    <!-- Larger spacings -->
+    <dimen name="space_2">8dp</dimen>
+    <dimen name="space_3">12dp</dimen>
+    <dimen name="space_4">16dp</dimen>
+    <dimen name="space_5">20dp</dimen>
+    <dimen name="space_6">24dp</dimen>
+    <dimen name="space_8">32dp</dimen>
+    <dimen name="space_10">40dp</dimen>
+    <dimen name="space_12">48dp</dimen>
+    <dimen name="space_16">64dp</dimen>
+    <dimen name="space_20">80dp</dimen>
+    <dimen name="space_24">96dp</dimen>
+    <dimen name="space_32">128dp</dimen>
+    <dimen name="space_40">160dp</dimen>
+    <dimen name="space_48">192dp</dimen>
+    <dimen name="space_56">224dp</dimen>
+    <dimen name="space_64">256dp</dimen>
+
+    <!-- custom values -->
+    <dimen name="container_padding">@dimen/space_4</dimen>
+</resources>
