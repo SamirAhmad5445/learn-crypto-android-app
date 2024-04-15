@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lesson_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/neutral_800"
+    android:layout_margin="@dimen/space_4"
+    app:cardCornerRadius="@dimen/corners_xl">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/space_2"
+        android:paddingHorizontal="@dimen/space_4"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lesson_card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World"
+            android:textColor="@color/primary_100"
+            android:textSize="@dimen/text_2xl"
+            android:textStyle="bold"
+            android:background="@color/transparent"
+            />
+
+        <TextView
+            android:id="@+id/lesson_card_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World"
+            android:textColor="@color/neutral_100"
+            android:textSize="@dimen/text_base"
+            android:background="@color/transparent"
+            />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

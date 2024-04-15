@@ -5,6 +5,7 @@
     <!-- Smaller spacing -->
     <dimen name="space_0_5">2dp</dimen>
     <!-- Larger spacings -->
+    <dimen name="space_1_5">6dp</dimen>
     <dimen name="space_2">8dp</dimen>
     <dimen name="space_3">12dp</dimen>
     <dimen name="space_4">16dp</dimen>
@@ -21,6 +22,17 @@
     <dimen name="space_48">192dp</dimen>
     <dimen name="space_56">224dp</dimen>
     <dimen name="space_64">256dp</dimen>
+
+    <!-- corner radius values -->
+    <dimen name="corners_none">0dp</dimen>
+    <dimen name="corners_sm">@dimen/space_0_5</dimen>
+    <dimen name="corners_default">@dimen/space_1</dimen>
+    <dimen name="corners_md">@dimen/space_1_5</dimen>
+    <dimen name="corners_lg">@dimen/space_2</dimen>
+    <dimen name="corners_xl">@dimen/space_3</dimen>
+    <dimen name="corners_2xl">@dimen/space_4</dimen>
+    <dimen name="corners_3xl">@dimen/space_6</dimen>
+    <dimen name="corners_full">9999dp</dimen>
 
     <!-- custom values -->
     <dimen name="container_padding">@dimen/space_4</dimen>

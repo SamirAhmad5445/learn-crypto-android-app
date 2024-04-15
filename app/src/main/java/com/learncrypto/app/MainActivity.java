@@ -1,6 +1,5 @@
 package com.learncrypto.app;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             } else if(id == R.id.navItemMore) {
                 updateFragment(new MoreFragment());
             }
-
             return true;
         });
     }
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public void updateFragment(Fragment f) {
         FragmentManager m = getSupportFragmentManager();
         FragmentTransaction t = m.beginTransaction();
-        t.replace(R.id.frameLayout, f);
+        t.replace(R.id.frame_container, f);
         t.commit();
     }
 }
