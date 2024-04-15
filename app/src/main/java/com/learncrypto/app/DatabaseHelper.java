@@ -2,6 +2,7 @@ package com.learncrypto.app;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,6 +16,7 @@ import java.io.InputStreamReader;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "CryptographyCourse.db";
+    public static final String DATABASE_PREFERENCES = "database_preferences";
 
     private final Context context;
     public DatabaseHelper(Context context) {
@@ -43,24 +45,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private void seedDb(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        seedLevelTable(db);
-//        seedLessonTable(db);
-//        seedQuestionTable(db);
+    public boolean isExist() {
+        SharedPreferences preferences = context.getSharedPreferences(DATABASE_PREFERENCES, Context.MODE_PRIVATE);
+        return preferences.getBoolean("isExist", false);
+    }
 
-//        ContentValues values = new ContentValues();
-//        values.put(DatabaseContract.LevelTable.COLUMN_NAME_LEVEL_NAME, "Samir Ahmad");
-//        long result = db.insert(DatabaseContract.LevelTable.TABLE_NAME, null, values);
-//        if(result == -1) {
-//            Toast.makeText(context, "Failed to seed the database", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(context, "Successfully seeded the database", Toast.LENGTH_SHORT).show();
-//        }
+    public void init() {
+        // check if the db has been created already
+        if(isExist()) {
+            return;
+        }
+
+        seedDb();
+
+        SharedPreferences.Editor editor = context.getSharedPreferences(DATABASE_PREFERENCES, Context.MODE_PRIVATE).edit();
+        editor.putBoolean("isExist", true);
+        editor.apply();
     }
 
     public Cursor getData() {
-        seedDb();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + DatabaseContract.LevelTable.TABLE_NAME;
 
@@ -72,8 +75,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    private void seedLevelTable(SQLiteDatabase db) {
+    private void seedDb(){
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        seedLevelTable(db);
+        seedLessonTable(db);
+        seedQuestionTable(db);
+    }
+
+    private void seedLevelTable(SQLiteDatabase db) {
         InputStream seedFile = null;
         BufferedReader seedFileReader = null;
 
@@ -82,14 +92,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             seedFileReader = new BufferedReader(new InputStreamReader(seedFile));
 
             db.beginTransaction();
-            Cursor cursor = null;
-            cursor = db.rawQuery(
-                    "SELECT * FROM " + DatabaseContract.LevelTable.TABLE_NAME, null
-            );
-
-            if(cursor.getCount() == 10) {
-                return;
-            }
 
             String line = seedFileReader.readLine();
             while (line != null) {
@@ -135,19 +137,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             String line = seedFileReader.readLine();
             while (line != null) {
-                String[] values = line.split("\\|");
-                if (values.length == 3) {
-                    String lessonName = values[0];
-                    String filePath = values[1];
-                    int levelId = Integer.parseInt(values[2]);
+                String[] parts = line.split("\\|");
+                if (parts.length == 3) {
+                    ContentValues values = new ContentValues();
+                    values.put(DatabaseContract.LessonTable.COLUMN_NAME_LESSON_NAME, parts[0]);
+                    values.put(DatabaseContract.LessonTable.COLUMN_NAME_FILE_PATH, parts[1]);
+                    values.put(DatabaseContract.LessonTable.COLUMN_NAME_FOREIGN_LEVEL_ID, parts[2]);
+                    values.put(DatabaseContract.LessonTable.COLUMN_NAME_IS_COMPLETED, false);
 
-                    String query = "INSERT INTO " + DatabaseContract.LessonTable.TABLE_NAME +
-                            " (" + DatabaseContract.LessonTable.COLUMN_NAME_LESSON_NAME +
-                            ", " + DatabaseContract.LessonTable.COLUMN_NAME_FILE_PATH +
-                            ", " + DatabaseContract.LessonTable.COLUMN_NAME_FOREIGN_LEVEL_ID +
-                            ") VALUES (?, ?, ?);";
-
-                    db.execSQL(query, new Object[]{lessonName, filePath, levelId});
+                    db.insert(DatabaseContract.LessonTable.TABLE_NAME, null, values);
+                } else {
+                    Toast.makeText(context, "Failed to seed Lesson Table", Toast.LENGTH_SHORT).show();
+                    break;
                 }
 
                 line = seedFileReader.readLine();
@@ -180,32 +181,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         BufferedReader seedFileReader = null;
 
         try {
-            seedFile = getContext().getAssets().open("questionTableSeed");
+            seedFile = getContext().getAssets().open("questionTableSeed.txt");
             seedFileReader = new BufferedReader(new InputStreamReader(seedFile));
 
             db.beginTransaction();
 
             String line = seedFileReader.readLine();
             while(line != null) {
-                String[] values = line.split("\\|");
-                if(values.length == 6) {
-                    String questionText = values[0];
-                    String choiceA = values[1];
-                    String choiceB = values[2];
-                    String choiceC = values[3];
-                    String correctChoice = values[4];
-                    int lessonId = Integer.parseInt(values[5]);
+                String[] parts = line.split("\\|");
+                if(parts.length == 6) {
+                    ContentValues values = new ContentValues();
+                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_QUESTION_TEXT, parts[0]);
+                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_CHOICE_A, parts[1]);
+                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_CHOICE_B, parts[2]);
+                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_CHOICE_C, parts[3]);
+                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_CORRECT_CHOICE, parts[4]);
+                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_FOREIGN_LESSON_ID, parts[5]);
+//                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_USER_CHOICE, "not answered");
+                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_IS_CORRECT, false);
 
-                    String query = "INSERT INTO " + DatabaseContract.QuestionTable.TABLE_NAME +
-                            " (" + DatabaseContract.QuestionTable.COLUMN_NAME_QUESTION_TEXT +
-                            ", " + DatabaseContract.QuestionTable.COLUMN_NAME_CHOICE_A +
-                            ", " + DatabaseContract.QuestionTable.COLUMN_NAME_CHOICE_B +
-                            ", " + DatabaseContract.QuestionTable.COLUMN_NAME_CHOICE_C +
-                            ", " + DatabaseContract.QuestionTable.COLUMN_NAME_CORRECT_CHOICE +
-                            ", " + DatabaseContract.QuestionTable.COLUMN_NAME_FOREIGN_LESSON_ID +
-                            ") VALUES (?, ?, ?, ?, ?, ?);";
-
-                    db.execSQL(query, new Object[] {questionText, choiceA, choiceB, choiceC, correctChoice, lessonId});
+                    db.insert(DatabaseContract.QuestionTable.TABLE_NAME, null, values);
                 }
 
                 line = seedFileReader.readLine();

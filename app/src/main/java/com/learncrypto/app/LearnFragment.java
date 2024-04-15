@@ -37,6 +37,7 @@ public class LearnFragment extends Fragment {
         lessonRecyclerView.setAdapter(lessonAdapter);
 
         dbHelper = new DatabaseHelper(getActivity());
+        dbHelper.init();
         leadLessonsDataFromDB();
         TextView txt = (TextView) view.findViewById(R.id.hello);
         txt.setText(hello);
