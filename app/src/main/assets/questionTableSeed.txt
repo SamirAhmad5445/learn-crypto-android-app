@@ -1,0 +1,6 @@
+What is the primary purpose of cryptography?|To create artistic secret codes|To provide elements of data security such as confidentiality, integrity, authentication, and non-repudiation|To develop new languages|b|1
+Which of the following is NOT a modern application of cryptography?|Secure Communications|E-commerce Transactions|Weather Forecasting|c|1
+Cryptography has been around since:|The invention of the computer|The ancient Egyptians|The Renaissance period|b|1
+What was the purpose of the scytale used by the Spartans?|To send secret messages|To measure distances|To predict the future|a|2
+Which cipher did Julius Caesar create?|Atbash Cipher|Vigenère Cipher|Caesar Cipher|c|2
+What advancement did the Hebern rotor machine introduce in cryptography?|The use of an encryption key|Machine-based encryption|Substitution cipher technique|b|2
