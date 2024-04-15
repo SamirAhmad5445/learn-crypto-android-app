@@ -46,17 +46,17 @@
     <color name="neutral_950">#141218</color>
 
     <!-- accent -->
-    <color name="accent_50">#fbf7fd</color>
-    <color name="accent_100">#f6ecfb</color>
-    <color name="accent_200">#efdcf8</color>
-    <color name="accent_300">#e2c0f2</color>
-    <color name="accent_400">#d098e8</color>
-    <color name="accent_500">#c47fe0</color>
-    <color name="accent_600">#aa51cc</color>
-    <color name="accent_700">#933eb2</color>
-    <color name="accent_800">#7b3792</color>
-    <color name="accent_900">#642e75</color>
-    <color name="accent_950">#461655</color>
+    <color name="accent_50">#eef3ff</color>
+    <color name="accent_100">#e0e9ff</color>
+    <color name="accent_200">#c7d6fe</color>
+    <color name="accent_300">#a5bbfc</color>
+    <color name="accent_400">#8195f8</color>
+    <color name="accent_500">#6371f1</color>
+    <color name="accent_600">#4649e5</color>
+    <color name="accent_700">#4545cd</color>
+    <color name="accent_800">#3032a3</color>
+    <color name="accent_900">#2e3181</color>
+    <color name="accent_950">#1b1c4b</color>
 
     <!-- muted -->
     <color name="muted_50">#f5f8f7</color>
@@ -72,5 +72,5 @@
     <color name="muted_950">#161d1c</color>
 
     <!-- custom values -->
-    <color name="text_neutal">@color/neutral_100</color>
+    <color name="text_neutral">@color/neutral_50</color>
 </resources>
