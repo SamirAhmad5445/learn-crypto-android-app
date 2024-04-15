@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/accent_800"
+        android:layout_margin="@dimen/space_4"
+        app:cardCornerRadius="@dimen/corners_lg"
+        >
+
+        <TextView
+            android:id="@+id/cipher_list_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_4"
+            android:layout_marginVertical="@dimen/space_2"
+            android:gravity="center"
+            android:text="Amin Abdo"
+            android:textColor="@color/primary_50"
+            android:textSize="@dimen/text_xl"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

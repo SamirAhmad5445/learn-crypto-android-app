@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/home_title"
-        android:textColor="@color/text_neutal"
+        android:textColor="@color/text_neutral"
         android:textSize="@dimen/text_3xl"
         android:layout_marginTop="@dimen/space_6"
         android:layout_marginBottom="@dimen/space_3"/>
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:text="Get Started"
         android:backgroundTint="@color/primary_500"
-        android:textColor="@color/text_neutal"
+        android:textColor="@color/text_neutral"
         android:textSize="@dimen/text_lg"
         android:layout_marginTop="@dimen/space_3"
         android:padding="@dimen/space_3"
