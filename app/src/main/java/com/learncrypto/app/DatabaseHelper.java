@@ -14,11 +14,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+    // database data members
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "CryptographyCourse.db";
-    public static final String DATABASE_PREFERENCES = "database_preferences";
-
     private final Context context;
+    // shared preferences maneging
+    public static final String DATABASE_PREFERENCES = "database_preferences";
+    public static final String PREFERENCES_IS_EXIST = "isExist";
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
@@ -45,36 +48,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean isExist() {
-        SharedPreferences preferences = context.getSharedPreferences(DATABASE_PREFERENCES, Context.MODE_PRIVATE);
-        return preferences.getBoolean("isExist", false);
-    }
-
+    // this function start the seeding if the app is just been installed
     public void init() {
         // check if the db has been created already
         if(isExist()) {
             return;
         }
-
+        // if not then seed the empty db
         seedDb();
-
+        // set the SharedPreferences item PREFERENCES_IS_EXIST to true
         SharedPreferences.Editor editor = context.getSharedPreferences(DATABASE_PREFERENCES, Context.MODE_PRIVATE).edit();
-        editor.putBoolean("isExist", true);
+        editor.putBoolean(PREFERENCES_IS_EXIST, true);
         editor.apply();
     }
 
-    public Cursor getData() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + DatabaseContract.LevelTable.TABLE_NAME;
-
-        Cursor cursor = null;
-        if(db!= null) {
-            cursor = db.rawQuery(query, null);
-        }
-
-        return cursor;
+    public boolean isExist() {
+        SharedPreferences preferences = context.getSharedPreferences(DATABASE_PREFERENCES, Context.MODE_PRIVATE);
+        return preferences.getBoolean(PREFERENCES_IS_EXIST, false);
     }
 
+    // Seeding functions: set of function that create the initial data from seed files for the table
     private void seedDb(){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -88,7 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         BufferedReader seedFileReader = null;
 
         try {
-            seedFile = getContext().getAssets().open("levelTableSeed.txt");
+            seedFile = getContext().getAssets().open(DatabaseContract.LevelTable.SEED_FILE);
             seedFileReader = new BufferedReader(new InputStreamReader(seedFile));
 
             db.beginTransaction();
@@ -130,7 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         BufferedReader seedFileReader = null;
 
         try {
-            seedFile = getContext().getAssets().open("lessonTableSeed.txt");
+            seedFile = getContext().getAssets().open(DatabaseContract.LessonTable.SEED_FILE);
             seedFileReader = new BufferedReader(new InputStreamReader(seedFile));
 
             db.beginTransaction();
@@ -181,7 +174,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         BufferedReader seedFileReader = null;
 
         try {
-            seedFile = getContext().getAssets().open("questionTableSeed.txt");
+            seedFile = getContext().getAssets().open(DatabaseContract.QuestionTable.SEED_FILE);
             seedFileReader = new BufferedReader(new InputStreamReader(seedFile));
 
             db.beginTransaction();
@@ -197,7 +190,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     values.put(DatabaseContract.QuestionTable.COLUMN_NAME_CHOICE_C, parts[3]);
                     values.put(DatabaseContract.QuestionTable.COLUMN_NAME_CORRECT_CHOICE, parts[4]);
                     values.put(DatabaseContract.QuestionTable.COLUMN_NAME_FOREIGN_LESSON_ID, parts[5]);
-//                    values.put(DatabaseContract.QuestionTable.COLUMN_NAME_USER_CHOICE, "not answered");
                     values.put(DatabaseContract.QuestionTable.COLUMN_NAME_IS_CORRECT, false);
 
                     db.insert(DatabaseContract.QuestionTable.TABLE_NAME, null, values);
@@ -226,5 +218,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             }
         }
+    }
+
+    // data getters: set of functions to get data from the different tables
+    public Cursor getLessonsData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " +  DatabaseContract.LessonTable.TABLE_NAME + ";";
+
+        Cursor cursor = null;
+        if(db!= null) {
+            cursor = db.rawQuery(query, null);
+        }
+
+        return cursor;
     }
 }

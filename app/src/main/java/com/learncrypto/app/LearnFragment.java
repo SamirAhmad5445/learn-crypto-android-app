@@ -20,7 +20,6 @@ import java.util.List;
 public class LearnFragment extends Fragment {
     private RecyclerView lessonRecyclerView;
     private LessonAdapter lessonAdapter;
-    private List<Lesson> lessonList;
     private String hello;
     private DatabaseHelper dbHelper;
 
@@ -29,31 +28,33 @@ public class LearnFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_learn, container, false);
 
-        lessonList = new ArrayList<Lesson>();
-        lessonAdapter = new LessonAdapter(lessonList);
-
-        lessonRecyclerView = view.findViewById(R.id.learn_recyclerview);
-        lessonRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        lessonRecyclerView.setAdapter(lessonAdapter);
-
         dbHelper = new DatabaseHelper(getActivity());
         dbHelper.init();
-        leadLessonsDataFromDB();
-        TextView txt = (TextView) view.findViewById(R.id.hello);
-        txt.setText(hello);
+
+        lessonAdapter = new LessonAdapter(loadLessonsDataFromDB());
+
+        lessonRecyclerView = view.findViewById(R.id.learn_recyclerview);
+        lessonRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        lessonRecyclerView.setAdapter(lessonAdapter);
+
         return view;
     }
 
-    private void leadLessonsDataFromDB() {
-        Cursor cursor = dbHelper.getData();
+    private List<Lesson> loadLessonsDataFromDB() {
+        List<Lesson> lessonsList = new ArrayList<>();
+        Cursor cursor = dbHelper.getLessonsData();
 
         if(cursor.getCount() == 0) {
             Toast.makeText(getContext(), "No data", Toast.LENGTH_SHORT).show();
         } else {
             while(cursor.moveToNext()) {
-                hello = cursor.getString(1);
+                String lessonName = cursor.getString(1);
+                String filePath = cursor.getString(2);
+                int levelId = cursor.getInt(4);
+
+                lessonsList.add(new Lesson(lessonName, filePath, levelId));
             }
         }
-
+        return lessonsList;
     }
 }

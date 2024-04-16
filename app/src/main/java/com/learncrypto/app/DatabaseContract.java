@@ -30,6 +30,7 @@ public class DatabaseContract {
     // Level Table:
     public static class LevelTable {
         public static final String TABLE_NAME = "level_table";
+        public static final String SEED_FILE = "levelTableSeed.txt";
         public static final String COLUMN_NAME_ID = "_level_id";
         public static final String COLUMN_NAME_LEVEL_NAME = "level_name";
         public static final String SQL_CREATE_LEVEL =
@@ -43,6 +44,7 @@ public class DatabaseContract {
     // Lesson Table:
     public static class LessonTable {
         public static final String TABLE_NAME = "lesson_table";
+        public static final String SEED_FILE = "lessonTableSeed.txt";
         public static final String COLUMN_NAME_ID = "_lesson_id";
         public static final String COLUMN_NAME_LESSON_NAME = "lesson_name";
         public static final String COLUMN_NAME_FILE_PATH = "file_path";
@@ -64,6 +66,7 @@ public class DatabaseContract {
     // Question Table:
     public static class QuestionTable {
         public static final String TABLE_NAME = "question_table";
+        public static final String SEED_FILE = "questionTableSeed.txt";
         public static final String COLUMN_NAME_ID = "_question_id";
         public static final String COLUMN_NAME_QUESTION_TEXT = "question_text";
         public static final String COLUMN_NAME_CHOICE_A = "choice_a";
