@@ -1,2 +1,37 @@
-What is Cryptography?|lesson_1.md|1
-A Brief History and Evolution of Cryptographic Techniques|lesson_2.md|1
+Definition and Purpose of Cryptography|lesson_1.md|1
+Brief History and Evolution of Cryptographic Techniques|lesson_2.md|1
+Concepts of Plain Text, Cipher Text, Encryption, and Decryption|lesson_3.md|2
+Keys and Key Management|lesson_4.md|2
+Introduction to Cryptographic Algorithms|lesson_5.md|2
+Shift Cipher: Understanding Caesar Cipher and its Mechanism|lesson_6.md|3
+Affine Cipher: Combining Caesar Cipher and Modular Arithmetic|lesson_7.md|3
+Substitution Cipher: Basics and the Concept of Substituting Letters|lesson_8.md|3
+Permutation Cipher: The Idea of Shuffling the Positions of Characters|lesson_9.md|3
+Vigenère Cipher: Using a Keyword to Encrypt Messages|lesson_10.md|3
+Hill Cipher: Linear Algebra and Encryption using Matrices|lesson_11.md|3
+SPN (Substitution-Permutation Network): Understanding Block Ciphers and Their Structure|lesson_12.md|3
+Data Encryption Standard (DES) and its Limitations|lesson_13.md|4
+Advanced Encryption Standard (AES)|lesson_14.md|4
+Stream Ciphers vs. Block Ciphers|lesson_15.md|4
+Modes of Operation (ECB, CBC, CFB, OFB, GCM)|lesson_16.md|4
+Public Key Infrastructure (PKI)|lesson_17.md|5
+RSA Algorithm|lesson_18.md|5
+Elliptic Curve Cryptography (ECC)|lesson_19.md|5
+Digital Signatures and their Importance|lesson_20.md|5
+Secure Sockets Layer (SSL)/Transport Layer Security (TLS)|lesson_21.md|6
+Secure Shell (SSH)|lesson_22.md|6
+Pretty Good Privacy (PGP)|lesson_23.md|6
+Understanding MD5, SHA-1, SHA-2, SHA-3|lesson_24.md|7
+Concept of Hash Collisions|lesson_25.md|7
+HMAC (Hash-based Message Authentication Code)|lesson_26.md|7
+Types of Attacks and How to Defend Against Them|lesson_27.md|8
+Famous Cryptanalysis Cases and Their Impact|lesson_28.md|8
+Quantum Cryptography and its Future|lesson_29.md|9
+Zero-Knowledge Proofs|lesson_30.md|9
+Homomorphic Encryption and its Applications|lesson_31.md|9
+Coding Cryptographic Algorithms|lesson_32.md|10
+Cryptography in Web and Mobile Applications|lesson_33.md|10
+Security Best Practices|lesson_34.md|10
+Cryptography Puzzles and CTF Challenges|lesson_35.md|11
+Case Studies and Real-world Cryptography Analysis|lesson_36.md|11
+Interactive Quizzes and Exercises|lesson_37.md|11
