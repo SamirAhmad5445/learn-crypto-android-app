@@ -18,10 +18,15 @@
     <dimen name="space_20">80dp</dimen>
     <dimen name="space_24">96dp</dimen>
     <dimen name="space_32">128dp</dimen>
+    <dimen name="space_36">144dp</dimen>
     <dimen name="space_40">160dp</dimen>
+    <dimen name="space_44">176dp</dimen>
     <dimen name="space_48">192dp</dimen>
+    <dimen name="space_52">208dp</dimen>
     <dimen name="space_56">224dp</dimen>
-    <dimen name="space_64">256dp</dimen>
+    <dimen name="space_72">288dp</dimen>
+    <dimen name="space_80">320dp</dimen>
+    <dimen name="space_96">384dp</dimen>
 
     <!-- corner radius values -->
     <dimen name="corners_none">0dp</dimen>

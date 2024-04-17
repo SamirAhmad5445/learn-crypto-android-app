@@ -58,6 +58,19 @@
     <color name="accent_900">#2e3181</color>
     <color name="accent_950">#1b1c4b</color>
 
+    <!-- danger -->
+    <color name="danger_50">#fef2f2</color>
+    <color name="danger_100">#fee2e2</color>
+    <color name="danger_200">#fecaca</color>
+    <color name="danger_300">#fca5a5</color>
+    <color name="danger_400">#f87171</color>
+    <color name="danger_500">#ef4444</color>
+    <color name="danger_600">#dc2626</color>
+    <color name="danger_700">#b91c1c</color>
+    <color name="danger_800">#991b1b</color>
+    <color name="danger_900">#7f1d1d</color>
+    <color name="danger_950">#450a0a</color>
+
     <!-- muted -->
     <color name="muted_50">#f5f8f7</color>
     <color name="muted_100">#dfe8e5</color>
