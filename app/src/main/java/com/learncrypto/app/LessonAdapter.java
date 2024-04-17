@@ -1,5 +1,6 @@
 package com.learncrypto.app;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,11 @@ import java.util.List;
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonViewHolder> {
     private List<Lesson> lessonList;
 
-    public LessonAdapter(List<Lesson> lessonList) {
+    private OnItemClickListener listener;
+
+    public LessonAdapter(List<Lesson> lessonList, OnItemClickListener listener) {
         this.lessonList = lessonList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,11 +38,14 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
         if(lesson != null) {
             String lessonName = lesson.getLessonName();
             String filePath = lesson.getFilePath();
-            Integer level = lesson.getLevel();
+            int level = lesson.getLevel();
 
             holder.lesson_card_title.setText(lessonName);
-            holder.lesson_card_level.setText(level.toString());
+            holder.lesson_card_level.setText(holder.getLevelString(level));
             holder.setFilePath(filePath);
+            holder.itemView.setOnClickListener(v -> {
+                listener.onItemClick(filePath);
+            });
         }
     }
 
@@ -55,11 +62,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
             super(itemView);
             lesson_card_title = itemView.findViewById(R.id.lesson_card_title);
             lesson_card_level = itemView.findViewById(R.id.lesson_card_level);
-
-            // remember to set onClickListener
-            itemView.setOnClickListener(v -> {
-                Toast.makeText(itemView.getContext(), getFilePath(), Toast.LENGTH_SHORT).show();
-            });
         }
 
         public void setFilePath(String filePath) {
@@ -69,5 +71,13 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
         public String getFilePath() {
             return filePath;
         }
+
+        public String getLevelString(int level) {
+            return "Level " + level;
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String lessonFileName);
     }
 }

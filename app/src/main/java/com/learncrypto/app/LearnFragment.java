@@ -1,5 +1,6 @@
 package com.learncrypto.app;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -31,7 +32,11 @@ public class LearnFragment extends Fragment {
         dbHelper = new DatabaseHelper(getActivity());
         dbHelper.init();
 
-        lessonAdapter = new LessonAdapter(loadLessonsDataFromDB());
+        lessonAdapter = new LessonAdapter(loadLessonsDataFromDB(), filePath -> {
+            Intent intent = new Intent((MainActivity)getActivity(), LessonActivity.class);
+            intent.putExtra("LESSON_FILE_PATH", filePath);
+            startActivity(intent);
+        });
 
         lessonRecyclerView = view.findViewById(R.id.learn_recyclerview);
         lessonRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
