@@ -1,6 +1,102 @@
-What is the primary purpose of cryptography?|To create artistic secret codes|To provide elements of data security such as confidentiality, integrity, authentication, and non-repudiation|To develop new languages|b|1
-Which of the following is NOT a modern application of cryptography?|Secure Communications|E-commerce Transactions|Weather Forecasting|c|1
-Cryptography has been around since:|The invention of the computer|The ancient Egyptians|The Renaissance period|b|1
-What was the purpose of the scytale used by the Spartans?|To send secret messages|To measure distances|To predict the future|a|2
-Which cipher did Julius Caesar create?|Atbash Cipher|Vigenère Cipher|Caesar Cipher|c|2
-What advancement did the Hebern rotor machine introduce in cryptography?|The use of an encryption key|Machine-based encryption|Substitution cipher technique|b|2
+What is the primary purpose of cryptography?|To create artistic patterns|To secure information|To compress data files|b|1
+Which type of cryptography uses a single key for both encryption and decryption?|Asymmetric-key cryptography|Symmetric-key cryptography|Hash functions|b|1
+What did Julius Caesar use to secure his messages?|The Caesar cipher|The Enigma machine|Quantum encryption|a|1
+What device did the Spartans use for sending secret messages?|Scytale|Enigma machine|Polyalphabetic cipher|a|2
+Who is credited with introducing frequency analysis in cryptography?|Julius Caesar|Al-Kindi|Alan Turing|b|2
+What significant cryptographic development occurred in the 1970s?|Caesar cipher|Enigma machine|Public key cryptography|c|2
+What term describes the raw, unencrypted information as it was originally created?|Cipher Text|Encryption Key|Plain Text|c|3
+What is the result of the encryption process applied to plain text?|Decryption Key|Cipher Text|Encryption Algorithm|b|3
+Which process transforms cipher text back into plain text?|Encryption|Hashing|Decryption|c|3
+What are the two main types of cryptographic keys?|Symmetric keys|Asymmetric keys|Both A and B|c|4
+Key management involves which of the following?|Creating and distributing keys|Storing and destroying keys|All of the above|c|4
+Hardware Security Modules (HSMs) are used for what purpose in key management?|Key creation|Key storage|Key destruction|b|4
+Which algorithm was once widely used but is now considered to be retired due to its vulnerability?|RSA|AES|DES|c|5
+What is the name of the current standard for symmetric encryption?|RSA|AES|DES|b|5
+Which type of cryptographic algorithm uses a pair of keys for encryption and decryption?|Symmetric|Asymmetric|Hash Function|b|5
+What is a shift cipher?|A method to change the font of text|A type of encryption that shifts letters in the alphabet|A cipher that only shifts the first letter of each word|b|6
+In the Caesar Cipher, how many places are letters typically shifted?|One place|Three places|Five places|b|6
+What is the main vulnerability of the Caesar Cipher?|It requires a key|It can be broken with frequency analysis|It only works in Latin|b|6
+What does the 'a' in the Affine Cipher formula represent?|The shift value|The multiplicative key|The additive key|b|7
+In the Affine Cipher, what must be true about the 'a' value?|It must be even|It must be prime|It must be coprime to 26|c|7
+What is the purpose of modular arithmetic in the Affine Cipher?|To ensure the cipher text is a fixed length|To wrap around the alphabet|To make the cipher text more complex|b|7
+What is a Substitution Cipher?|A method to reverse the order of letters|A type of encryption where each letter is replaced with another|A cipher that only substitutes vowels|b|8
+In a Substitution Cipher, what is the key used for?|To lock a physical safe|To determine how letters are swapped|To encrypt numeric data|b|8
+What is a common method used to crack a Substitution Cipher?|Looking for mathematical equations|Analyzing letter frequencies and patterns|Using a special decryption machine|b|8
+What does a Permutation Cipher primarily do to the plaintext?|Changes the letters to numbers|Replaces each letter with a symbol|Shuffles the positions of characters|c|9
+In a Permutation Cipher, what dictates the new arrangement of letters?|The encryption algorithm|The pattern or key|The length of the message|b|9
+What is a common method to decipher a Permutation Cipher?|Using a substitution key|Analyzing the pattern of shuffling|Guessing the original message|b|9
+What does the Vigenère Cipher use to encrypt messages?|A single alphabet shift|A keyword|A numeric code|b|10
+How is the keyword used in the Vigenère Cipher?|It is sent along with the message|It determines the shift for each letter|It is the message itself|b|10
+What made the Vigenère Cipher so secure for many years?|Its simplicity|The use of a keyword to create multiple Caesar ciphers|The use of a single substitution alphabet|b|10
+What mathematical concept is the Hill Cipher based on?|Probability|Linear Algebra|Calculus|b|11
+What does the encryption matrix in the Hill Cipher do?|It adds a fixed number to each letter|It determines the order of operations|It multiplies by the plaintext vector|c|11
+Why must the encryption matrix be invertible in the Hill Cipher?|To ensure the message is readable|To allow for the decryption process|To increase the complexity of the cipher|b|11
+What are the two main components of an SPN?|S-boxes and P-boxes|Encryption and Decryption|Public and Private Keys|a|12
+In an SPN, what is the purpose of the S-boxes?|To shuffle the positions of characters|To substitute blocks of bits with others|To generate the encryption key|b|12
+What does the P-box in an SPN do?|Performs the permutation of bits|Creates the public key|Encrypts the message directly|a|12
+What type of algorithm is DES?|Asymmetric|Symmetric|Hash Function|b|13
+Why is DES considered vulnerable to brute-force attacks?|Because of its short key size|Because it uses simple permutations|Because it encrypts data in small blocks|a|13
+Which standard is considered a more secure alternative to DES?|RSA|AES|SHA-256|b|13
+What type of encryption algorithm is AES?|Asymmetric|Symmetric|Hash Function|b|14
+How many bits are in a block of AES encryption?|64 bits|128 bits|256 bits|b|14
+What makes AES considered secure against brute-force attacks?|The number of rounds it performs|The use of a single key|The simplicity of its algorithm|a|14
+Which cipher type encrypts data one bit at a time?|Stream Cipher|Block Cipher|Both|a|15
+What is a characteristic of Block Ciphers regarding error propagation?|A single error affects one bit|A single error affects the entire block|Errors are automatically corrected|b|15
+In what scenario might Stream Ciphers be preferred over Block Ciphers?|When encrypting large databases|When speed is critical, such as streaming media|When using the same key repeatedly|b|15
+Which mode uses a chain-like process to encrypt data blocks?|ECB|CBC|OFB|b|16
+If you need to secure a live video stream, which mode might be your best choice?|CFB|OFB|GCM|b|16
+Which mode includes an integrated mechanism for checking data integrity?|ECB|CBC|GCM|c|16
+What does a Certificate Authority (CA) do in PKI?|Issues digital certificates|Creates private keys|Monitors network traffic|a|17
+What is the purpose of a digital signature?|To encrypt data|To verify the sender's identity|To increase download speed|b|17
+Which component of PKI lists untrusted certificates?|Certificate Revocation Lists (CRLs)|Public Key|Private Key|a|17
+What is the primary mathematical principle on which RSA is based?|Addition of prime numbers|Factorization of large primes|Subtraction of integers|b|18
+Which key is shared publicly in RSA encryption?|The encryption key|The decryption key|Both keys|a|18
+What ensures the security of the RSA algorithm?|The length of the message|The complexity of the algorithm|The difficulty of factoring large primes|c|18
+What mathematical structure is fundamental to ECC?|Prime numbers|Elliptic curves|Factorization|b|19
+Why is ECC preferred for mobile devices?|It has a cool name|It requires less power and smaller keys|It works without an internet connection|b|19
+What role does ECC play in cryptocurrencies?|It generates random numbers|It secures transactions|It calculates exchange rates|b|19
+What is the primary purpose of a digital signature?|To encrypt data|To verify the sender's identity|To enhance the visual appeal of documents|b|20
+Which of the following is a component of a digital signature?|Public key|Private key|Both public and private keys|c|20
+What aspect of a digital message does a digital signature primarily protect?|Its size|Its integrity|Its color scheme|b|20
+What is the main purpose of SSL/TLS in internet communication?|To speed up data transfer|To secure data transmission|To compress data files|b|21
+Which protocol is the successor to SSL?|HTTPS|TLS|SSH|b|21
+What does the 'handshake' in SSL/TLS establish?|A new internet connection|A secure communication channel|The best encryption algorithm|b|21
+What is the primary function of SSH in network communication?|To increase data transfer speed|To secure remote connections|To compress data files|b|22
+Which feature of SSH prevents unauthorized access to a server?|Data compression|Authentication|Traffic shaping|b|22
+What does SSH use to ensure that the data remains confidential?|Firewalls|Encryption|Antivirus software|b|22
+What does PGP stand for?|Pretty Great Protection|Pretty Good Privacy|Pretty Grand Protocol|b|23
+Which type of cryptography does PGP use?|Public-Key Cryptography|Symmetric-Key Cryptography|Both a and b|c|23
+Why was PGP considered a weapon?|It could encrypt top-secret government files.|It was used in military communications.|Its strong encryption was classified as munitions.|c|23
+Which hash function is considered outdated and insecure?|MD5|SHA-1|SHA-2|a|24
+What is the primary purpose of using hash functions in password storage?|To make passwords longer|To store passwords in encrypted form|To verify data integrity|b|24
+Which hash function family includes variants like SHA-256 and SHA-512?|MD5|SHA-1|SHA-2|c|24
+What is a hash collision?|A successful encryption|A data compression technique|The occurrence of two different inputs having the same hash value|c|25
+Which hash function has been compromised due to collision attacks?|SHA-2|MD5|SHA-3|b|25
+What principle explains the inevitability of hash collisions?|Murphy's Law|The Pigeonhole Principle|Moore's Law|b|25
+What does HMAC stand for?|Hashing Message Authentication Code|Hash-based Message Authentication Code|Hyper Media Access Control|b|26
+What is the primary use of HMAC?|To encrypt data|To verify data integrity and authenticity|To compress data files|b|26
+Which of the following is a feature of HMAC?|It uses a public key|It uses a secret key|It uses a digital certificate|b|26
+What type of attack uses social engineering to trick individuals into revealing sensitive information?|DDoS Attack|Phishing Attack|SQL Injection Attack|b|27
+Which attack involves overwhelming a system with traffic to make it unavailable?|Malware Attack|Ransomware Attack|DDoS Attack|c|27
+What is a common defense against many types of cyber attacks?|Using the same password for all accounts|Clicking on all email links to verify the sender|Keeping software updated|c|27
+Which machine's codes were decrypted by Alan Turing, significantly aiding the Allied victory in World War II?|The Zimmermann Machine|The Enigma Machine|The Turing Machine|b|28
+What was the Zimmermann Telegram's impact on World War I?|It led to Germany's victory|It brought the United States into the war|It ended the war with a treaty|b|28
+What was the primary purpose of the Venona Project during the Cold War?|To encrypt U.S. military communications|To decrypt Soviet intelligence messages|To develop new cryptographic algorithms|b|28
+What unique feature of quantum mechanics ensures the security of Quantum Cryptography?|Superposition|Entanglement|Uncertainty Principle|c|29
+What is the main advantage of Quantum Cryptography over traditional methods?|Faster transmission|Unhackability|Cheaper costs|b|29
+Why is Quantum Cryptography considered crucial for the future?|It's more reliable|It's resistant to quantum computer attacks|It's easier to implement|b|29
+What is the main purpose of a Zero-Knowledge Proof?|To encrypt data|To prove a statement's truth without revealing any other information|To compress data files|b|30
+In a ZKP, who is the one that knows the secret?|The verifier|The prover|The observer|b|30
+What is a key application of ZKPs in the blockchain?|Creating new coins|Verifying transactions without exposing details|Speeding up transaction times|b|30
+What allows Homomorphic Encryption to perform calculations on encrypted data?|The decryption key|The encryption algorithm|The properties of the encryption|c|31
+Which application of Homomorphic Encryption ensures voter privacy?|Cloud storage|Electronic voting|Online banking|b|31
+What is a key benefit of Homomorphic Encryption in healthcare?|Faster data transfer|Secure sharing of medical records for research|Reduced storage needs|b|31
+What type of cryptographic algorithm uses the same key for both encryption and decryption?|Asymmetric Algorithm|Symmetric Algorithm|Hash Function|b|32
+Which algorithm is known for creating a unique 'fingerprint' for data?|RSA|AES|SHA-256|c|32
+Why is learning to code cryptographic algorithms beneficial?|It's a fun hobby|It enhances understanding of digital security|It helps in making better passwords|b|32
+What does SSL/TLS encryption protect in web applications?|The source code|The communication channel|The user interface|b|33
+Why is password hashing important in app security?|It makes passwords longer|It ensures passwords cannot be reversed if compromised|It makes passwords easier to remember|b|33
+What is a likely future development in app cryptography?|Simpler encryption methods|Quantum-resistant algorithms|Less reliance on cryptography|b|33
+What is the cornerstone of personal cyber hygiene?|Using the same password everywhere|Creating strong, unique passwords|Writing down all your passwords|b|34
+Why are software updates crucial in cybersecurity?|They add new features|They patch security vulnerabilities|They change the interface|b|34
+What is the purpose of multi-factor authentication?|To make logging in faster|To require multiple pieces of evidence for access|To reset passwords more often|b|34

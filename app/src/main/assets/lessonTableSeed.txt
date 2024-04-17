@@ -32,6 +32,3 @@ Homomorphic Encryption and its Applications|lesson_31.md|9
 Coding Cryptographic Algorithms|lesson_32.md|10
 Cryptography in Web and Mobile Applications|lesson_33.md|10
 Security Best Practices|lesson_34.md|10
-Cryptography Puzzles and CTF Challenges|lesson_35.md|11
-Case Studies and Real-world Cryptography Analysis|lesson_36.md|11
-Interactive Quizzes and Exercises|lesson_37.md|11
