@@ -71,6 +71,18 @@
     <color name="danger_900">#7f1d1d</color>
     <color name="danger_950">#450a0a</color>
 
+    <!-- success -->
+    <color name="success_50">#f0fdf4</color>
+    <color name="success_100">#dcfce7</color>
+    <color name="success_200">#bbf7d0</color>
+    <color name="success_300">#86efac</color>
+    <color name="success_400">#4ade80</color>
+    <color name="success_500">#22c55e</color>
+    <color name="success_600">#16a34a</color>
+    <color name="success_700">#15803d</color>
+    <color name="success_800">#166534</color>
+    <color name="success_900">#14532d</color>
+
     <!-- muted -->
     <color name="muted_50">#f5f8f7</color>
     <color name="muted_100">#dfe8e5</color>

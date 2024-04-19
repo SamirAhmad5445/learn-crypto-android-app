@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/neutral_900"
+    android:layout_margin="@dimen/space_4"
+    app:cardCornerRadius="@dimen/text_lg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_4">
+
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question one text?"
+            android:textSize="@dimen/text_xl"
+            android:textStyle="bold"
+            />
+
+        <RadioGroup
+            android:id="@+id/question_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/question_choice_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choice A"
+                />
+
+            <RadioButton
+                android:id="@+id/question_choice_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choice B"
+                />
+
+            <RadioButton
+                android:id="@+id/question_choice_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choice C"
+                />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

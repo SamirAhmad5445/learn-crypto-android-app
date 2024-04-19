@@ -1,22 +1,20 @@
 package com.learncrypto.app;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonViewHolder> {
-    private List<Lesson> lessonList;
+    private final List<Lesson> lessonList;
 
-    private OnItemClickListener listener;
+    private final OnItemClickListener listener;
 
     public LessonAdapter(List<Lesson> lessonList, OnItemClickListener listener) {
         this.lessonList = lessonList;
@@ -36,16 +34,25 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
     public void onBindViewHolder(@NonNull LessonViewHolder holder, int position) {
         Lesson lesson = lessonList.get(position);
         if(lesson != null) {
+            int lessonId = lesson.getId();
             String lessonName = lesson.getLessonName();
             String filePath = lesson.getFilePath();
+            int isComplete = lesson.getIsComplete();
             int level = lesson.getLevel();
 
-            holder.lesson_card_title.setText(lessonName);
+            String lessonCardTitle = lessonId + ". " + lessonName;
+
+            holder.lesson_card_title.setText(lessonCardTitle);
             holder.lesson_card_level.setText(holder.getLevelString(level));
+            if(isComplete == 0) {
+                holder.lesson_card_is_complete.setVisibility(View.INVISIBLE);
+            }
+
+            holder.lesson_card_is_success.setVisibility(View.INVISIBLE);
+            holder.lesson_card_is_failed.setVisibility(View.INVISIBLE);
+
             holder.setFilePath(filePath);
-            holder.itemView.setOnClickListener(v -> {
-                listener.onItemClick(filePath);
-            });
+            holder.itemView.setOnClickListener(v -> listener.onItemClick(lesson));
         }
     }
 
@@ -57,20 +64,23 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
     public static class LessonViewHolder extends RecyclerView.ViewHolder {
         public TextView lesson_card_title;
         public TextView lesson_card_level;
+        public CardView lesson_card_is_complete;
+        public CardView lesson_card_is_success;
+        public CardView lesson_card_is_failed;
         public String filePath;
         public LessonViewHolder(@NonNull View itemView) {
             super(itemView);
             lesson_card_title = itemView.findViewById(R.id.lesson_card_title);
             lesson_card_level = itemView.findViewById(R.id.lesson_card_level);
+            lesson_card_is_complete = itemView.findViewById(R.id.lesson_card_is_complete);
+            lesson_card_is_success = itemView.findViewById(R.id.lesson_card_is_success);
+            lesson_card_is_failed = itemView.findViewById(R.id.lesson_card_is_failed);
         }
 
         public void setFilePath(String filePath) {
             this.filePath = filePath;
         }
 
-        public String getFilePath() {
-            return filePath;
-        }
 
         public String getLevelString(int level) {
             return "Level " + level;
@@ -78,6 +88,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String lessonFileName);
+        void onItemClick(Lesson lesson);
     }
 }

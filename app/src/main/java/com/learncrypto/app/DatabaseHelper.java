@@ -233,4 +233,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return cursor;
     }
+
+    public void updateLessonToComplete(int lessonId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.LessonTable.COLUMN_NAME_IS_COMPLETED, 1);
+
+        db.update(
+                DatabaseContract.LessonTable.TABLE_NAME,
+                values,
+                DatabaseContract.LessonTable.COLUMN_NAME_ID + "=?",
+                new String[]{String.valueOf(lessonId)}
+        );
+    }
+
+    public Cursor getQuestionByLessonId(int lessonId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + DatabaseContract.QuestionTable.TABLE_NAME +
+                " WHERE " + DatabaseContract.QuestionTable.COLUMN_NAME_FOREIGN_LESSON_ID +
+                " = " + lessonId + ";";
+
+        Cursor cursor = null;
+        if (db != null) {
+             cursor = db.rawQuery(query, null);
+        }
+
+        return cursor;
+    }
+
+    public void updateUserChoice(int questionId, String choice) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.QuestionTable.COLUMN_NAME_USER_CHOICE, choice);
+
+        db.update(
+                DatabaseContract.QuestionTable.TABLE_NAME,
+                values,
+                DatabaseContract.QuestionTable.COLUMN_NAME_ID + " = ?",
+                new String[]{String.valueOf(questionId)}
+        );
+    }
+
+    public void updateQuestionIsCorrect(int questionId, int isCorrect) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.QuestionTable.COLUMN_NAME_IS_CORRECT, isCorrect);
+
+        db.update(
+                DatabaseContract.QuestionTable.TABLE_NAME,
+                values,
+                DatabaseContract.QuestionTable.COLUMN_NAME_ID + " = ?",
+                new String[] {String.valueOf(questionId)}
+        );
+    }
 }

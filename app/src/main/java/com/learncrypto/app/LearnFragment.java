@@ -21,7 +21,6 @@ import java.util.List;
 public class LearnFragment extends Fragment {
     private RecyclerView lessonRecyclerView;
     private LessonAdapter lessonAdapter;
-    private String hello;
     private DatabaseHelper dbHelper;
 
     @Override
@@ -32,9 +31,14 @@ public class LearnFragment extends Fragment {
         dbHelper = new DatabaseHelper(getActivity());
         dbHelper.init();
 
-        lessonAdapter = new LessonAdapter(loadLessonsDataFromDB(), filePath -> {
+        lessonAdapter = new LessonAdapter(loadLessonsDataFromDB(), (lesson) -> {
             Intent intent = new Intent((MainActivity)getActivity(), LessonActivity.class);
-            intent.putExtra("LESSON_FILE_PATH", filePath);
+            intent.putExtra("LESSON_ID", lesson.getId());
+            intent.putExtra("LESSON_FILE_PATH", lesson.getFilePath());
+            intent.putExtra("LESSON_IS_COMPLETE", lesson.getIsComplete());
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
             startActivity(intent);
         });
 
@@ -53,11 +57,13 @@ public class LearnFragment extends Fragment {
             Toast.makeText(getContext(), "No data", Toast.LENGTH_SHORT).show();
         } else {
             while(cursor.moveToNext()) {
+                int lessonId = cursor.getInt(0);
                 String lessonName = cursor.getString(1);
                 String filePath = cursor.getString(2);
+                int isComplete = cursor.getInt(3);
                 int levelId = cursor.getInt(4);
 
-                lessonsList.add(new Lesson(lessonName, filePath, levelId));
+                lessonsList.add(new Lesson(lessonId, lessonName, filePath, isComplete, levelId));
             }
         }
         return lessonsList;

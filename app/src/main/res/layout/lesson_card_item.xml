@@ -57,6 +57,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/lesson_card_is_complete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/corners_lg"
@@ -76,6 +77,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/lesson_card_is_success"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/corners_lg"
@@ -97,6 +99,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/lesson_card_is_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/corners_lg"
