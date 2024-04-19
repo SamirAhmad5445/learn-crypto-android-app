@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/accent_800"
+        android:backgroundTint="@color/accent_600"
         android:layout_margin="@dimen/space_4"
         app:cardCornerRadius="@dimen/corners_lg"
         >
@@ -23,6 +23,7 @@
             android:textColor="@color/primary_50"
             android:textSize="@dimen/text_xl"
             android:textStyle="bold" />
+
     </androidx.cardview.widget.CardView>
 
 

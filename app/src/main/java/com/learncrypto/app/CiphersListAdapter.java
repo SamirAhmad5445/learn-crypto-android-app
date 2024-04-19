@@ -1,6 +1,7 @@
 package com.learncrypto.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,12 @@ public class CiphersListAdapter extends  ArrayAdapter<String> {
 
         TextView cipher_list_item_name = convertView.findViewById(R.id.cipher_list_item_name);
         cipher_list_item_name.setText(cipherName);
+
+        convertView.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), CipherActivity.class);
+            intent.putExtra("CIPHER_NAME", cipherName);
+            getContext().startActivity(intent);
+        });
 
         return convertView;
     }

@@ -13,9 +13,12 @@
         android:theme="@style/Theme.Learncrypto"
         tools:targetApi="31">
         <activity
-            android:name=".LessonActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".CipherActivity"
             android:exported="false" />
+        <activity
+            android:name=".LessonActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
