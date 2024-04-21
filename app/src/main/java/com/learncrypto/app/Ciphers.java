@@ -267,6 +267,68 @@ public class Ciphers {
         }
     }
 
+    public static class Vigenere {
+        public final static String CIPHER_NAME = "Vigenere Cipher";
+
+        static String encrypt(String plaintext, String key) {
+            String ciphertext = "";
+            plaintext = plaintext.toUpperCase();
+            key = key.toUpperCase();
+
+            if (key.length() == 1) {
+                char k = key.charAt(0);
+                return Shift.encrypt(plaintext, k);
+            } else {
+                int j = 0;
+                for (int i = 0; i < plaintext.length(); i++) {
+                    int p = plaintext.charAt(i);
+                    int k = key.charAt(j++);
+
+                    if (p < 65 || p > 90)
+                        ciphertext += (char) p;
+                    else {
+                        int ch = k + p;
+                        ch %= 26;
+                        ch += 65;
+                        ciphertext += (char) ch;
+                    }
+                    if (j == key.length())
+                        j = 0;
+                }
+            }
+            return ciphertext;
+        }
+
+        static String decrypt(String ciphertext, String key) {
+            String plaintext = "";
+            ciphertext = ciphertext.toUpperCase();
+            key = key.toUpperCase();
+
+            if (key.length() == 1) {
+                char k = key.charAt(0);
+                return Shift.decrypt(ciphertext, k);
+            } else {
+                int j = 0;
+                for (int i = 0; i < ciphertext.length(); i++) {
+                    int c = ciphertext.charAt(i);
+                    int k = key.charAt(j++);
+                    if (c < 65 || c > 90)
+                        plaintext += (char) c;
+                    else {
+                        int ch = c - k + 26;
+                        ch %= 26;
+                        ch += 65;
+                        plaintext += (char) ch;
+                    }
+                    if (j == key.length())
+                        j = 0;
+                }
+
+            }
+            return plaintext;
+        }
+    }
+
     public static class Utils {
         public static int GCD(int m, int n) {
             if (n == 0)

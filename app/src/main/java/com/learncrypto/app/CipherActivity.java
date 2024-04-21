@@ -39,6 +39,8 @@ public class CipherActivity extends AppCompatActivity {
             fragment= new AffineCipherFragment();
         } else if(Objects.equals(cipherName, Ciphers.Substitution.CIPHER_NAME)) {
             fragment= new SubstitutionCipherFragment();
+        } else if(Objects.equals(cipherName, Ciphers.Vigenere.CIPHER_NAME)) {
+            fragment= new VigenereCipherFragment();
         }
 
         if (fragment != null) {
