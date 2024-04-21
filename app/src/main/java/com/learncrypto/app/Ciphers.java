@@ -329,6 +329,52 @@ public class Ciphers {
         }
     }
 
+    public static class Permutation {
+        public final static String CIPHER_NAME = "Permutation Cipher";
+
+        public static String encrypt(String message, int key[]) {
+            String cipherText = "";
+            message = message.toLowerCase();
+
+            while (message.length() % key.length != 0)
+                message += '_';
+
+            for (int i = 0; i < message.length(); i += key.length) {
+                for (int j = 0; j < key.length; j++)
+                    cipherText += message.charAt(key[j] - 1 + i);
+            }
+
+            String result = "";
+            for (int i = 0; i < cipherText.length(); i++) {
+                if (cipherText.charAt(i) != '_')
+                    result += cipherText.charAt(i);
+            }
+
+            return result;
+        }
+
+        public static String decrypt(String cipherText, int[] key) {
+            String message = "";
+            cipherText = cipherText.toLowerCase();
+
+            while (cipherText.length() % key.length != 0)
+                cipherText += '_';
+
+            for (int i = 0; i < cipherText.length(); i += key.length) {
+                for (int j = 0; j < key.length; j++)
+                    message += cipherText.charAt(key[j] - 1 + i);
+            }
+
+            String result = "";
+            for (int i = 0; i < message.length(); i++) {
+                if (message.charAt(i) != '_')
+                    result += message.charAt(i);
+            }
+
+            return result;
+        }
+    }
+
     public static class Utils {
         public static int GCD(int m, int n) {
             if (n == 0)

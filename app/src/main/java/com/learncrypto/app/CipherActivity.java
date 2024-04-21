@@ -41,6 +41,8 @@ public class CipherActivity extends AppCompatActivity {
             fragment= new SubstitutionCipherFragment();
         } else if(Objects.equals(cipherName, Ciphers.Vigenere.CIPHER_NAME)) {
             fragment= new VigenereCipherFragment();
+        }  else if(Objects.equals(cipherName, Ciphers.Permutation.CIPHER_NAME)) {
+            fragment= new PermutationCipherFragment();
         }
 
         if (fragment != null) {
