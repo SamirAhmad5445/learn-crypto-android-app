@@ -127,17 +127,39 @@
         android:padding="@dimen/space_3"
         tools:ignore="HardcodedText,UnusedAttribute" />
 
-    <TextView
-        android:id="@+id/vigenere_cipher_output"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/space_4"
-        android:layout_marginBottom="@dimen/space_12"
-        android:layout_weight="1"
-        android:background="@drawable/rounded_input"
-        android:hint="Cipher text"
-        android:padding="@dimen/space_4"
-        android:textColor="@color/neutral_200"
-        android:textSize="@dimen/text_xl" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/vigenere_cipher_copy_btn"
+            android:layout_width="@dimen/space_8"
+            android:layout_height="@dimen/space_8"
+            android:background="@color/transparent"
+            android:padding="@dimen/space_1"
+            android:textColor="@color/neutral_100"
+            app:flow_horizontalGap="0dp"
+            app:icon="@drawable/ic_copy"
+            app:iconGravity="end"
+            app:iconTint="@color/neutral_100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/vigenere_cipher_output"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_input"
+            android:hint="Cipher text"
+            android:padding="@dimen/space_4"
+            android:textColor="@color/neutral_200"
+            android:textSize="@dimen/text_xl"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vigenere_cipher_copy_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
