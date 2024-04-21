@@ -5,7 +5,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,7 +25,6 @@ import io.noties.markwon.Markwon;
 public class LessonActivity extends AppCompatActivity {
     private int lessonId;
     private String filePath;
-    private int isComplete;
     private DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,7 @@ public class LessonActivity extends AppCompatActivity {
 
         lessonId = getIntent().getIntExtra("LESSON_ID", -1);
         filePath = getIntent().getStringExtra("LESSON_FILE_PATH");
-        isComplete = getIntent().getIntExtra("LESSON_IS_COMPLETE", 0);
+        int isComplete = getIntent().getIntExtra("LESSON_IS_COMPLETE", 0);
 
         if(lessonId == -1) {
             Toast.makeText(this, "invalid lesson id", Toast.LENGTH_SHORT).show();
@@ -52,11 +50,9 @@ public class LessonActivity extends AppCompatActivity {
         }
 
         Button lesson_back_btn = findViewById(R.id.lesson_back_btn);
-        lesson_back_btn.setText("lesson " + lessonId);
-        lesson_back_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(LessonActivity.this, MainActivity.class);
-            startActivity(intent);
-        });
+        String lessonString = "lesson " + lessonId;
+        lesson_back_btn.setText(lessonString);
+        lesson_back_btn.setOnClickListener(v -> finish());
 
         Markwon markwon = Markwon.create(this);
 

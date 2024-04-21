@@ -50,6 +50,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             holder.setQuestionId(questionId);
             holder.setCorrectChoice(correctChoice);
 
+            holder.paintUserChoice(questionId, correctChoice);
+
             holder.question_text.setText(questionText);
             holder.question_choice_a.setText(choices[0]);
             holder.question_choice_b.setText(choices[1]);
@@ -83,6 +85,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             question_choice_c = itemView.findViewById(R.id.question_choice_c);
             question_radio_group = itemView.findViewById(R.id.question_radio_group);
 
+
             question_radio_group.setOnCheckedChangeListener((group, checkedId) -> {
                 RadioButton checked = itemView.findViewById(checkedId);
 
@@ -115,11 +118,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
                 isCorrect = checkIsCorrect(userChoice);
 
-                if(isCorrect) {
-                    paintCorrect(checked);
-                } else {
-                    paintWrong(checked);
-                }
+                paintButton(checked, isCorrect);
             });
         }
 
@@ -151,6 +150,36 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             dbHelper.updateQuestionIsCorrect(getQuestionId(), isCorrect);
 
             return Objects.equals(choice, getCorrectChoice());
+        }
+
+        public void paintUserChoice(int questionId, String correctChoice) {
+            String userChoice = dbHelper.getUserChoiceByQuestionId(questionId);
+            boolean isCorrect = userChoice.equals(correctChoice);
+
+            if(!userChoice.isEmpty()) {
+                switch (userChoice) {
+                    case "a":
+                        paintButton(question_choice_a, isCorrect);
+                        question_choice_a.setChecked(true);
+                        break;
+                    case "b":
+                        paintButton(question_choice_b, isCorrect);
+                        question_choice_b.setChecked(true);
+                        break;
+                    case "c":
+                        paintButton(question_choice_c, isCorrect);
+                        question_choice_c.setChecked(true);
+                        break;
+                }
+            }
+        }
+
+        public void paintButton(RadioButton button, boolean isCorrect) {
+            if(isCorrect) {
+                paintCorrect(button);
+            } else {
+                paintWrong(button);
+            }
         }
 
         public void paintCorrect(RadioButton button) {
