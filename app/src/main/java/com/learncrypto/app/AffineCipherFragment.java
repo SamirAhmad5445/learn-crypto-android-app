@@ -1,5 +1,8 @@
 package com.learncrypto.app;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +28,8 @@ public class AffineCipherFragment extends Fragment {
     private EditText key_input_a;
     private EditText key_input_b;
     private Button cipher_btn;
+    private Button copy_btn;
+
     private TextView text_output;
 
     @Override
@@ -39,6 +44,7 @@ public class AffineCipherFragment extends Fragment {
         key_input_a = view.findViewById(R.id.affine_cipher_key_a_input);
         key_input_b = view.findViewById(R.id.affine_cipher_key_b_input);
         cipher_btn = view.findViewById(R.id.affine_cipher_btn);
+        copy_btn = view.findViewById(R.id.affine_cipher_copy_btn);
         text_output = view.findViewById(R.id.affine_cipher_output);
 
         radio_group.setOnCheckedChangeListener((group, checkedId) -> {
@@ -85,7 +91,17 @@ public class AffineCipherFragment extends Fragment {
                 }
             }
         });
-        
+
+        copy_btn.setOnClickListener(v -> {
+            if(!text_output.getText().toString().isEmpty()) {
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Copied Text", text_output.getText().toString());
+                clipboard.setPrimaryClip(clip);
+            } else {
+                Toast.makeText(view.getContext(), "No Text to copy", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 }
