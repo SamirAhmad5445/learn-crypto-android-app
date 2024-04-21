@@ -14,8 +14,8 @@ import android.widget.ListView;
 
 public class EncryptFragment extends Fragment {
     String[] ciphers = {
-            "Shift Cipher",
-            "Affine Cipher",
+            Ciphers.Shift.CIPHER_NAME,
+            Ciphers.Affine.CIPHER_NAME,
             "Substitution Cipher",
             "Permutation Cipher",
             "Vigenere Cipher",

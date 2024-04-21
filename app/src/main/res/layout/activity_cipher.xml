@@ -6,31 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".CipherActivity">
 
+    <FrameLayout
+        android:id="@+id/cipher_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cipher_back_btn"
+        app:layout_constraintVertical_bias="1.0" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cipher_back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="back"
-        android:layout_marginStart="@dimen/space_4"
-        android:layout_marginLeft="@dimen/space_4"
+        android:layout_marginStart="@dimen/space_1"
+        android:layout_marginLeft="@dimen/space_1"
         android:layout_marginTop="@dimen/space_2"
         android:background="@color/transparent"
         android:textColor="@color/neutral_100"
         android:textSize="@dimen/text_xl"
         app:icon="@drawable/ic_arrow_back"
         app:iconTint="@color/neutral_100"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/cipher_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="@dimen/text_3xl"
-        android:textColor="@color/accent_300"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

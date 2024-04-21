@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="@dimen/space_2"
+    android:paddingHorizontal="@dimen/space_4"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText"
+    tools:context=".AffineCipherFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/corners_xl">
+
+        <RadioGroup
+            android:id="@+id/affine_cipher_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/space_1">
+
+            <RadioButton
+                android:id="@+id/affine_cipher_encrypt_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_button_background"
+                android:text="Encrypt"
+                android:textColor="@color/primary_50"
+                android:checked="true"
+                android:textSize="@dimen/text_lg"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:button="@null"
+                app:buttonCompat="@null"
+                />
+
+            <RadioButton
+                android:id="@+id/affine_cipher_decrypt_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_button_background"
+                android:text="Decrypt"
+                android:textColor="@color/primary_50"
+                android:textSize="@dimen/text_lg"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:button="@null"
+                app:buttonCompat="@null"
+                />
+
+        </RadioGroup>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/space_3"
+        >
+
+        <TextView
+            android:id="@+id/affine_cipher_input_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_2xl"
+            android:textStyle="bold"
+            android:text="Plane text"
+            android:layout_marginBottom="@dimen/space_2"
+            />
+
+        <EditText
+            android:id="@+id/affine_cipher_text_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Please enter your message"
+            android:inputType="text"
+            android:background="@drawable/input_style"
+            android:padding="@dimen/space_4"
+            android:textSize="@dimen/text_xl" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/space_3"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_2xl"
+            android:textStyle="bold"
+            android:text="Key"
+            android:layout_marginBottom="@dimen/space_2"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <EditText
+                android:id="@+id/affine_cipher_key_a_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter a"
+                android:inputType="text"
+                android:maxLength="1"
+                android:background="@drawable/input_style"
+                android:textSize="@dimen/text_xl"
+                android:padding="@dimen/space_4"
+                android:layout_marginRight="@dimen/space_1"
+                android:layout_marginEnd="@dimen/space_1" />
+
+            <EditText
+                android:id="@+id/affine_cipher_key_b_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter b"
+                android:inputType="text"
+                android:maxLength="1"
+                android:background="@drawable/input_style"
+                android:textSize="@dimen/text_xl"
+                android:padding="@dimen/space_4"
+                android:layout_marginLeft="@dimen/space_1"
+                android:layout_marginStart="@dimen/space_1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/affine_cipher_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Encrypt"
+        android:backgroundTint="@color/primary_500"
+        android:textColor="@color/primary_50"
+        android:layout_marginTop="@dimen/space_4"
+        android:layout_marginBottom="@dimen/space_3"
+        android:textSize="@dimen/text_xl"
+        android:padding="@dimen/space_3"
+        tools:ignore="HardcodedText,UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/affine_cipher_output"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_4"
+        android:layout_marginBottom="@dimen/space_12"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_input"
+        android:hint="Cipher text"
+        android:padding="@dimen/space_4"
+        android:textColor="@color/neutral_200"
+        android:textSize="@dimen/text_xl" />
+
+
+</LinearLayout>
