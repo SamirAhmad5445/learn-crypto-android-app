@@ -1,10 +1,11 @@
 package com.learncrypto.app;
 
-import android.content.res.ColorStateList;
-import android.os.Build;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShiftCipherFragment extends Fragment {
 
@@ -24,6 +26,7 @@ public class ShiftCipherFragment extends Fragment {
     private EditText text_input;
     private EditText key_input;
     private Button cipher_btn;
+    private Button copy_btn;
     private TextView text_output;
 
     @Override
@@ -37,8 +40,8 @@ public class ShiftCipherFragment extends Fragment {
         text_input = view.findViewById(R.id.shift_cipher_text_input);
         key_input = view.findViewById(R.id.shift_cipher_key_input);
         cipher_btn = view.findViewById(R.id.shift_cipher_btn);
+        copy_btn = view.findViewById(R.id.shift_cipher_copy_btn);
         text_output = view.findViewById(R.id.shift_cipher_output);
-
 
         radio_group.setOnCheckedChangeListener((group, checkedId) -> {
             if(encrypt_radio.isChecked()) {
@@ -78,7 +81,17 @@ public class ShiftCipherFragment extends Fragment {
             }
         });
 
+        copy_btn.setOnClickListener(v -> {
+            if(!text_output.getText().toString().isEmpty()) {
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Copied Text", text_output.getText().toString());
+                clipboard.setPrimaryClip(clip);
+            } else {
+                Toast.makeText(view.getContext(), "No Text to copy", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
+
 }
