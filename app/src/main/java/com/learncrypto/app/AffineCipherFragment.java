@@ -20,7 +20,6 @@ import android.widget.Toast;
 public class AffineCipherFragment extends Fragment {
     private RadioGroup radio_group;
     private RadioButton encrypt_radio;
-    private RadioButton decrypt_radio;
     private TextView label;
     private EditText text_input;
     private EditText key_input_a;
@@ -35,7 +34,6 @@ public class AffineCipherFragment extends Fragment {
 
         radio_group = view.findViewById(R.id.affine_cipher_radio_group);
         encrypt_radio = view.findViewById(R.id.affine_cipher_encrypt_radio);
-        decrypt_radio = view.findViewById(R.id.affine_cipher_decrypt_radio);
         label = view.findViewById(R.id.affine_cipher_input_label);
         text_input = view.findViewById(R.id.affine_cipher_text_input);
         key_input_a = view.findViewById(R.id.affine_cipher_key_a_input);

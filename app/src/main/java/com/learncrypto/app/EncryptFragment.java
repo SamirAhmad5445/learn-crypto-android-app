@@ -16,7 +16,7 @@ public class EncryptFragment extends Fragment {
     String[] ciphers = {
             Ciphers.Shift.CIPHER_NAME,
             Ciphers.Affine.CIPHER_NAME,
-            "Substitution Cipher",
+            Ciphers.Substitution.CIPHER_NAME,
             "Permutation Cipher",
             "Vigenere Cipher",
             "Hill Cipher",

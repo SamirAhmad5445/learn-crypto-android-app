@@ -133,6 +133,140 @@ public class Ciphers {
         }
     }
 
+    public static class Substitution {
+        public final static String CIPHER_NAME = "Substitution Cipher";
+        public static String encrypt(String s) {
+            String ciphertext = "";
+            s = s.toLowerCase();
+
+            char c;
+            for (int i = 0; i < s.length(); i++) {
+                c = s.charAt(i);
+
+                if (c == 'a')
+                    ciphertext += 'X';
+                else if (c == 'b')
+                    ciphertext += 'N';
+                else if (c == 'c')
+                    ciphertext += 'Y';
+                else if (c == 'd')
+                    ciphertext += 'A';
+                else if (c == 'e')
+                    ciphertext += 'H';
+                else if (c == 'f')
+                    ciphertext += 'P';
+                else if (c == 'g')
+                    ciphertext += 'O';
+                else if (c == 'h')
+                    ciphertext += 'G';
+                else if (c == 'i')
+                    ciphertext += 'Z';
+                else if (c == 'j')
+                    ciphertext += 'Q';
+                else if (c == 'k')
+                    ciphertext += 'W';
+                else if (c == 'l')
+                    ciphertext += 'B';
+                else if (c == 'm')
+                    ciphertext += 'T';
+                else if (c == 'n')
+                    ciphertext += 'S';
+                else if (c == 'o')
+                    ciphertext += 'F';
+                else if (c == 'p')
+                    ciphertext += 'L';
+                else if (c == 'q')
+                    ciphertext += 'R';
+                else if (c == 'r')
+                    ciphertext += 'C';
+                else if (c == 's')
+                    ciphertext += 'V';
+                else if (c == 't')
+                    ciphertext += 'M';
+                else if (c == 'u')
+                    ciphertext += 'U';
+                else if (c == 'v')
+                    ciphertext += 'E';
+                else if (c == 'w')
+                    ciphertext += 'K';
+                else if (c == 'x')
+                    ciphertext += 'J';
+                else if (c == 'y')
+                    ciphertext += 'D';
+                else if (c == 'z')
+                    ciphertext += 'I';
+                else
+                    ciphertext += c;
+            }
+            return ciphertext;
+        }
+        public static String decrypt(String c) {
+            String plaintext = "";
+            c = c.toUpperCase();
+
+            char p;
+            for (int i = 0; i < c.length(); i++) {
+                p = c.charAt(i);
+
+                if (p == 'A')
+                    plaintext += 'd';
+                else if (p == 'B')
+                    plaintext += 'l';
+                else if (p == 'C')
+                    plaintext += 'r';
+                else if (p == 'D')
+                    plaintext += 'y';
+                else if (p == 'E')
+                    plaintext += 'v';
+                else if (p == 'F')
+                    plaintext += 'o';
+                else if (p == 'G')
+                    plaintext += 'h';
+                else if (p == 'H')
+                    plaintext += 'e';
+                else if (p == 'I')
+                    plaintext += 'z';
+                else if (p == 'J')
+                    plaintext += 'x';
+                else if (p == 'K')
+                    plaintext += 'w';
+                else if (p == 'L')
+                    plaintext += 'p';
+                else if (p == 'M')
+                    plaintext += 't';
+                else if (p == 'N')
+                    plaintext += 'b';
+                else if (p == 'O')
+                    plaintext += 'g';
+                else if (p == 'P')
+                    plaintext += 'f';
+                else if (p == 'Q')
+                    plaintext += 'j';
+                else if (p == 'R')
+                    plaintext += 'q';
+                else if (p == 'S')
+                    plaintext += 'n';
+                else if (p == 'T')
+                    plaintext += 'm';
+                else if (p == 'U')
+                    plaintext += 'u';
+                else if (p == 'V')
+                    plaintext += 's';
+                else if (p == 'W')
+                    plaintext += 'k';
+                else if (p == 'X')
+                    plaintext += 'a';
+                else if (p == 'Y')
+                    plaintext += 'c';
+                else if (p == 'Z')
+                    plaintext += 'i';
+                else
+                    plaintext += c;
+            }
+            return plaintext;
+        }
+    }
+
     public static class Utils {
         public static int GCD(int m, int n) {
             if (n == 0)

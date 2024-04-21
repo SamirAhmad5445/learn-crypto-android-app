@@ -3,17 +3,13 @@ package com.learncrypto.app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.Objects;
 
@@ -41,6 +37,8 @@ public class CipherActivity extends AppCompatActivity {
             fragment= new ShiftCipherFragment();
         } else if(Objects.equals(cipherName, Ciphers.Affine.CIPHER_NAME)) {
             fragment= new AffineCipherFragment();
+        } else if(Objects.equals(cipherName, Ciphers.Substitution.CIPHER_NAME)) {
+            fragment= new SubstitutionCipherFragment();
         }
 
         if (fragment != null) {
@@ -50,8 +48,6 @@ public class CipherActivity extends AppCompatActivity {
 
         Button cipher_back_btn = findViewById(R.id.cipher_back_btn);
         cipher_back_btn.setText(cipherName);
-        cipher_back_btn.setOnClickListener(v -> {
-            finish();
-        });
+        cipher_back_btn.setOnClickListener(v -> finish());
     }
 }

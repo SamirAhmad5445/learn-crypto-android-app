@@ -1,10 +1,7 @@
 package com.learncrypto.app;
 
-import android.content.res.ColorStateList;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,30 +12,26 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ShiftCipherFragment extends Fragment {
-
+public class SubstitutionCipherFragment extends Fragment {
     private RadioGroup radio_group;
     private RadioButton encrypt_radio;
     private TextView label;
     private EditText text_input;
-    private EditText key_input;
     private Button cipher_btn;
     private TextView text_output;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_shift_cipher, container, false);
+        View view = inflater.inflate(R.layout.fragment_substitution_cipher, container, false);
 
-        radio_group = view.findViewById(R.id.shift_cipher_radio_group);
-        encrypt_radio = view.findViewById(R.id.shift_cipher_encrypt_radio);
-        label = view.findViewById(R.id.shift_cipher_input_label);
-        text_input = view.findViewById(R.id.shift_cipher_text_input);
-        key_input = view.findViewById(R.id.shift_cipher_key_input);
-        cipher_btn = view.findViewById(R.id.shift_cipher_btn);
-        text_output = view.findViewById(R.id.shift_cipher_output);
-
+        radio_group = view.findViewById(R.id.substitution_cipher_radio_group);
+        encrypt_radio = view.findViewById(R.id.substitution_cipher_encrypt_radio);
+        label = view.findViewById(R.id.substitution_cipher_input_label);
+        text_input = view.findViewById(R.id.substitution_cipher_text_input);
+        cipher_btn = view.findViewById(R.id.substitution_cipher_btn);
+        text_output = view.findViewById(R.id.substitution_cipher_output);
 
         radio_group.setOnCheckedChangeListener((group, checkedId) -> {
             if(encrypt_radio.isChecked()) {
@@ -58,26 +51,23 @@ public class ShiftCipherFragment extends Fragment {
 
         cipher_btn.setOnClickListener(v -> {
             if(encrypt_radio.isChecked()) {
-                if(!text_input.getText().toString().isEmpty() && !key_input.getText().toString().isEmpty()) {
-                    text_output.setText(Ciphers.Shift.encrypt(
-                            text_input.getText().toString(),
-                            key_input.getText().toString().charAt(0)
+                if(!text_input.getText().toString().isEmpty()) {
+                    text_output.setText(Ciphers.Substitution.encrypt(
+                            text_input.getText().toString()
                     ));
                 } else {
-                    text_output.setText("");
+                    Toast.makeText(view.getContext(), "Fill the text input", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                if(!text_input.getText().toString().isEmpty() && !key_input.getText().toString().isEmpty()) {
-                    text_output.setText(Ciphers.Shift.decrypt(
-                            text_input.getText().toString(),
-                            key_input.getText().toString().charAt(0)
+                if(!text_input.getText().toString().isEmpty()) {
+                    text_output.setText(Ciphers.Substitution.decrypt(
+                            text_input.getText().toString()
                     ));
                 } else {
-                    text_output.setText("");
+                    Toast.makeText(view.getContext(), "Fill the text input", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
 
         return view;
     }
