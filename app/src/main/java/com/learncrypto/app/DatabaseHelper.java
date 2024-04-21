@@ -288,4 +288,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[] {String.valueOf(questionId)}
         );
     }
+
+    public String getUserChoiceByQuestionId(int questionId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT " + DatabaseContract.QuestionTable.COLUMN_NAME_USER_CHOICE +
+                " FROM " + DatabaseContract.QuestionTable.TABLE_NAME +
+                " WHERE " + DatabaseContract.QuestionTable.COLUMN_NAME_ID +
+                " = " + questionId + ";";
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+
+        if(cursor != null) {
+            cursor.moveToNext();
+        }
+
+        String userChoice =  cursor.getString(0);
+        if(userChoice == null) {
+            return "";
+        }
+
+        return userChoice;
+    }
 }
