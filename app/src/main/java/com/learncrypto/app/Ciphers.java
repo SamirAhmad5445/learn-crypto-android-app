@@ -373,6 +373,176 @@ public class Ciphers {
 
             return result;
         }
+
+        public static int[] getPermutationKey(String input) {
+            int[] key = new int[input.length()];
+            for(int i = 0; i < input.length(); i++) {
+                key[i] = Integer.parseInt(String.valueOf(input.charAt(i)));
+            }
+
+            return key;
+        }
+    }
+
+    public static class Hill {
+        public final static String CIPHER_NAME = "Hill Cipher";
+
+        public static String encrypt(String plaintext, int[][] keyMatrix) {
+            int blockSize = keyMatrix.length;
+            String ciphertext = "";
+
+            while (plaintext.length() % keyMatrix.length != 0)
+                plaintext += '_';
+
+            for (int i = 0; i < plaintext.length(); i += blockSize) {
+                int[] block = new int[blockSize];
+
+                for (int j = 0; j < blockSize; j++)
+                    block[j] = plaintext.charAt(i + j) - 'a';
+
+                for (int j = 0; j < blockSize; j++) {
+                    int sum = 0;
+                    for (int k = 0; k < blockSize; k++)
+                        sum += keyMatrix[j][k] * block[k];
+                    sum += 26;
+                    sum %= 26;
+                    sum += 'a';
+                    ciphertext += (char) sum;
+                }
+            }
+            ciphertext = ciphertext.substring(0, Math.abs(plaintext.length() - keyMatrix.length + 1));
+            return ciphertext;
+        }
+
+        public static String decrypt(String ciphertext, int[][] keyMatrix) {
+            if (keyMatrix.length == 2 || keyMatrix.length == 3) {
+                int blockSize = keyMatrix.length;
+                String plaintext = "";
+
+                while (ciphertext.length() % keyMatrix.length != 0)
+                    ciphertext += '_';
+
+                for (int i = 0; i < ciphertext.length(); i += blockSize) {
+                    int[] block = new int[blockSize];
+
+                    for (int j = 0; j < blockSize; j++)
+                        block[j] = ciphertext.charAt(i + j) - 'a';
+
+                    int[][] keyInverse = invertMatrix(keyMatrix);
+                    for (int j = 0; j < blockSize; j++) {
+                        int sum = 0;
+                        for (int k = 0; k < blockSize; k++)
+                            sum += keyInverse[j][k] * block[k];
+                        sum += 26;
+                        sum %= 26;
+                        sum += 'a';
+                        plaintext += (char) sum;
+                    }
+                }
+
+                plaintext = plaintext.substring(0, Math.abs(ciphertext.length() - keyMatrix.length + 1));
+                return plaintext;
+            }
+            System.out.println("Out of Range!");
+            return "";
+        }
+
+        public static int det(int a, int b, int c, int d) {
+            return (((a * d)%26) - ((b * c)%26) + 26) % 26;
+        }
+
+        public static int getInverse(int a) {
+            if (Utils.GCD(a, 26) == 1) {
+                for (int j = 1; j < 26; j++) {
+                    if ((a * j) % 26 == 1)
+                        return j;
+                }
+            }
+            return -1;
+        }
+
+        public static int[][] invertMatrix(int[][] k) {
+            if (k.length == 2) {
+                int det = det(k[0][0], k[0][1], k[1][0], k[1][1]);
+                det %= 26;
+
+                if (det == 0){
+                    System.out.println("Matrix isn't invertible!");
+                    return null;
+                }
+
+                int inv2x2 = getInverse(det);
+                if (inv2x2 == -1){
+                    System.out.println("Inverse isn't Exist");
+                    return null;
+                }
+
+                int[][] inverse = new int[2][2];
+                for (int i = 0; i < 2; i++) {
+                    for (int j = 0; j < 2; j++) {
+                        inverse[0][0] = k[1][1] * inv2x2 % 26;
+                        inverse[0][1] = (-k[0][1] + 26) * inv2x2 % 26;
+                        inverse[1][0] = (-k[1][0] + 26) * inv2x2 % 26;
+                        inverse[1][1] = k[0][0] * inv2x2 % 26;
+                    }
+                }
+                return inverse;
+            }
+
+            int det = (k[0][0] * k[1][1] * k[2][2]) % 26
+                    + (k[0][1] * k[1][2] * k[2][0]) % 26
+                    + (k[0][2] * k[1][0] * k[2][1]) % 26
+                    - (k[0][1] * k[1][0] * k[2][2]) % 26
+                    - (k[0][0] * k[1][2] * k[2][1]) % 26
+                    - (k[0][2] * k[1][1] * k[2][0]) % 26;
+            det += 26;
+            det %= 26;
+
+            if (det == 0){
+                System.out.println("Matrix isn't invertible!");
+                return null;
+            }
+
+            int inv3x3 = getInverse(det);
+            if (inv3x3 == 0){
+                System.out.println("Inverse isn't Exist");
+                return null;
+            }
+
+            // Calculate the adjugate of the matrix
+            int[][] adjugate = new int[3][3];
+            adjugate[0][0] = det(k[1][1], k[1][2], k[2][1], k[2][2]) % 26;
+            adjugate[0][1] = (-det(k[1][0], k[1][2], k[2][0], k[2][2]) + 26) % 26;
+            adjugate[0][2] = det(k[1][0], k[1][1], k[2][0], k[2][1]) % 26;
+            adjugate[1][0] = (-det(k[0][1], k[0][2], k[2][1], k[2][2]) + 26) % 26;
+            adjugate[1][1] = det(k[0][0], k[0][2], k[2][0], k[2][2]) % 26;
+            adjugate[1][2] = (-det(k[0][0], k[0][1], k[2][0], k[2][1]) + 26) % 26;
+            adjugate[2][0] = det(k[0][1], k[0][2], k[1][1], k[1][2]) % 26;
+            adjugate[2][1] = (-det(k[0][0], k[0][2], k[1][0], k[1][2]) + 26) % 26;
+            adjugate[2][2] = det(k[0][0], k[0][1], k[1][0], k[1][1]) % 26;
+
+            // Calculate the inverse matrix
+            int[][] inverse = new int[3][3];
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++)
+                    inverse[i][j] = (adjugate[j][i] * inv3x3 + 26) % 26;
+            }
+            return inverse;
+        }
+
+        public int[][] getHillKey(String input) {
+            double size = Math.sqrt(input.length());
+            int[][] key = new int[(int)size][(int)size];
+
+            int n = 0;
+            for(int i = 0; i < size; i++) {
+                for(int j = 0; j < size; j++) {
+                    key[i][j] = input.charAt(n++);
+                }
+            }
+
+            return key;
+        }
     }
 
     public static class Utils {

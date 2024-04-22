@@ -19,7 +19,7 @@ public class EncryptFragment extends Fragment {
             Ciphers.Substitution.CIPHER_NAME,
             Ciphers.Permutation.CIPHER_NAME,
             Ciphers.Vigenere.CIPHER_NAME,
-            "Hill Cipher",
+            Ciphers.Hill.CIPHER_NAME,
             "SPN Cipher"
     };
 

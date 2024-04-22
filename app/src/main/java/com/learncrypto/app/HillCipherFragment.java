@@ -17,12 +17,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+public class HillCipherFragment extends Fragment {
 
-public class PermutationCipherFragment extends Fragment {
     private RadioGroup radio_group;
+    private RadioGroup size_group;
     private RadioButton encrypt_radio;
+    private RadioButton size_2_radio;
     private TextView label;
     private EditText text_input;
     private EditText key_input;
@@ -32,16 +32,19 @@ public class PermutationCipherFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_permutation_cipher, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_hill_cipher, container, false);
 
-        radio_group = view.findViewById(R.id.permutation_cipher_radio_group);
-        encrypt_radio = view.findViewById(R.id.permutation_cipher_encrypt_radio);
-        label = view.findViewById(R.id.permutation_cipher_input_label);
-        text_input = view.findViewById(R.id.permutation_cipher_text_input);
-        key_input = view.findViewById(R.id.permutation_cipher_key_input);
-        cipher_btn = view.findViewById(R.id.permutation_cipher_btn);
-        copy_btn = view.findViewById(R.id.permutation_cipher_copy_btn);
-        text_output = view.findViewById(R.id.permutation_cipher_output);
+        radio_group = view.findViewById(R.id.hill_cipher_radio_group);
+        size_group = view.findViewById(R.id.hill_cipher_size_radio_group);
+        encrypt_radio = view.findViewById(R.id.hill_cipher_encrypt_radio);
+        size_2_radio = view.findViewById(R.id.hill_cipher_size_2_radio);
+        label = view.findViewById(R.id.hill_cipher_input_label);
+        text_input = view.findViewById(R.id.hill_cipher_text_input);
+        key_input = view.findViewById(R.id.hill_cipher_key_input);
+        cipher_btn = view.findViewById(R.id.hill_cipher_btn);
+        copy_btn = view.findViewById(R.id.hill_cipher_copy_btn);
+        text_output = view.findViewById(R.id.hill_cipher_output);
 
         radio_group.setOnCheckedChangeListener((group, checkedId) -> {
             if(encrypt_radio.isChecked()) {
@@ -59,30 +62,17 @@ public class PermutationCipherFragment extends Fragment {
             text_output.setText(input_previous_value);
         });
 
-        cipher_btn.setOnClickListener(v -> {
-            if(key_input.getText().toString().length() > text_input.getText().toString().length()) {
-                Toast.makeText(view.getContext(), "The key is too large, it must be less or equals the message length", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            
-            if(encrypt_radio.isChecked()) {
-                if(!text_input.getText().toString().isEmpty() && !key_input.getText().toString().isEmpty()) {
-                    text_output.setText(Ciphers.Permutation.encrypt(
-                            text_input.getText().toString(),
-                            Ciphers.Permutation.getPermutationKey(key_input.getText().toString())
-                    ));
-                } else {
-                    text_output.setText("");
-                }
+        size_group.setOnCheckedChangeListener((group, checkedId) -> {
+            if(size_2_radio.isChecked()) {
+                key_input.setHint("Please enter the key form size 4");
             } else {
-                if(!text_input.getText().toString().isEmpty() && !key_input.getText().toString().isEmpty()) {
-                    text_output.setText(Ciphers.Permutation.decrypt(
-                            text_input.getText().toString(),
-                            Ciphers.Permutation.getPermutationKey(key_input.getText().toString())
-                    ));
-                } else {
-                    text_output.setText("");
-                }
+                key_input.setHint("Please enter the key form size 9");
+            }
+        });
+
+        cipher_btn.setOnClickListener(v -> {
+            if(encrypt_radio.isChecked()) {
+//                if(size_2_radio.isChecked())
             }
         });
 
@@ -95,7 +85,7 @@ public class PermutationCipherFragment extends Fragment {
                 Toast.makeText(view.getContext(), "No Text to copy", Toast.LENGTH_SHORT).show();
             }
         });
-        
+
         return view;
     }
 }
