@@ -90,7 +90,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                 RadioButton checked = itemView.findViewById(checkedId);
 
                 if(isLessonComplete == 0) {
-                    dbHelper.updateLessonToComplete(lessonId);
+                    dbHelper.updateLessonToFinished(lessonId);
                 }
 
                 paintBlank(question_choice_a);

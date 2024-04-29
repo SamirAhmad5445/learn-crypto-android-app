@@ -9,23 +9,22 @@
     android:clipToPadding="false"
     android:orientation="vertical"
     tools:ignore="HardcodedText"
-    tools:context=".HillCipherFragment">
+    tools:context=".SPNCipherFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_3"
         app:cardCornerRadius="@dimen/corners_xl">
 
         <RadioGroup
-            android:id="@+id/hill_cipher_radio_group"
+            android:id="@+id/spn_cipher_radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="@dimen/space_1">
 
             <RadioButton
-                android:id="@+id/hill_cipher_encrypt_radio"
+                android:id="@+id/spn_cipher_encrypt_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/radio_button_background"
@@ -40,56 +39,11 @@
                 />
 
             <RadioButton
-                android:id="@+id/hill_cipher_decrypt_radio"
+                android:id="@+id/spn_cipher_decrypt_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/radio_button_background"
                 android:text="Decrypt"
-                android:textColor="@color/primary_50"
-                android:textSize="@dimen/text_lg"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:button="@null"
-                app:buttonCompat="@null"
-                />
-
-        </RadioGroup>
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/corners_xl">
-
-        <RadioGroup
-            android:id="@+id/hill_cipher_size_radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/space_1">
-
-            <RadioButton
-                android:id="@+id/hill_cipher_size_2x2_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/radio_button_background"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:text="2x2"
-                android:textColor="@color/primary_50"
-                android:textSize="@dimen/text_lg"
-                app:buttonCompat="@null" />
-
-            <RadioButton
-                android:id="@+id/hill_cipher_size_3x3_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/radio_button_background"
-                android:text="3x3"
                 android:textColor="@color/primary_50"
                 android:textSize="@dimen/text_lg"
                 android:gravity="center"
@@ -110,17 +64,17 @@
         >
 
         <TextView
-            android:id="@+id/hill_cipher_input_label"
+            android:id="@+id/spn_cipher_input_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_2xl"
             android:textStyle="bold"
-            android:text="plain text"
+            android:text="Plane text"
             android:layout_marginBottom="@dimen/space_2"
             />
 
         <EditText
-            android:id="@+id/hill_cipher_text_input"
+            android:id="@+id/spn_cipher_text_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Please enter your message"
@@ -147,27 +101,22 @@
             android:layout_marginBottom="@dimen/space_2"
             />
 
-<!--        <EditText-->
-<!--            android:id="@+id/hill_cipher_key_input"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/input_style"-->
-<!--            android:hint="Please enter the key form size 4"-->
-<!--            android:inputType="text"-->
-<!--            android:maxLength="1"-->
-<!--            android:padding="@dimen/space_4"-->
-<!--            android:textSize="@dimen/text_xl" />-->
-
-        <LinearLayout
-            android:id="@+id/hill_cipher_key_matrix"
+        <EditText
+            android:id="@+id/spn_cipher_key_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:hint="Please enter the key (only numbers)"
+            android:inputType="number"
+            android:maxLength="9"
+            android:background="@drawable/input_style"
+            android:padding="@dimen/space_4"
+            android:textSize="@dimen/text_xl"
+            />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/hill_cipher_btn"
+        android:id="@+id/spn_cipher_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Encrypt"
@@ -185,7 +134,7 @@
         android:layout_weight="1">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/hill_cipher_copy_btn"
+            android:id="@+id/spn_cipher_copy_btn"
             android:layout_width="@dimen/space_8"
             android:layout_height="@dimen/space_8"
             android:background="@color/transparent"
@@ -199,7 +148,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/hill_cipher_output"
+            android:id="@+id/spn_cipher_output"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/rounded_input"
@@ -210,7 +159,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hill_cipher_copy_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/spn_cipher_copy_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    
 </LinearLayout>

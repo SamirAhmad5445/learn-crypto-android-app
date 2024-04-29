@@ -45,6 +45,8 @@ public class CipherActivity extends AppCompatActivity {
             fragment= new PermutationCipherFragment();
         } else if(Objects.equals(cipherName, Ciphers.Hill.CIPHER_NAME)) {
             fragment= new HillCipherFragment();
+        } else if(Objects.equals(cipherName, Ciphers.SPN.CIPHER_NAME)) {
+            fragment= new SPNCipherFragment();
         }
 
         if (fragment != null) {

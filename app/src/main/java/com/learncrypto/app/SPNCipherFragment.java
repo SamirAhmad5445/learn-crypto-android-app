@@ -17,10 +17,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SPNCipherFragment extends Fragment {
 
-public class PermutationCipherFragment extends Fragment {
     private RadioGroup radio_group;
     private RadioButton encrypt_radio;
     private TextView label;
@@ -32,16 +30,17 @@ public class PermutationCipherFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_permutation_cipher, container, false);
+        
+        View view = inflater.inflate(R.layout.fragment_spn_cipher, container, false);
 
-        radio_group = view.findViewById(R.id.permutation_cipher_radio_group);
-        encrypt_radio = view.findViewById(R.id.permutation_cipher_encrypt_radio);
-        label = view.findViewById(R.id.permutation_cipher_input_label);
-        text_input = view.findViewById(R.id.permutation_cipher_text_input);
-        key_input = view.findViewById(R.id.permutation_cipher_key_input);
-        cipher_btn = view.findViewById(R.id.permutation_cipher_btn);
-        copy_btn = view.findViewById(R.id.permutation_cipher_copy_btn);
-        text_output = view.findViewById(R.id.permutation_cipher_output);
+        radio_group = view.findViewById(R.id.spn_cipher_radio_group);
+        encrypt_radio = view.findViewById(R.id.spn_cipher_encrypt_radio);
+        label = view.findViewById(R.id.spn_cipher_input_label);
+        text_input = view.findViewById(R.id.spn_cipher_text_input);
+        key_input = view.findViewById(R.id.spn_cipher_key_input);
+        cipher_btn = view.findViewById(R.id.spn_cipher_btn);
+        copy_btn = view.findViewById(R.id.spn_cipher_copy_btn);
+        text_output = view.findViewById(R.id.spn_cipher_output);
 
         radio_group.setOnCheckedChangeListener((group, checkedId) -> {
             if(encrypt_radio.isChecked()) {
@@ -57,38 +56,30 @@ public class PermutationCipherFragment extends Fragment {
             String input_previous_value = text_input.getText().toString();
             text_input.setText(text_output.getText().toString());
             text_output.setText(input_previous_value);
-
-            String key = key_input.getText().toString();
-            if(!key.isEmpty()) {
-                int[] inverseKey = Ciphers.Permutation.getInverseKey(
-                        Ciphers.Permutation.getPermutationKeyFromString(key)
-                );
-
-                key_input.setText(Ciphers.Permutation.getPermutationKeyFromArray(inverseKey));
-            }
         });
 
         cipher_btn.setOnClickListener(v -> {
             if(encrypt_radio.isChecked()) {
                 if(!text_input.getText().toString().isEmpty() && !key_input.getText().toString().isEmpty()) {
-                    text_output.setText(Ciphers.Permutation.encrypt(
+                    text_output.setText(Ciphers.SPN.encrypt(
                             text_input.getText().toString(),
-                            key_input.getText().toString()
+                            Integer.parseInt(key_input.getText().toString())
                     ));
                 } else {
                     text_output.setText("");
                 }
             } else {
                 if(!text_input.getText().toString().isEmpty() && !key_input.getText().toString().isEmpty()) {
-                    text_output.setText(Ciphers.Permutation.decrypt(
+                    text_output.setText(Ciphers.SPN.decrypt(
                             text_input.getText().toString(),
-                            key_input.getText().toString()
+                            Integer.parseInt(key_input.getText().toString())
                     ));
                 } else {
                     text_output.setText("");
                 }
             }
         });
+
 
         copy_btn.setOnClickListener(v -> {
             if(!text_output.getText().toString().isEmpty()) {
@@ -99,7 +90,7 @@ public class PermutationCipherFragment extends Fragment {
                 Toast.makeText(view.getContext(), "No Text to copy", Toast.LENGTH_SHORT).show();
             }
         });
-        
+
         return view;
     }
 }

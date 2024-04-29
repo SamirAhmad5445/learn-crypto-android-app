@@ -136,7 +136,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     values.put(DatabaseContract.LessonTable.COLUMN_NAME_LESSON_NAME, parts[0]);
                     values.put(DatabaseContract.LessonTable.COLUMN_NAME_FILE_PATH, parts[1]);
                     values.put(DatabaseContract.LessonTable.COLUMN_NAME_FOREIGN_LEVEL_ID, parts[2]);
-                    values.put(DatabaseContract.LessonTable.COLUMN_NAME_IS_COMPLETED, false);
+                    values.put(DatabaseContract.LessonTable.COLUMN_NAME_IS_FINISHED, false);
 
                     db.insert(DatabaseContract.LessonTable.TABLE_NAME, null, values);
                 } else {
@@ -234,10 +234,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void updateLessonToComplete(int lessonId) {
+    public void updateLessonToFinished(int lessonId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DatabaseContract.LessonTable.COLUMN_NAME_IS_COMPLETED, 1);
+        values.put(DatabaseContract.LessonTable.COLUMN_NAME_IS_FINISHED, 1);
 
         db.update(
                 DatabaseContract.LessonTable.TABLE_NAME,

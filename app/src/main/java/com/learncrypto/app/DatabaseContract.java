@@ -48,14 +48,14 @@ public class DatabaseContract {
         public static final String COLUMN_NAME_ID = "_lesson_id";
         public static final String COLUMN_NAME_LESSON_NAME = "lesson_name";
         public static final String COLUMN_NAME_FILE_PATH = "file_path";
-        public static final String COLUMN_NAME_IS_COMPLETED = "is_completed";
+        public static final String COLUMN_NAME_IS_FINISHED = "is_finished";
         public static final String COLUMN_NAME_FOREIGN_LEVEL_ID = "foreign_level_id";
         public static final String SQL_CREATE_LESSON =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_NAME_LESSON_NAME + " TEXT NOT NULL," +
                         COLUMN_NAME_FILE_PATH + " TEXT NOT NULL," +
-                        COLUMN_NAME_IS_COMPLETED + " BOOLEAN DEFAULT FALSE," +
+                        COLUMN_NAME_IS_FINISHED + " BOOLEAN DEFAULT FALSE," +
                         COLUMN_NAME_FOREIGN_LEVEL_ID + " INTEGER," +
                         "FOREIGN KEY (" + COLUMN_NAME_FOREIGN_LEVEL_ID + ") REFERENCES " +
                         LevelTable.TABLE_NAME + " (" + LevelTable.COLUMN_NAME_ID + "));";

@@ -20,7 +20,7 @@ public class EncryptFragment extends Fragment {
             Ciphers.Permutation.CIPHER_NAME,
             Ciphers.Vigenere.CIPHER_NAME,
             Ciphers.Hill.CIPHER_NAME,
-            "SPN Cipher"
+            Ciphers.SPN.CIPHER_NAME
     };
 
     ListView listView;
