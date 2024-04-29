@@ -1,9 +1,4 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="1dp"
-    android:height="1dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-  <path
-      android:fillColor="#FF000000"
-      android:pathData="M10,20q-0.825,0 -1.412,-0.587T8,18q0,-0.825 0.588,-1.412T10,16h10q0.825,0 1.413,0.588T22,18q0,0.825 -0.587,1.413T20,20zM10,14q-0.825,0 -1.412,-0.587T8,12q0,-0.825 0.588,-1.412T10,10h10q0.825,0 1.413,0.588T22,12q0,0.825 -0.587,1.413T20,14zM10,8q-0.825,0 -1.412,-0.587T8,6q0,-0.825 0.588,-1.412T10,4h10q0.825,0 1.413,0.588T22,6q0,0.825 -0.587,1.413T20,8zM4,8q-0.825,0 -1.412,-0.587T2,6q0,-0.825 0.588,-1.412T4,4q0.825,0 1.413,0.588T6,6q0,0.825 -0.587,1.413T4,8m0,6q-0.825,0 -1.412,-0.587T2,12q0,-0.825 0.588,-1.412T4,10q0.825,0 1.413,0.588T6,12q0,0.825 -0.587,1.413T4,14m0,6q-0.825,0 -1.412,-0.587T2,18q0,-0.825 0.588,-1.412T4,16q0.825,0 1.413,0.588T6,18q0,0.825 -0.587,1.413T4,20"/>
-</vector>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:drawable="@drawable/ic_more_filled" android:state_checked="true"/>
+  <item android:drawable="@drawable/ic_more_outline" android:state_checked="false"/>
+</selector>

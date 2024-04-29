@@ -8,6 +8,7 @@
         android:icon="@drawable/ic_home"
         android:id="@+id/navItemHome"
         />
+
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +16,7 @@
         android:icon="@drawable/ic_docs"
         android:id="@+id/navItemLearn"
         />
+
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,6 +24,7 @@
         android:icon="@drawable/ic_encrypted"
         android:id="@+id/navItemEncrypt"
         />
+
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,4 +32,5 @@
         android:icon="@drawable/ic_more"
         android:id="@+id/navItemMore"
         />
+
 </menu>
