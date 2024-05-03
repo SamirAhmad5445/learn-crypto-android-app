@@ -10,11 +10,11 @@ public class Ciphers {
     public static class Shift {
         public final static String CIPHER_NAME = "Shift Cipher";
 
-        public static String encrypt(String s, char k) {
+        static String encrypt(String s, char k) {
             return Affine.encrypt(s, 'b', k);
         }
 
-        public static String decrypt(String s, char k) {
+        static String decrypt(String s, char k) {
             return Affine.decrypt(s, 'b', k);
         }
     }
@@ -49,8 +49,7 @@ public class Ciphers {
             }
             return ciphertext.toString();
         }
-
-        static String decrypt(String c, char a, char b) {
+        public static String decrypt(String c, char a, char b) {
             StringBuilder plaintext = new StringBuilder();
             c = c.toLowerCase();
             if ((a >= 'A' && a <= 'Z')) {
@@ -79,6 +78,7 @@ public class Ciphers {
                             }
                         }
                     } else {
+                        System.out.println("Error!! Inverse isn't exist.");
                         return "";
                     }
 
@@ -95,10 +95,49 @@ public class Ciphers {
             int ka = a - 'a';
             return Utils.GCD(26, ka) == 1;
         }
+
+        public static String getKeyInverse(String key) {
+            int ka = key.charAt(0) - 'a';
+
+            int inv = -1;
+            if (Utils.GCD(26, ka) == 1) {
+                for (int j = 1; j < 26; j++) {
+                    if ((ka * j % 26) == 1) {
+                        inv = j;
+                        break;
+                    }
+                }
+            } else {
+                System.out.println("Error!! Inverse isn't exist.");
+                return "";
+            }
+            char a = (char)(inv + 'a');
+            return String.valueOf(a);
+        }
     }
 
     public static class Substitution {
         public final static String CIPHER_NAME = "Substitution Cipher";
+
+        public final static String[] ALPHABET = {
+                "A", "B", "C", "D", "E", "F", "G",
+                "H", "I", "J", "K", "L", "M", "N",
+                "O", "P", "Q", "R", "S", "T", "U",
+                "V", "W", "X", "Y", "Z"
+        };
+
+        public final static String[] ENCRYPTION_PERMUTATION = {
+                "X", "N", "Y", "A", "H", "P", "O", "G", "Z", "Q",
+                "W", "B", "T", "S", "F", "L", "R", "C", "V", "M",
+                "U", "E", "K", "J", "D", "I"
+        };
+
+        public final static String[] DECRYPTION_PERMUTATION = {
+                "D", "L", "R", "Y", "V", "O", "H", "E", "Z", "X",
+                "W", "P", "T", "B", "G", "F", "J", "Q", "N", "M",
+                "U", "S", "K", "A", "C", "I"
+        };
+
         public static String encrypt(String s) {
             StringBuilder ciphertext = new StringBuilder();
             s = s.toLowerCase();
@@ -164,6 +203,7 @@ public class Ciphers {
             }
             return ciphertext.toString();
         }
+
         public static String decrypt(String c) {
             StringBuilder plaintext = new StringBuilder();
             c = c.toUpperCase();
@@ -231,6 +271,152 @@ public class Ciphers {
         }
     }
 
+    public static class Permutation {
+        public final static String CIPHER_NAME = "Permutation Cipher";
+
+        static String Check(int[] key) {
+            int n = 1, b = 0;
+            for (int i = 0; i < key.length; i++) {
+                b = 0;
+                for (int k : key)
+                    if (k == n) {
+                        b = 1;
+                        break;
+                    }
+                n++;
+            }
+            if (b == 1)
+                return " ";
+            return "Permutation Key is Invalid";
+        }
+
+        static String encrypt(String s, String k) {
+            String[] k1 = k.split(" ");
+
+            ArrayList<Integer> al = new ArrayList<>();
+            for (String a : k1) {
+                if (!a.isEmpty())
+                    al.add(Integer.parseInt(a) % 26);
+            }
+
+            int[] key = new int[al.size()];
+            for (int i = 0; i < key.length; i++)
+                key[i] = al.get(i);
+
+            return Encrypt(s, key);
+        }
+
+        static String Encrypt(String message, int[] key) {
+            StringBuilder cipherText = new StringBuilder();
+            message = message.toLowerCase();
+
+            String checkResult = Check(key);
+            if (!checkResult.equals(" ")) {
+                return checkResult;
+            }
+
+            for (int k : key) {
+                if (k > key.length) {
+                    return "Input of The Key is Out The Range";
+                }
+            }
+
+            StringBuilder messageBuilder = new StringBuilder(message);
+            while (messageBuilder.length() % key.length != 0)
+                messageBuilder.append('_');
+            message = messageBuilder.toString();
+
+            for (int i = 0; i < message.length(); i += key.length) {
+                for (int k : key) cipherText.append(message.charAt(k - 1 + i));
+            }
+
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < cipherText.length(); i++)
+                if (cipherText.charAt(i) != '_')
+                    result.append(cipherText.charAt(i));
+
+            return result.toString();
+        }
+
+        static int[] getInverseKey(int[] key) {
+            int[] inverseKey = new int[key.length];
+            for (int i = 0; i < key.length; i++) {
+                inverseKey[key[i] - 1] = i + 1;
+            }
+            return inverseKey;
+        }
+
+        static String decrypt(String s, String k) {
+            String[] k1 = k.split(" ");
+
+            ArrayList<Integer> al = new ArrayList<>();
+            for (String a : k1) {
+                if (!a.isEmpty())
+                    al.add(Integer.parseInt(a) % 26);
+            }
+
+            int[] key = new int[al.size()];
+            for (int i = 0; i < key.length; i++)
+                key[i] = al.get(i);
+
+            return Decrypt(s, key);
+        }
+
+        static String Decrypt(String cipherText, int[] key) {
+            StringBuilder message = new StringBuilder();
+            cipherText = cipherText.toLowerCase();
+
+            String checkResult = Check(key);
+            if (!checkResult.equals(" ")) {
+                return checkResult;
+            }
+
+            for (int k : key) {
+                if (k > key.length) {
+                    return "Input of The Key is Out The Range";
+                }
+            }
+
+            StringBuilder cipherTextBuilder = new StringBuilder(cipherText);
+            while (cipherTextBuilder.length() % key.length != 0)
+                cipherTextBuilder.append('_');
+            cipherText = cipherTextBuilder.toString();
+
+            int[] inverseKey = getInverseKey(key);
+
+            for (int i = 0; i < cipherText.length(); i += key.length) {
+                for (int j = 0; j < key.length; j++)
+                    message.append(cipherText.charAt(inverseKey[j] - 1 + i));
+            }
+
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < message.length(); i++)
+                if (message.charAt(i) != '_')
+                    result.append(message.charAt(i));
+
+            return result.toString();
+        }
+
+        public static int[] getPermutationKeyFromString(String keyString) {
+            String[] bits = keyString.split(" ");
+            int[] key = new int[bits.length];
+            for(int i = 0; i < bits.length; i++) {
+                key[i] = Integer.parseInt(bits[i]);
+            }
+
+            return key;
+        }
+
+        public static String getPermutationKeyFromArray(int[] key) {
+            StringBuilder keyString = new StringBuilder();
+
+            for (int bit : key)
+                keyString.append(bit).append(" ");
+
+            return keyString.toString().trim();
+        }
+    }
+
     public static class Vigenere {
         public final static String CIPHER_NAME = "Vigenere Cipher";
 
@@ -293,179 +479,40 @@ public class Ciphers {
         }
     }
 
-    public static class Permutation {
-        public final static String CIPHER_NAME = "Permutation Cipher";
-
-        public static String Check(int[] key) {
-            int n = 1, b = 0;
-            for (int i = 0; i < key.length; i++) {
-                b = 0;
-                for (int k : key)
-                    if (k == n) {
-                        b = 1;
-                        break;
-                    }
-                n++;
-            }
-            if (b == 1)
-                return " ";
-            return "Permutation Key is Invalid";
-        }
-
-        public static String encrypt(String s, String k) {
-            String[] k1 = k.split(" ");
-
-            ArrayList<Integer> al = new ArrayList<>();
-            for (String a : k1) {
-                if (!a.isEmpty())
-                    al.add(Integer.parseInt(a) % 26);
-            }
-
-            int[] key = new int[al.size()];
-            for (int i = 0; i < key.length; i++)
-                key[i] = al.get(i);
-
-            return Encrypt(s, key);
-        }
-
-        public static String Encrypt(String message, int[] key) {
-            StringBuilder cipherText = new StringBuilder();
-            message = message.toLowerCase();
-
-            String checkResult = Check(key);
-            if (!checkResult.equals(" ")) {
-                return checkResult;
-            }
-
-            for (int k : key) {
-                if (k > key.length) {
-                    return "Input of The Key is Out The Range";
-                }
-            }
-
-            StringBuilder messageBuilder = new StringBuilder(message);
-            while (messageBuilder.length() % key.length != 0)
-                messageBuilder.append('_');
-            message = messageBuilder.toString();
-
-            for (int i = 0; i < message.length(); i += key.length) {
-                for (int k : key) cipherText.append(message.charAt(k - 1 + i));
-            }
-
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < cipherText.length(); i++)
-                if (cipherText.charAt(i) != '_')
-                    result.append(cipherText.charAt(i));
-
-            return result.toString();
-        }
-
-        public static int[] getInverseKey(int[] key) {
-            int[] inverseKey = new int[key.length];
-            for (int i = 0; i < key.length; i++) {
-                inverseKey[key[i] - 1] = i + 1;
-            }
-            return inverseKey;
-        }
-
-        public static String decrypt(String s, String k) {
-            String[] k1 = k.split(" ");
-
-            ArrayList<Integer> al = new ArrayList<>();
-            for (String a : k1) {
-                if (!a.isEmpty())
-                    al.add(Integer.parseInt(a) % 26);
-            }
-
-            int[] key = new int[al.size()];
-            for (int i = 0; i < key.length; i++)
-                key[i] = al.get(i);
-
-            return Decrypt(s, key);
-        }
-
-        public static String Decrypt(String cipherText, int[] key) {
-            StringBuilder message = new StringBuilder();
-            cipherText = cipherText.toLowerCase();
-
-            String checkResult = Check(key);
-            if (!checkResult.equals(" ")) {
-                return checkResult;
-            }
-
-            for (int k : key) {
-                if (k > key.length) {
-                    return "Input of The Key is Out The Range";
-                }
-            }
-
-            StringBuilder cipherTextBuilder = new StringBuilder(cipherText);
-            while (cipherTextBuilder.length() % key.length != 0)
-                cipherTextBuilder.append('_');
-            cipherText = cipherTextBuilder.toString();
-
-            int[] inverseKey = getInverseKey(key);
-
-            for (int i = 0; i < cipherText.length(); i += key.length) {
-                for (int j = 0; j < key.length; j++)
-                    message.append(cipherText.charAt(inverseKey[j] - 1 + i));
-            }
-
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < message.length(); i++)
-                if (message.charAt(i) != '_')
-                    result.append(message.charAt(i));
-
-            return result.toString();
-        }
-
-        public static int[] getPermutationKeyFromString(String keyString) {
-            String[] bits = keyString.split(" ");
-            int[] key = new int[bits.length];
-            for(int i = 0; i < bits.length; i++) {
-                key[i] = Integer.parseInt(bits[i]);
-            }
-
-            return key;
-        }
-
-        public static String getPermutationKeyFromArray(int[] key) {
-            StringBuilder keyString = new StringBuilder();
-
-            for (int bit : key)
-                keyString.append(bit).append(" ");
-
-            return keyString.toString().trim();
-        }
-    }
-
     public static class Hill {
         private static int size;
 
         public final static String CIPHER_NAME = "Hill Cipher";
 
-        public static String encrypt(String s, String k) {
+        static String encrypt(String str, String k) {
             String[] k1 = k.split(" ");
             int[][] key;
-            size = 0;
+            int length;
             if (k1.length == 4) {
                 key = new int[2][2];
-                size = 2;
+                length = 2;
             } else if (k1.length == 9) {
                 key = new int[3][3];
-                size = 3;
+                length = 3;
             } else
                 return "Invalid Key";
 
+            StringBuilder s = new StringBuilder();
+            str = str.toUpperCase();
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z')
+                    s.append(str.charAt(i));
+            }
+
             int cnt = 0;
-            for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
+            for (int i = 0; i < length; i++)
+                for (int j = 0; j < length; j++)
                     key[i][j] = Integer.parseInt(k1[cnt++]) % 26;
 
-            return Encrypt(s, key);
+            return Encrypt(s.toString(), key);
         }
 
-        public static String Encrypt(String plaintext, int[][] keyMatrix) {
+        static String Encrypt(String plaintext, int[][] keyMatrix) {
             size = plaintext.length();
             int blockSize = keyMatrix.length;
             plaintext = plaintext.toLowerCase();
@@ -495,25 +542,32 @@ public class Ciphers {
             return ciphertext.toString();
         }
 
-        static String decrypt(String s, String k) {
+        static String decrypt(String str, String k) {
             String[] k1 = k.split(" ");
             int[][] key;
-            size = 0;
+            int length;
             if (k1.length == 4) {
                 key = new int[2][2];
-                size = 2;
+                length = 2;
             } else if (k1.length == 9) {
                 key = new int[3][3];
-                size = 3;
+                length = 3;
             } else
                 return "Invalid Key";
 
+            StringBuilder s = new StringBuilder();
+            str = str.toUpperCase();
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z')
+                    s.append(str.charAt(i));
+            }
+
             int cnt = 0;
-            for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
+            for (int i = 0; i < length; i++)
+                for (int j = 0; j < length; j++)
                     key[i][j] = Integer.parseInt(k1[cnt++]) % 26;
 
-            return Decrypt(s, key);
+            return Decrypt(s.toString(), key);
         }
 
         static String Decrypt(String ciphertext, int[][] keyMatrix) {
@@ -537,17 +591,16 @@ public class Ciphers {
                     int[][] keyInverse = invertMatrix(keyMatrix);
                     for (int j = 0; j < blockSize; j++) {
                         int sum = 0;
-                        for (int k = 0; k < blockSize; k++) // t_
-                            if (keyInverse != null)
-                                sum += block[k] * keyInverse[k][j];
-
+                        for (int k = 0; k < blockSize; k++) { // t_
+                            assert keyInverse != null;
+                            sum += block[k] * keyInverse[k][j]; //
+                        }
                         sum += 26;
                         sum %= 26;
                         sum += 'a';
                         plaintext.append((char) sum);
                     }
                 }
-
                 StringBuilder res = new StringBuilder();
                 for (int i = 0; i < size; i++)
                     res.append(plaintext.charAt(i));
@@ -555,6 +608,7 @@ public class Ciphers {
             }
             return "";
         }
+
         static int det(int a, int b, int c, int d) {
             return (((a * d) % 26) - ((b * c) % 26) + 26) % 26;
         }
@@ -575,11 +629,13 @@ public class Ciphers {
                 det %= 26;
 
                 if (det == 0) {
+                    System.out.println("Matrix isn't invertible!");
                     return null;
                 }
 
                 int inv2x2 = getInverse(det);
                 if (inv2x2 == -1) {
+                    System.out.println("Inverse isn't Exist");
                     return null;
                 }
 
@@ -605,11 +661,13 @@ public class Ciphers {
             det %= 26;
 
             if (det == 0) {
+                System.out.println("Matrix isn't invertible!");
                 return null;
             }
 
             int inv3x3 = getInverse(det);
             if (inv3x3 == 0) {
+                System.out.println("Inverse isn't Exist");
                 return null;
             }
 
@@ -804,16 +862,19 @@ public class Ciphers {
             return convertHexToString(Integer.toHexString(y), cipher);
         }
 
-        public static String encrypt(String input, int key) {
-            if (key > 999999999)
+        public static String encrypt(String Input, int key) {
+            if (key > 99999999)
                 return "The Key is Out of The Range";
-
+            StringBuilder input = new StringBuilder();
+            Input = Input.toUpperCase();
+            for (int i = 0; i < Input.length(); i++) {
+                if (Input.charAt(i) >= 'A' && Input.charAt(i) <= 'Z')
+                    input.append(Input.charAt(i));
+            }
             ArrayList<Integer> roundKeys = SPN.generateRoundKeys(key);
             size = input.length();
-            StringBuilder inputBuilder = new StringBuilder(input.toUpperCase());
-            while (inputBuilder.length() % 4 != 0)
-                inputBuilder.append('_');
-            input = inputBuilder.toString();
+            while (input.length() % 4 != 0)
+                input.append('_');
 
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < input.length(); i += 4) {
@@ -826,7 +887,7 @@ public class Ciphers {
         }
 
         public static String decrypt(String input, int key) {
-            if (key > 999999999)
+            if (key > 99999999)
                 return "The Key is Out of The Range";
 
             ArrayList<Integer> roundKeys = SPN.generateRoundKeys(key);
@@ -859,5 +920,4 @@ public class Ciphers {
             return GCD(n, r);
         }
     }
-
 }

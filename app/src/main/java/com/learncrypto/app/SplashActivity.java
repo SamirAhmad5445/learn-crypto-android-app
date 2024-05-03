@@ -12,7 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class SplashActivity extends AppCompatActivity {
-
+    private DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +24,9 @@ public class SplashActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.neutral_950));
         }
+
+        db = new DatabaseHelper(this);
+        db.init();
 
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);

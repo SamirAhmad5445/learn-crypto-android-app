@@ -19,13 +19,11 @@ import android.widget.Toast;
 
 public class VigenereCipherFragment extends Fragment {
 
-    private RadioGroup radio_group;
     private RadioButton encrypt_radio;
     private TextView label;
     private EditText text_input;
     private EditText key_input;
     private Button cipher_btn;
-    private Button copy_btn;
 
     private TextView text_output;
     @Override
@@ -34,29 +32,31 @@ public class VigenereCipherFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_vigenere_cipher, container, false);
 
-        radio_group = view.findViewById(R.id.vigenere_cipher_radio_group);
+        RadioGroup radio_group = view.findViewById(R.id.vigenere_cipher_radio_group);
         encrypt_radio = view.findViewById(R.id.vigenere_cipher_encrypt_radio);
         label = view.findViewById(R.id.vigenere_cipher_input_label);
         text_input = view.findViewById(R.id.vigenere_cipher_text_input);
         key_input = view.findViewById(R.id.vigenere_cipher_key_input);
         cipher_btn = view.findViewById(R.id.vigenere_cipher_btn);
-        copy_btn = view.findViewById(R.id.vigenere_cipher_copy_btn);
         text_output = view.findViewById(R.id.vigenere_cipher_output);
+        Button copy_btn = view.findViewById(R.id.vigenere_cipher_copy_btn);
+        Button clear_btn = view.findViewById(R.id.vigenere_cipher_clear_btn);
 
         radio_group.setOnCheckedChangeListener((group, checkedId) -> {
             if(encrypt_radio.isChecked()) {
-                label.setText("Plane text");
+                label.setText("Plain text");
                 text_output.setHint("Cipher text");
                 cipher_btn.setText("Encrypt");
             } else {
                 label.setText("Cipher text");
-                text_output.setHint("Plane text");
+                text_output.setHint("Plain text");
                 cipher_btn.setText("Decrypt");
             }
 
-            String input_previous_value = text_input.getText().toString();
-            text_input.setText(text_output.getText().toString());
-            text_output.setText(input_previous_value);
+            text_input.setText(
+                    text_output.getText().toString()
+            );
+            text_output.setText("");
         });
 
         cipher_btn.setOnClickListener(v -> {
@@ -89,6 +89,13 @@ public class VigenereCipherFragment extends Fragment {
             } else {
                 Toast.makeText(view.getContext(), "No Text to copy", Toast.LENGTH_SHORT).show();
             }
+        });
+
+
+        clear_btn.setOnClickListener(v -> {
+            text_input.setText("");
+            key_input.setText("");
+            text_output.setText("");
         });
 
         return view;

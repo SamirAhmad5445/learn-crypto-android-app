@@ -24,8 +24,6 @@ import java.util.Objects;
 
 public class HillCipherFragment extends Fragment {
     private View view;
-    private RadioGroup radio_group;
-    private RadioGroup size_group;
     private RadioButton encrypt_radio;
     private RadioButton size_2x2_radio;
     private TextView label;
@@ -33,23 +31,23 @@ public class HillCipherFragment extends Fragment {
     private LinearLayout key_matrix;
     private int matrixSize = 2; // by default
     private Button cipher_btn;
-    private Button copy_btn;
     private TextView text_output;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hill_cipher, container, false);
 
-        radio_group = view.findViewById(R.id.hill_cipher_radio_group);
-        size_group = view.findViewById(R.id.hill_cipher_size_radio_group);
+        RadioGroup radio_group = view.findViewById(R.id.hill_cipher_radio_group);
+        RadioGroup size_group = view.findViewById(R.id.hill_cipher_size_radio_group);
         encrypt_radio = view.findViewById(R.id.hill_cipher_encrypt_radio);
         size_2x2_radio = view.findViewById(R.id.hill_cipher_size_2x2_radio);
         label = view.findViewById(R.id.hill_cipher_input_label);
         text_input = view.findViewById(R.id.hill_cipher_text_input);
         key_matrix = view.findViewById(R.id.hill_cipher_key_matrix);
         cipher_btn = view.findViewById(R.id.hill_cipher_btn);
-        copy_btn = view.findViewById(R.id.hill_cipher_copy_btn);
         text_output = view.findViewById(R.id.hill_cipher_output);
+        Button copy_btn = view.findViewById(R.id.hill_cipher_copy_btn);
+        Button clear_btn = view.findViewById(R.id.hill_cipher_clear_btn);
 
         createMatrix(matrixSize);
 
@@ -64,9 +62,10 @@ public class HillCipherFragment extends Fragment {
                 cipher_btn.setText("Decrypt");
             }
 
-            String input_previous_value = text_input.getText().toString();
-            text_input.setText(text_output.getText().toString());
-            text_output.setText(input_previous_value);
+            text_input.setText(
+                    text_output.getText().toString()
+            );
+            text_output.setText("");
 
             String key = getKeyValue();
             if(key != null){
@@ -114,12 +113,19 @@ public class HillCipherFragment extends Fragment {
 
         copy_btn.setOnClickListener(v -> {
             if(!text_output.getText().toString().isEmpty()) {
-                ClipboardManager clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("Copied Text", text_output.getText().toString());
                 clipboard.setPrimaryClip(clip);
+                Toast.makeText(view.getContext(), "Copied to clipboard", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(view.getContext(), "No Text to copy", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        clear_btn.setOnClickListener(v -> {
+            text_input.setText("");
+            createMatrix(matrixSize);
+            text_output.setText("");
         });
 
         return view;

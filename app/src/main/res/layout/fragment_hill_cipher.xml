@@ -1,216 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingVertical="@dimen/space_2"
     android:paddingHorizontal="@dimen/space_4"
     android:clipToPadding="false"
     android:orientation="vertical"
-    tools:ignore="HardcodedText"
+    tools:ignore="HardcodedText,UnusedAttribute,Autofill"
     tools:context=".HillCipherFragment">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_3"
-        app:cardCornerRadius="@dimen/corners_xl">
-
-        <RadioGroup
-            android:id="@+id/hill_cipher_radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/space_1">
-
-            <RadioButton
-                android:id="@+id/hill_cipher_encrypt_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/radio_button_background"
-                android:text="Encrypt"
-                android:textColor="@color/primary_50"
-                android:checked="true"
-                android:textSize="@dimen/text_lg"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:button="@null"
-                app:buttonCompat="@null"
-                />
-
-            <RadioButton
-                android:id="@+id/hill_cipher_decrypt_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/radio_button_background"
-                android:text="Decrypt"
-                android:textColor="@color/primary_50"
-                android:textSize="@dimen/text_lg"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:button="@null"
-                app:buttonCompat="@null"
-                />
-
-        </RadioGroup>
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/corners_xl">
-
-        <RadioGroup
-            android:id="@+id/hill_cipher_size_radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/space_1">
-
-            <RadioButton
-                android:id="@+id/hill_cipher_size_2x2_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/radio_button_background"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:text="2x2"
-                android:textColor="@color/primary_50"
-                android:textSize="@dimen/text_lg"
-                app:buttonCompat="@null" />
-
-            <RadioButton
-                android:id="@+id/hill_cipher_size_3x3_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/radio_button_background"
-                android:text="3x3"
-                android:textColor="@color/primary_50"
-                android:textSize="@dimen/text_lg"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:button="@null"
-                app:buttonCompat="@null"
-                />
-
-        </RadioGroup>
-
-    </androidx.cardview.widget.CardView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingVertical="@dimen/space_3"
-        >
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/hill_cipher_input_label"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_2xl"
-            android:textStyle="bold"
-            android:text="plain text"
-            android:layout_marginBottom="@dimen/space_2"
-            />
+            android:layout_marginBottom="@dimen/space_3"
+            app:cardCornerRadius="@dimen/corners_xl">
 
-        <EditText
-            android:id="@+id/hill_cipher_text_input"
+            <RadioGroup
+                android:id="@+id/hill_cipher_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/space_1">
+
+                <RadioButton
+                    android:id="@+id/hill_cipher_encrypt_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_button_background"
+                    android:text="Encrypt"
+                    android:textColor="@color/primary_50"
+                    android:checked="true"
+                    android:textSize="@dimen/text_lg"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:button="@null"
+                    app:buttonCompat="@null"
+                    />
+
+                <RadioButton
+                    android:id="@+id/hill_cipher_decrypt_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_button_background"
+                    android:text="Decrypt"
+                    android:textColor="@color/primary_50"
+                    android:textSize="@dimen/text_lg"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    app:buttonCompat="@null"
+                    />
+
+            </RadioGroup>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Please enter your message"
-            android:inputType="text"
-            android:background="@drawable/input_style"
-            android:padding="@dimen/space_4"
-            android:textSize="@dimen/text_xl" />
+            app:cardCornerRadius="@dimen/corners_xl">
 
-    </LinearLayout>
+            <RadioGroup
+                android:id="@+id/hill_cipher_size_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/space_1">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingVertical="@dimen/space_3"
-        >
+                <RadioButton
+                    android:id="@+id/hill_cipher_size_2x2_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_background"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="2x2"
+                    android:textColor="@color/primary_50"
+                    android:textSize="@dimen/text_lg"
+                    app:buttonCompat="@null" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_2xl"
-            android:textStyle="bold"
-            android:text="Key"
-            android:layout_marginBottom="@dimen/space_2"
-            />
+                <RadioButton
+                    android:id="@+id/hill_cipher_size_3x3_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_button_background"
+                    android:text="3x3"
+                    android:textColor="@color/primary_50"
+                    android:textSize="@dimen/text_lg"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    app:buttonCompat="@null"
+                    />
 
-<!--        <EditText-->
-<!--            android:id="@+id/hill_cipher_key_input"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/input_style"-->
-<!--            android:hint="Please enter the key form size 4"-->
-<!--            android:inputType="text"-->
-<!--            android:maxLength="1"-->
-<!--            android:padding="@dimen/space_4"-->
-<!--            android:textSize="@dimen/text_xl" />-->
+            </RadioGroup>
+
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:id="@+id/hill_cipher_key_matrix"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_3"
+            >
+
+            <TextView
+                android:id="@+id/hill_cipher_input_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_2xl"
+                android:textStyle="bold"
+                android:text="plain text"
+                android:layout_marginBottom="@dimen/space_2"
+                />
+
+            <EditText
+                android:id="@+id/hill_cipher_text_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Please enter your message"
+                android:inputType="text"
+                android:background="@drawable/input_style"
+                android:padding="@dimen/space_4"
+                android:textSize="@dimen/text_xl" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_3"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_2xl"
+                android:textStyle="bold"
+                android:text="Key"
+                android:layout_marginBottom="@dimen/space_2"
+                />
+
+            <LinearLayout
+                android:id="@+id/hill_cipher_key_matrix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/hill_cipher_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Encrypt"
+            android:backgroundTint="@color/primary_500"
+            android:textColor="@color/primary_50"
+            android:layout_marginTop="@dimen/space_4"
+            android:layout_marginBottom="@dimen/space_3"
+            android:textSize="@dimen/text_xl"
+            android:padding="@dimen/space_3"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/corners_3xl">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/hill_cipher_output"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_64"
+                    android:text="Cipher text"
+                    android:textColor="@color/neutral_200"
+                    android:textSize="@dimen/text_2xl"
+                    android:padding="@dimen/space_3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="@dimen/space_2"
+                    android:paddingHorizontal="@dimen/space_2"
+                    android:gravity="end"
+                    tools:ignore="ExtraText,RtlSymmetry,UnusedAttribute">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/hill_cipher_copy_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/space_12"
+                        android:backgroundTint="@color/white"
+                        android:paddingVertical="@dimen/space_1"
+                        android:text="Copy"
+                        android:textColor="@color/neutral_950"
+                        android:textSize="@dimen/text_sm"
+                        android:paddingLeft="@dimen/space_4"
+                        android:paddingStart="@dimen/space_4"
+                        app:icon="@drawable/ic_copy"
+                        app:iconTint="@color/neutral_950" />                         />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/hill_cipher_clear_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/space_12"
+                        android:backgroundTint="@color/danger_600"
+                        android:paddingVertical="@dimen/space_1"
+                        android:text="Clear"
+                        android:textColor="@color/neutral_50"
+                        app:flow_horizontalGap="0dp"
+                        android:paddingLeft="@dimen/space_4"
+                        android:paddingStart="@dimen/space_4"
+                        android:layout_marginLeft="@dimen/space_2"
+                        android:layout_marginStart="@dimen/space_2"
+                        app:icon="@drawable/ic_delete"
+                        app:iconTint="@color/neutral_50" />                         />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/hill_cipher_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Encrypt"
-        android:backgroundTint="@color/primary_500"
-        android:textColor="@color/primary_50"
-        android:layout_marginTop="@dimen/space_4"
-        android:layout_marginBottom="@dimen/space_3"
-        android:textSize="@dimen/text_xl"
-        android:padding="@dimen/space_3"
-        tools:ignore="HardcodedText,UnusedAttribute" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/hill_cipher_copy_btn"
-            android:layout_width="@dimen/space_8"
-            android:layout_height="@dimen/space_8"
-            android:background="@color/transparent"
-            android:padding="@dimen/space_1"
-            android:textColor="@color/neutral_100"
-            app:flow_horizontalGap="0dp"
-            app:icon="@drawable/ic_copy"
-            app:iconGravity="end"
-            app:iconTint="@color/neutral_100"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/hill_cipher_output"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/rounded_input"
-            android:hint="Cipher text"
-            android:padding="@dimen/space_4"
-            android:textColor="@color/neutral_200"
-            android:textSize="@dimen/text_xl"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hill_cipher_copy_btn" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
+</ScrollView>

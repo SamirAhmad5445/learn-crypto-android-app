@@ -25,7 +25,6 @@ public class LearnFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_learn, container, false);
 
         dbHelper = new DatabaseHelper(getActivity());
-        dbHelper.init();
 
         LessonAdapter lessonAdapter = new LessonAdapter(loadLessonsDataFromDB(), (lesson) -> {
             Intent intent = new Intent(getActivity(), LessonActivity.class);
