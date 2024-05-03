@@ -39,19 +39,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/corners_lg"
-                    android:backgroundTint="@color/accent_300"
+                    android:backgroundTint="@color/primary_300"
                     android:layout_marginRight="@dimen/space_2"
                     >
+
                     <TextView
                         android:id="@+id/lesson_card_level"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="level 5"
-                        android:paddingVertical="@dimen/space_1"
+                        android:layout_height="match_parent"
                         android:paddingHorizontal="@dimen/space_2"
-                        android:textColor="@color/accent_950"
-                        android:textStyle="bold"
-                        />
+                        android:paddingVertical="@dimen/space_1"
+                        android:text="level 5"
+                        android:textColor="@color/primary_900"
+                        android:textStyle="bold" />
 
                 </androidx.cardview.widget.CardView>
 

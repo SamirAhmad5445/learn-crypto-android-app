@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.learncrypto.app.databinding.ActivityMainBinding;
 
@@ -35,7 +36,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Start app with home fragment
-        updateFragment(new HomeFragment());
+        String intentFragment = getIntent().getStringExtra("fragment");
+        if(intentFragment != null) {
+            updateFragmentByName(intentFragment);
+        } else {
+            Toast.makeText(this, "Oops, Something went off please restart the app.", Toast.LENGTH_SHORT).show();
+        }
+
 
         // add select listener for th bottom nav
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -68,5 +75,27 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction t = m.beginTransaction();
         t.replace(R.id.frame_container, f);
         t.commit();
+    }
+
+    public void updateFragmentByName(String fragmentName) {
+        switch (fragmentName.toLowerCase()) {
+            default:
+            case "home":
+                updateFragment(new HomeFragment());
+                binding.bottomNavigationView.setSelectedItemId(R.id.navItemHome);
+                break;
+            case "learn":
+                updateFragment(new LearnFragment());
+                binding.bottomNavigationView.setSelectedItemId(R.id.navItemLearn);
+                break;
+            case "encrypt":
+                updateFragment(new EncryptFragment());
+                binding.bottomNavigationView.setSelectedItemId(R.id.navItemEncrypt);
+                break;
+            case "more":
+                updateFragment(new MoreFragment());
+                binding.bottomNavigationView.setSelectedItemId(R.id.navItemMore);
+                break;
+        }
     }
 }

@@ -33,8 +33,8 @@ public class LearnFragment extends Fragment {
             intent.putExtra("LESSON_FILE_PATH", lesson.getFilePath());
             intent.putExtra("LESSON_IS_COMPLETE", lesson.getIsComplete());
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivityForResult(intent, 1);
+            startActivity(intent);
+            getActivity().finish();
         });
 
         RecyclerView lessonRecyclerView = view.findViewById(R.id.learn_recyclerview);
@@ -61,6 +61,7 @@ public class LearnFragment extends Fragment {
                 lessonsList.add(new Lesson(lessonId, lessonName, filePath, isComplete, levelId));
             }
         }
+
         return lessonsList;
     }
 }

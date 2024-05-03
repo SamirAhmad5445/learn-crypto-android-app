@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,7 +53,12 @@ public class LessonActivity extends AppCompatActivity {
         Button lesson_back_btn = findViewById(R.id.lesson_back_btn);
         String lessonString = "lesson " + lessonId;
         lesson_back_btn.setText(lessonString);
-        lesson_back_btn.setOnClickListener(v -> finish());
+        lesson_back_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(LessonActivity.this, MainActivity.class);
+            intent.putExtra("fragment", "learn");
+            startActivity(intent);
+            finish();
+        });
 
         Markwon markwon = Markwon.create(this);
 

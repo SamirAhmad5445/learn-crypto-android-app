@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
@@ -15,6 +16,7 @@ import java.util.Objects;
 
 public class CipherActivity extends AppCompatActivity {
 
+    Button cipher_back_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +56,13 @@ public class CipherActivity extends AppCompatActivity {
             transaction.commit();
         }
 
-        Button cipher_back_btn = findViewById(R.id.cipher_back_btn);
+        cipher_back_btn = findViewById(R.id.cipher_back_btn);
         cipher_back_btn.setText(cipherName);
-        cipher_back_btn.setOnClickListener(v -> finish());
+        cipher_back_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(CipherActivity.this, MainActivity.class);
+            intent.putExtra("fragment", "encrypt");
+            startActivity(intent);
+            finish();
+        });
     }
 }

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/accent_600"
+        android:backgroundTint="@color/primary_600"
         android:layout_margin="@dimen/space_4"
-        app:cardCornerRadius="@dimen/corners_lg"
-        >
+        app:cardCornerRadius="@dimen/corners_lg">
 
         <TextView
             android:id="@+id/cipher_list_item_name"
@@ -25,6 +24,5 @@
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
-
 
 </LinearLayout>
