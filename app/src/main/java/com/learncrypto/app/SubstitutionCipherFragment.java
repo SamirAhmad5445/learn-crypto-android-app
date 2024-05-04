@@ -126,13 +126,7 @@ public class SubstitutionCipherFragment extends Fragment {
         textView.setBackgroundResource(R.drawable.table_cell_style);
         textView.setGravity(Gravity.CENTER);
         textView.setText(text);
-        textView.setPadding(
-                getResources().getDimensionPixelSize(R.dimen.space_2),
-                getResources().getDimensionPixelSize(R.dimen.space_2),
-                getResources().getDimensionPixelSize(R.dimen.space_2),
-                getResources().getDimensionPixelSize(R.dimen.space_2)
-        );
-        textView.setTextSize(getResources().getDimensionPixelSize(R.dimen.text_base));
+        textView.setTextSize(getResources().getDimensionPixelSize(R.dimen.text_sm));
 
         return textView;
     }

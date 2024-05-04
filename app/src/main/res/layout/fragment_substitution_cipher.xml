@@ -206,7 +206,7 @@
                     android:id="@+id/substitution_cipher_output"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_64"
-                    android:text="Cipher text"
+                    android:hint="Cipher text"
                     android:textColor="@color/neutral_200"
                     android:textSize="@dimen/text_2xl"
                     android:padding="@dimen/space_3" />
