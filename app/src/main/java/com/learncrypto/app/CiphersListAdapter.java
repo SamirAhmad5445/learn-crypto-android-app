@@ -34,9 +34,6 @@ public class CiphersListAdapter extends  ArrayAdapter<String> {
             Intent intent = new Intent(getContext(), CipherActivity.class);
             intent.putExtra("CIPHER_NAME", cipherName);
             getContext().startActivity(intent);
-            if (getContext() instanceof Activity) {
-                ((Activity) getContext()).finish();
-            }
         });
 
         return convertView;
