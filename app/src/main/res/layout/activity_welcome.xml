@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/space_8"
+    android:paddingTop="@dimen/space_12"
+    android:paddingBottom="@dimen/space_24"
+    android:clipToPadding="false"
+    tools:ignore="HardcodedText"
+    tools:context=".WelcomeActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        android:src="@drawable/login_image"
+        android:contentDescription="login image"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to"
+        android:textSize="@dimen/text_2xl"
+        android:textStyle="bold"
+        android:textColor="@color/primary_50"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/text_4xl"
+        android:textStyle="bold"
+        android:textColor="@color/primary_200"
+        android:layout_marginVertical="@dimen/space_1"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_description"
+        android:textSize="@dimen/text_sm"
+        android:textStyle="bold"
+        android:textColor="@color/muted_100"
+        />
+
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:backgroundTint="@color/primary_500"
+        android:textColor="@color/text_neutral"
+        android:textSize="@dimen/text_lg"
+        android:layout_marginTop="@dimen/space_3"
+        android:padding="@dimen/space_3"
+        android:layout_marginHorizontal="@dimen/space_8"
+        />
+
+</LinearLayout>

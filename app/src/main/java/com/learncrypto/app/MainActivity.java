@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         if(intentFragment != null) {
             updateFragmentByName(intentFragment);
         } else {
-            Toast.makeText(this, "Oops, Something went off please restart the app.", Toast.LENGTH_SHORT).show();
+            updateFragmentByName("home");
         }
 
 

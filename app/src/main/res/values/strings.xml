@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">learn crypto</string>
+    <string name="app_description">Unlock the mysteries of cryptography with Learn Crypto! 🚀 Dive into interactive lessons, hands-on encryption tools, and challenging quizzes. Perfect for beginners and enthusiasts alike. Start your cryptographic adventure today!</string>
 
     <!-- Titles -->
     <string name="home_title">Learn Crypto</string>

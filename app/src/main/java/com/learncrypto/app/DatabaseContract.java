@@ -11,6 +11,8 @@ public class DatabaseContract {
         public static final String COLUMN_NAME_ID = "_user_id";
         public static final String COLUMN_NAME_FIRST_NAME = "first_name";
         public static final String COLUMN_NAME_LAST_NAME = "last_name";
+        public static final String COLUMN_NAME_EMAIL = "email";
+        public static final String COLUMN_NAME_PASSWORD = "password";
         public static final String COLUMN_NAME_SCORE = "score";
         // Foreign key for the 1:1 relationship any user has 1 current level
         public static final String COLUMN_NAME_USER_LEVEL = "user_level";
@@ -19,6 +21,8 @@ public class DatabaseContract {
                         COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_NAME_FIRST_NAME + " TEXT NOT NULL," +
                         COLUMN_NAME_LAST_NAME + " TEXT NOT NULL," +
+                        COLUMN_NAME_EMAIL + " TEXT NOT NULL," +
+                        COLUMN_NAME_PASSWORD + " TEXT NOT NULL," +
                         COLUMN_NAME_SCORE + " INTEGER NOT NULL," +
                         COLUMN_NAME_USER_LEVEL + " INTEGER," +
                         "FOREIGN KEY (" + COLUMN_NAME_USER_LEVEL + ") REFERENCES " +

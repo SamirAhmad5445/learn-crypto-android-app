@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 public class DatabaseHelper extends SQLiteOpenHelper {
     // database data members
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "CryptographyCourse.db";
+    public static final String DATABASE_NAME = "LearnCrypto.db";
     private final Context context;
     // shared preferences maneging
     public static final String DATABASE_PREFERENCES = "database_preferences";
@@ -221,6 +221,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // data getters: set of functions to get data from the different tables
+    public boolean isUserHasAccount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " +  DatabaseContract.UserTable.TABLE_NAME + ";";
+
+        Cursor cursor;
+        if(db!= null) {
+            cursor = db.rawQuery(query, null);
+            return cursor.getCount() != 0;
+        }
+
+        return false;
+    }
+
+    public boolean createUserAccount(String firstName, String lastName, String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_FIRST_NAME, firstName);
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_LAST_NAME, lastName);
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_EMAIL, email);
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_PASSWORD, password);
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_SCORE, 0);
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_USER_LEVEL, 0);
+
+        long result = db.insert(DatabaseContract.UserTable.TABLE_NAME, null, values);
+
+        return result != -1;
+    }
+
+
     public Cursor getLessonsData() {
         SQLiteDatabase db = this.getReadableDatabase();
 

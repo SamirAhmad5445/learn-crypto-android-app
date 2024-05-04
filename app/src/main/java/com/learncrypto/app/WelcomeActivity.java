@@ -4,19 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
-public class SplashActivity extends AppCompatActivity {
-    private DatabaseHelper db;
+public class WelcomeActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_welcome);
+
         Window window = getWindow();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -25,20 +25,11 @@ public class SplashActivity extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.neutral_950));
         }
 
-        db = new DatabaseHelper(this);
-        db.init();
+        Button login_btn = findViewById(R.id.login_btn);
 
-        boolean isLoggedIn = db.isUserHasAccount();
-
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, isLoggedIn ? MainActivity.class : WelcomeActivity.class);
-
-            if(isLoggedIn) {
-                intent.putExtra("fragment", "home");
-            }
-
-            startActivity(intent);
+        login_btn.setOnClickListener(v -> {
+            startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
             finish();
-        }, 2000);
+        });
     }
 }
