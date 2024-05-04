@@ -90,40 +90,94 @@
 
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipChildren="false">
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_3"
+            >
 
-            <HorizontalScrollView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
-                android:clipChildren="false"
-                >
+                android:layout_marginBottom="@dimen/space_2"
+                android:text="Key Permutation"
+                android:textSize="@dimen/text_2xl"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/corners_md"
+                android:clipChildren="false">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:id="@+id/substitution_cipher_alpha_table"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
+                        android:background="@color/primary_500"
+                        android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/substitution_cipher_key_table"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="@dimen/space_20"
+                            android:layout_height="@dimen/space_12"
+                            android:text="Input"
+                            android:textSize="@dimen/text_xl"
+                            android:padding="@dimen/space_2"
+                            android:gravity="center"
+                            android:background="@drawable/table_cell_style"
+                            android:textColor="@color/neutral_50"
+                            />
+
+                        <TextView
+                            android:layout_width="@dimen/space_20"
+                            android:layout_height="@dimen/space_12"
+                            android:text="Output"
+                            android:textSize="@dimen/text_xl"
+                            android:padding="@dimen/space_2"
+                            android:gravity="center"
+                            android:background="@drawable/table_cell_style"
+                            android:textColor="@color/neutral_50"
+                            />
+
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
+                        android:scrollbars="horizontal"
+                        android:clipChildren="false"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/substitution_cipher_alpha_table"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal" />
+
+                            <LinearLayout
+                                android:id="@+id/substitution_cipher_key_table"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal" />
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
 
                 </LinearLayout>
 
-            </HorizontalScrollView>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <Button
             android:id="@+id/substitution_cipher_btn"

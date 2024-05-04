@@ -100,13 +100,10 @@ public class SubstitutionCipherFragment extends Fragment {
 
         copy_clear.setOnClickListener(v -> {
             text_input.setText("");
-            text_output.setText(encrypt_radio.isChecked() ? "Cipher text" : "Plain text");
         });
 
         return view;
     }
-
-
 
     private void createTable(LinearLayout table, String[] cells) {
         table.removeAllViews();

@@ -10,11 +10,11 @@ public class Ciphers {
     public static class Shift {
         public final static String CIPHER_NAME = "Shift Cipher";
 
-        static String encrypt(String s, char k) {
+        public static String encrypt(String s, char k) {
             return Affine.encrypt(s, 'b', k);
         }
 
-        static String decrypt(String s, char k) {
+        public static String decrypt(String s, char k) {
             return Affine.decrypt(s, 'b', k);
         }
     }
@@ -274,7 +274,7 @@ public class Ciphers {
     public static class Permutation {
         public final static String CIPHER_NAME = "Permutation Cipher";
 
-        static String Check(int[] key) {
+        public static String Check(int[] key) {
             int n = 1, b = 0;
             for (int i = 0; i < key.length; i++) {
                 b = 0;
@@ -290,7 +290,7 @@ public class Ciphers {
             return "Permutation Key is Invalid";
         }
 
-        static String encrypt(String s, String k) {
+        public static String encrypt(String s, String k) {
             String[] k1 = k.split(" ");
 
             ArrayList<Integer> al = new ArrayList<>();
@@ -306,7 +306,7 @@ public class Ciphers {
             return Encrypt(s, key);
         }
 
-        static String Encrypt(String message, int[] key) {
+        public static String Encrypt(String message, int[] key) {
             StringBuilder cipherText = new StringBuilder();
             message = message.toLowerCase();
 
@@ -338,7 +338,7 @@ public class Ciphers {
             return result.toString();
         }
 
-        static int[] getInverseKey(int[] key) {
+        public static int[] getInverseKey(int[] key) {
             int[] inverseKey = new int[key.length];
             for (int i = 0; i < key.length; i++) {
                 inverseKey[key[i] - 1] = i + 1;
@@ -346,7 +346,7 @@ public class Ciphers {
             return inverseKey;
         }
 
-        static String decrypt(String s, String k) {
+        public static String decrypt(String s, String k) {
             String[] k1 = k.split(" ");
 
             ArrayList<Integer> al = new ArrayList<>();
@@ -362,7 +362,7 @@ public class Ciphers {
             return Decrypt(s, key);
         }
 
-        static String Decrypt(String cipherText, int[] key) {
+        public static String Decrypt(String cipherText, int[] key) {
             StringBuilder message = new StringBuilder();
             cipherText = cipherText.toLowerCase();
 
@@ -484,7 +484,7 @@ public class Ciphers {
 
         public final static String CIPHER_NAME = "Hill Cipher";
 
-        static String encrypt(String str, String k) {
+        public static String encrypt(String str, String k) {
             String[] k1 = k.split(" ");
             int[][] key;
             int length;
@@ -512,7 +512,7 @@ public class Ciphers {
             return Encrypt(s.toString(), key);
         }
 
-        static String Encrypt(String plaintext, int[][] keyMatrix) {
+        public static String Encrypt(String plaintext, int[][] keyMatrix) {
             size = plaintext.length();
             int blockSize = keyMatrix.length;
             plaintext = plaintext.toLowerCase();
@@ -542,7 +542,7 @@ public class Ciphers {
             return ciphertext.toString();
         }
 
-        static String decrypt(String str, String k) {
+        public static String decrypt(String str, String k) {
             String[] k1 = k.split(" ");
             int[][] key;
             int length;
@@ -570,7 +570,7 @@ public class Ciphers {
             return Decrypt(s.toString(), key);
         }
 
-        static String Decrypt(String ciphertext, int[][] keyMatrix) {
+        public static String Decrypt(String ciphertext, int[][] keyMatrix) {
 
             ciphertext = ciphertext.toLowerCase();
             if (keyMatrix.length == 2 || keyMatrix.length == 3) {
@@ -609,11 +609,11 @@ public class Ciphers {
             return "";
         }
 
-        static int det(int a, int b, int c, int d) {
+        public static int det(int a, int b, int c, int d) {
             return (((a * d) % 26) - ((b * c) % 26) + 26) % 26;
         }
 
-        static int getInverse(int a) {
+        public static int getInverse(int a) {
             if (Utils.GCD(a, 26) == 1) {
                 for (int j = 1; j < 26; j++) {
                     if ((a * j) % 26 == 1)
@@ -623,7 +623,7 @@ public class Ciphers {
             return -1;
         }
 
-        static int[][] invertMatrix(int[][] k) {
+        public static int[][] invertMatrix(int[][] k) {
             if (k.length == 2) {
                 int det = det(k[0][0], k[0][1], k[1][0], k[1][1]);
                 det %= 26;
@@ -726,7 +726,7 @@ public class Ciphers {
 
         private static final int[] p_Box = { 0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15 };
 
-        static ArrayList<Integer> generateRoundKeys(int key) {
+        public static ArrayList<Integer> generateRoundKeys(int key) {
             ArrayList<Integer> roundKeys = new ArrayList<>();
             for (int i = 0; i < 11; ++i) {
                 key = ((key << 1) | (key >> 15)) & 0xFFFF; // Circular left shift
@@ -774,7 +774,7 @@ public class Ciphers {
             return sb.toString();
         }
 
-        static String Encrypt(String message, ArrayList<Integer> roundKeys) {
+        public static String Encrypt(String message, ArrayList<Integer> roundKeys) {
             int plaintext = convertStringToHex(message);
 
             int x = plaintext;
@@ -816,7 +816,7 @@ public class Ciphers {
             return convertHexToString(Integer.toHexString(y), message);
         }
 
-        static String Decrypt(String cipher, ArrayList<Integer> roundKeys) {
+        public static String Decrypt(String cipher, ArrayList<Integer> roundKeys) {
             int ciphertext = convertStringToHex(cipher);
 
             int x = ciphertext;
