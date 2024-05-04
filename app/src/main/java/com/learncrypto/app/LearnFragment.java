@@ -33,7 +33,6 @@ public class LearnFragment extends Fragment {
             intent.putExtra("LESSON_IS_COMPLETE", lesson.getIsComplete());
 
             startActivity(intent);
-            getActivity().finish();
         });
 
         RecyclerView lessonRecyclerView = view.findViewById(R.id.learn_recyclerview);

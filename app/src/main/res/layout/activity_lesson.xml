@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:clipChildren="false"
     android:orientation="vertical"
+    tools:ignore="HardcodedText,UnusedAttribute,RtlSymmetry"
     tools:context=".LessonActivity">
 
         <LinearLayout
@@ -33,14 +34,31 @@
                     android:text="@string/hello_blank_fragment"
                     android:textSize="@dimen/text_lg" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/space_4"
+                    android:paddingHorizontal="@dimen/space_4"
+                    android:orientation="horizontal"
+                    >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Questions"
+                            android:textSize="@dimen/text_3xl"
+                            android:layout_weight="1"
+                            android:textStyle="bold" />
+
+                </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/question_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_4"
                     android:clipToPadding="false"
-                    android:overScrollMode="always"
-                    android:padding="@dimen/space_4" />
+                    android:overScrollMode="always"/>
 
         </LinearLayout>
 

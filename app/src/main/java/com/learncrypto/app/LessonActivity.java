@@ -53,12 +53,7 @@ public class LessonActivity extends AppCompatActivity {
         Button lesson_back_btn = findViewById(R.id.lesson_back_btn);
         String lessonString = "lesson " + lessonId;
         lesson_back_btn.setText(lessonString);
-        lesson_back_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(LessonActivity.this, MainActivity.class);
-            intent.putExtra("fragment", "learn");
-            startActivity(intent);
-            finish();
-        });
+        lesson_back_btn.setOnClickListener(v -> finish());
 
         Markwon markwon = Markwon.create(this);
 

@@ -22,6 +22,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     private final int lessonId;
     private final int isLessonComplete;
 
+    private QuestionAdapter.QuestionViewHolder viewHolder;
+
     public QuestionAdapter(List<Question> questionList,int lessonId, int isLessonComplete) {
         this.questionList = questionList;
         this.lessonId = lessonId;
@@ -93,9 +95,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                     dbHelper.updateLessonToFinished(lessonId);
                 }
 
-                paintBlank(question_choice_a);
-                paintBlank(question_choice_b);
-                paintBlank(question_choice_c);
+                unpaint(question_choice_a);
+                unpaint(question_choice_b);
+                unpaint(question_choice_c);
 
                 String userChoice;
 
@@ -110,7 +112,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                 }
 
                 if(userChoice.isEmpty()) {
-                    Toast.makeText(itemView.getContext(), "user choice is invalid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), "user choice is invalid 1", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -118,7 +120,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
                 isCorrect = checkIsCorrect(userChoice);
 
-                paintButton(checked, isCorrect);
+                paint(checked, isCorrect);
             });
         }
 
@@ -159,50 +161,45 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             if(!userChoice.isEmpty()) {
                 switch (userChoice) {
                     case "a":
-                        paintButton(question_choice_a, isCorrect);
+                        paint(question_choice_a, isCorrect);
                         question_choice_a.setChecked(true);
                         break;
                     case "b":
-                        paintButton(question_choice_b, isCorrect);
+                        paint(question_choice_b, isCorrect);
                         question_choice_b.setChecked(true);
                         break;
                     case "c":
-                        paintButton(question_choice_c, isCorrect);
+                        paint(question_choice_c, isCorrect);
                         question_choice_c.setChecked(true);
                         break;
+                }
+            } else {
+                int checkedId = question_radio_group.getCheckedRadioButtonId();
+                if(checkedId != -1) {
+                    RadioButton checked = itemView.findViewById(checkedId);
+                    checked.setChecked(false);
+                    unpaint(checked);
                 }
             }
         }
 
-        public void paintButton(RadioButton button, boolean isCorrect) {
-            if(isCorrect) {
-                paintCorrect(button);
-            } else {
-                paintWrong(button);
+        public void paint(RadioButton button, boolean isCorrect) {
+            int color = isCorrect
+                    ? ContextCompat.getColor(itemView.getContext(), R.color.success_400)
+                    : ContextCompat.getColor(itemView.getContext(), R.color.danger_500);
+
+            button.setTextColor(color);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                button.setButtonTintList(ColorStateList.valueOf(color));
             }
         }
 
-        public void paintCorrect(RadioButton button) {
-            button.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.success_400));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                button.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(
-                        itemView.getContext(), R.color.success_400)));
-            }
-        }
+        public void unpaint(RadioButton button) {
+            int color = ContextCompat.getColor(itemView.getContext(), R.color.neutral_100);
 
-        public void paintWrong(RadioButton button) {
-            button.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.danger_500));
+            button.setTextColor(color);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                button.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(
-                        itemView.getContext(), R.color.danger_500)));
-            }
-        }
-
-        public void paintBlank(RadioButton button) {
-            button.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.neutral_100));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                button.setButtonTintList(ColorStateList.valueOf(ContextCompat.getColor(
-                        itemView.getContext(), R.color.neutral_100)));
+                button.setButtonTintList(ColorStateList.valueOf(color));
             }
         }
     }
