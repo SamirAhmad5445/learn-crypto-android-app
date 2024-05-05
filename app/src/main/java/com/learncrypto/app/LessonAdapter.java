@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonViewHolder> {
+    private DatabaseHelper dbHelper;
     private final List<Lesson> lessonList;
-
     private final OnItemClickListener listener;
 
     public LessonAdapter(List<Lesson> lessonList, OnItemClickListener listener) {
@@ -26,6 +26,8 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
     public LessonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.lesson_card_item, parent, false);
+
+        dbHelper = new DatabaseHelper(itemView.getContext());
 
         return new LessonViewHolder(itemView);
     }
@@ -41,15 +43,24 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
             int level = lesson.getLevel();
 
             String lessonCardTitle = lessonId + ". " + lessonName;
+            boolean isLessonFinished = dbHelper.isLessonFinished(lessonId);
+            boolean isLessonSuccess = dbHelper.isLessonSuccess(lessonId);
+            boolean isLessonFailed = dbHelper.isLessonFailed(lessonId);
 
             holder.lesson_card_title.setText(lessonCardTitle);
             holder.lesson_card_level.setText(holder.getLevelString(level));
-            if(isComplete == 0) {
-                holder.lesson_card_is_complete.setVisibility(View.INVISIBLE);
+
+            if(!isLessonFinished) {
+                holder.lesson_card_is_complete.setVisibility(View.GONE);
             }
 
-            holder.lesson_card_is_success.setVisibility(View.INVISIBLE);
-            holder.lesson_card_is_failed.setVisibility(View.INVISIBLE);
+            if(!isLessonSuccess || !isLessonFinished) {
+                holder.lesson_card_is_success.setVisibility(View.GONE);
+            }
+
+            if(!isLessonFailed || !isLessonFinished) {
+                holder.lesson_card_is_failed.setVisibility(View.GONE);
+            }
 
             holder.setFilePath(filePath);
             holder.itemView.setOnClickListener(v -> listener.onItemClick(lesson));

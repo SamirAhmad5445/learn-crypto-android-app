@@ -453,6 +453,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return 0;
     }
 
+    public boolean isLessonFinished(int lessonId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT " + DatabaseContract.LessonTable.COLUMN_NAME_IS_FINISHED +
+                " FROM " +  DatabaseContract.LessonTable.TABLE_NAME +
+                " WHERE " + DatabaseContract.LessonTable.COLUMN_NAME_ID + " = ?";
+
+        Cursor cursor;
+        if(db!= null) {
+            cursor = db.rawQuery(query, new String[]{ String.valueOf(lessonId)});
+            if(cursor != null) {
+                cursor.moveToFirst();
+                return cursor.getInt(0) == 1;
+            }
+        }
+
+        return false;
+    }
+    public boolean isLessonSuccess(int lessonId) {
+        int correctQuestionCount = getCorrectQuestionCountByLessonId(lessonId);
+        return correctQuestionCount == 3;
+    }
+    public boolean isLessonFailed(int lessonId) {
+        int correctQuestionCount = getCorrectQuestionCountByLessonId(lessonId);
+        return correctQuestionCount == 0;
+    }
+
 
     public Cursor getQuestionByLessonId(int lessonId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -507,6 +534,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor;
         if(db!= null) {
             cursor = db.rawQuery(query, null);
+            if(cursor != null) {
+                return cursor.getCount();
+            }
+        }
+
+        return 0;
+    }
+
+    public int getCorrectQuestionCountByLessonId(int lessonId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT " + DatabaseContract.QuestionTable.COLUMN_NAME_ID +
+                " FROM " +  DatabaseContract.QuestionTable.TABLE_NAME +
+                " WHERE " + DatabaseContract.QuestionTable.COLUMN_NAME_IS_CORRECT +
+                " = 1 AND " + DatabaseContract.QuestionTable.COLUMN_NAME_FOREIGN_LESSON_ID +
+                " = ?;";
+
+        Cursor cursor;
+        if(db!= null) {
+            cursor = db.rawQuery(query, new String[]{ String.valueOf(lessonId)});
             if(cursor != null) {
                 return cursor.getCount();
             }
