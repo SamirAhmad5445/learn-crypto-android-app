@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(isAccountCreated) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         login_btn.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.danger_500)));
