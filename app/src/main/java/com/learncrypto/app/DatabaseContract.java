@@ -29,6 +29,9 @@ public class DatabaseContract {
                         LevelTable.TABLE_NAME + " (" + LevelTable.COLUMN_NAME_ID + "));";
         public static final String SQL_DELETE_USER =
                 "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+
+        public static final int POINTS_VALUE = 50;
+        public static final int LEVEL_MAX = 10;
     }
 
     // Level Table:

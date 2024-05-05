@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // this function start the seeding if the app is just been installed
+    // this function start the seeding if the app is just been opened for the first time
     public void init() {
         // check if the db has been created already
         if(isExist()) {
@@ -61,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         editor.putBoolean(PREFERENCES_IS_EXIST, true);
         editor.apply();
     }
-
+    // check is the data exist
     public boolean isExist() {
         SharedPreferences preferences = context.getSharedPreferences(DATABASE_PREFERENCES, Context.MODE_PRIVATE);
         return preferences.getBoolean(PREFERENCES_IS_EXIST, false);
@@ -250,6 +250,127 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public UserAccount getUserAccount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if(!updateUserScore() && !updateUserLevel()) {
+            return null;
+        }
+
+        String query = "SELECT * FROM " + DatabaseContract.UserTable.TABLE_NAME + ";";
+
+        Cursor cursor = null;
+        if(db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+
+            return new UserAccount(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getInt(5),
+                    cursor.getInt(6)
+            );
+        }
+
+        return null;
+    }
+
+    public int getUserScore() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if(!updateUserScore()) {
+            return 0;
+        }
+
+        String query = "SELECT " + DatabaseContract.UserTable.COLUMN_NAME_SCORE +
+                " FROM " + DatabaseContract.UserTable.TABLE_NAME + ";";
+
+        Cursor cursor = null;
+        if(db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+
+            return cursor.getInt(0);
+        }
+
+        return 0;
+    }
+
+    public boolean updateUserScore() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int score = getCorrectQuestionCount() * DatabaseContract.UserTable.POINTS_VALUE;
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_SCORE, score);
+
+        long result = db.update(DatabaseContract.UserTable.TABLE_NAME, values, null, null);
+
+        return result != -1;
+    }
+
+    public int getMaxScore() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT " + DatabaseContract.QuestionTable.COLUMN_NAME_ID +
+                " FROM " +  DatabaseContract.QuestionTable.TABLE_NAME;
+
+        Cursor cursor;
+        if(db!= null) {
+            cursor = db.rawQuery(query, null);
+            if(cursor != null) {
+                return cursor.getCount() * DatabaseContract.UserTable.POINTS_VALUE;
+            }
+        }
+
+        return 0;
+    }
+
+    public int getUserLevel() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if(!updateUserLevel()) {
+            return 0;
+        }
+
+        String query = "SELECT " + DatabaseContract.UserTable.COLUMN_NAME_USER_LEVEL +
+                " FROM " + DatabaseContract.UserTable.TABLE_NAME + ";";
+
+        Cursor cursor = null;
+        if(db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+
+            return cursor.getInt(0);
+        }
+
+        return 0;
+    }
+
+    public boolean updateUserLevel() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int scorePerLevel = getMaxScore() / (DatabaseContract.UserTable.LEVEL_MAX + 1);
+        int level = Math.min(
+                (getUserScore() / scorePerLevel) + 1,
+                DatabaseContract.UserTable.LEVEL_MAX
+        ) ;
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_USER_LEVEL, level);
+
+        long result = db.update(DatabaseContract.UserTable.TABLE_NAME, values, null, null);
+
+        return result != -1;
+    }
 
     public Cursor getLessonsData() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -276,6 +397,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(lessonId)}
         );
     }
+
+    public int getFinishedLessonCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT " + DatabaseContract.LessonTable.COLUMN_NAME_ID +
+                " FROM " +  DatabaseContract.LessonTable.TABLE_NAME +
+                " WHERE " + DatabaseContract.LessonTable.COLUMN_NAME_IS_FINISHED +
+                " = 1;" ;
+
+        Cursor cursor;
+        if(db!= null) {
+            cursor = db.rawQuery(query, null);
+            if(cursor != null) {
+                return cursor.getCount();
+            }
+        }
+
+        return 0;
+    }
+
 
     public Cursor getQuestionByLessonId(int lessonId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -317,6 +458,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseContract.QuestionTable.COLUMN_NAME_ID + " = ?",
                 new String[] {String.valueOf(questionId)}
         );
+    }
+
+    public int getCorrectQuestionCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT " + DatabaseContract.QuestionTable.COLUMN_NAME_ID +
+                " FROM " +  DatabaseContract.QuestionTable.TABLE_NAME +
+                " WHERE " + DatabaseContract.QuestionTable.COLUMN_NAME_IS_CORRECT +
+                " = 1;" ;
+
+        Cursor cursor;
+        if(db!= null) {
+            cursor = db.rawQuery(query, null);
+            if(cursor != null) {
+                return cursor.getCount();
+            }
+        }
+
+        return 0;
     }
 
     public String getUserChoiceByQuestionId(int questionId) {

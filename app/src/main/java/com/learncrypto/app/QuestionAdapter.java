@@ -112,7 +112,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                 }
 
                 if(userChoice.isEmpty()) {
-                    Toast.makeText(itemView.getContext(), "user choice is invalid 1", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), "Oops! your choice is invalid", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
