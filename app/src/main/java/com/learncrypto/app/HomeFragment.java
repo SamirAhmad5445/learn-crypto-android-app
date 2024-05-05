@@ -17,17 +17,6 @@ public class HomeFragment extends Fragment {
     private View view;
     private DatabaseHelper dbHelper;
     private int newCardCount = 2;
-    private Button get_started_btn;
-    private TextView home_user_name;
-    private TextView home_user_score;
-    private TextView home_user_level;
-    private TextView home_finished_lessons;
-    private Button btn_try_spn;
-    private Button btn_dismiss_spn;
-    private Button btn_try_hill;
-    private Button btn_dismiss_hill;
-    private Button btn_view_lessons;
-    private Button btn_view_ciphers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,21 +24,24 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-        get_started_btn = view.findViewById(R.id.get_started_btn);
+        Button get_started_btn = view.findViewById(R.id.get_started_btn);
 
-        home_user_name = view.findViewById(R.id.home_user_name);
-        home_user_score = view.findViewById(R.id.home_user_score);
-        home_user_level = view.findViewById(R.id.home_user_level);
-        home_finished_lessons = view.findViewById(R.id.home_finished_lessons);
+        TextView home_user_name = view.findViewById(R.id.home_user_name);
+        TextView home_user_score = view.findViewById(R.id.home_user_score);
+        TextView home_user_level = view.findViewById(R.id.home_user_level);
+        TextView home_finished_lessons = view.findViewById(R.id.home_finished_lessons);
 
-        btn_try_spn = view.findViewById(R.id.btn_try_spn);
-        btn_dismiss_spn = view.findViewById(R.id.btn_dismiss_spn);
+        Button btn_try_spn = view.findViewById(R.id.btn_try_spn);
+        Button btn_dismiss_spn = view.findViewById(R.id.btn_dismiss_spn);
 
-        btn_try_hill = view.findViewById(R.id.btn_try_hill);
-        btn_dismiss_hill = view.findViewById(R.id.btn_dismiss_hill);
+        Button btn_try_hill = view.findViewById(R.id.btn_try_hill);
+        Button btn_dismiss_hill = view.findViewById(R.id.btn_dismiss_hill);
 
-        btn_view_lessons = view.findViewById(R.id.btn_view_lessons);
-        btn_view_ciphers = view.findViewById(R.id.btn_view_ciphers);
+        Button btn_view_lessons = view.findViewById(R.id.btn_view_lessons);
+        Button btn_view_ciphers = view.findViewById(R.id.btn_view_ciphers);
+
+        Button btn_view_profile = view.findViewById(R.id.btn_view_profile);
+        Button btn_edit_profile = view.findViewById(R.id.btn_edit_profile);
 
         dbHelper = new DatabaseHelper(getActivity());
 
@@ -60,7 +52,7 @@ public class HomeFragment extends Fragment {
         } else {
             home_user_name.setText(user.getFullName().toLowerCase());
             home_user_score.setText(String.valueOf(user.getScore()));
-            home_user_level.setText(getLevelString(dbHelper.getUserLevel()));
+            home_user_level.setText(getLevelString());
             home_finished_lessons.setText(String.valueOf(dbHelper.getFinishedLessonCount()));
         }
 
@@ -131,11 +123,21 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        btn_view_profile.setOnClickListener(v -> {
+            MainActivity mainActivity = (MainActivity)getActivity();
+            Fragment moreFragment = new MoreFragment();
+
+            if (mainActivity != null) {
+                mainActivity.updateFragment(moreFragment);
+                mainActivity.binding.bottomNavigationView.setSelectedItemId(R.id.navItemMore);
+            }
+        });
 
         return view;
     }
 
-    private String getLevelString(int level) {
+    private String getLevelString() {
+        int level = dbHelper.getUserLevel();
         return level < 10 ? ("0" + level) : String.valueOf(level);
     }
 }

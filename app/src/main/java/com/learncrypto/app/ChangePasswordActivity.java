@@ -11,23 +11,16 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class LoginActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
-    private EditText first_name_input;
-    private EditText last_name_input;
-    private EditText email_input;
-    private EditText password_input;
-    private Button login_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_change_password);
 
         Window window = getWindow();
 
@@ -39,74 +32,60 @@ public class LoginActivity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
 
-        first_name_input = findViewById(R.id.first_name_input);
-        last_name_input = findViewById(R.id.last_name_input);
-        email_input = findViewById(R.id.email_input);
-        password_input = findViewById(R.id.password_input);
+        String oldPassword = getIntent().getStringExtra("password");
 
-        login_btn = findViewById(R.id.login_btn);
+        TextView old_password_input = findViewById(R.id.old_password_input);
+        TextView new_password_input = findViewById(R.id.new_password_input);
+        TextView confirm_password_input = findViewById(R.id.confirm_password_input);
 
-        login_btn.setOnClickListener(v -> {
-            boolean isValid = validateInput(
-                    first_name_input.getText().toString(),
-                    last_name_input.getText().toString(),
-                    email_input.getText().toString(),
-                    password_input.getText().toString()
-            );
+        Button change_password_btn =findViewById(R.id.change_password_btn);
 
+        change_password_btn.setOnClickListener(v -> {
+            assert oldPassword != null;
+            if (!oldPassword.equals(old_password_input.getText().toString())) {
+                Toast.makeText(this, "Please enter your old password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String newPassword = new_password_input.getText().toString();
+            String confirmPassword = confirm_password_input.getText().toString();
+
+            boolean isValid = validatePassword(newPassword);
             if(isValid) {
-                login_btn.setText("Creating your account...");
+                if(!newPassword.equals(confirmPassword)) {
+                    Toast.makeText(this, "Password mismatch, please confirm youe password.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                boolean isAccountCreated = dbHelper.createUserAccount(
-                        first_name_input.getText().toString(),
-                        last_name_input.getText().toString(),
-                        email_input.getText().toString(),
-                        password_input.getText().toString()
-                );
+                change_password_btn.setText("Changing your password...");
 
-                if(isAccountCreated) {
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                boolean isAccountUpdated = dbHelper.updateUserPassword(newPassword);
+
+                if(isAccountUpdated) {
+                    Intent intent = new Intent(ChangePasswordActivity.this, MainActivity.class);
+                    intent.putExtra("fragment", "more");
+                    startActivity(intent);
                     finish();
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        login_btn.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.danger_500)));
+                        change_password_btn.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.danger_500)));
                     }
 
-                    login_btn.setText("Restarting in 5s...");
+                    change_password_btn.setText("Restarting in 5s...");
 
                     Toast.makeText(this, "Oops, something went off, the app will restart in 5s", Toast.LENGTH_SHORT).show();
 
                     new Handler().postDelayed(() -> {
-                        startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                        Intent intent = new Intent(ChangePasswordActivity.this, MainActivity.class);
+                        intent.putExtra("fragment", "more");
+                        startActivity(intent);
                         finish();
                     }, 5000);
                 }
             }
+
         });
-    }
 
-    public boolean validateInput(String firstName, String lastName, String email, String password) {
-        if (firstName.isEmpty()) {
-            Toast.makeText(this, "First name can not be empty", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (lastName.isEmpty()) {
-            Toast.makeText(this, "Last name can not be empty", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (email.isEmpty()) {
-            Toast.makeText(this, "Email can not be empty", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Email is invalid", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return validatePassword(password);
     }
 
     public boolean validatePassword(String password) {

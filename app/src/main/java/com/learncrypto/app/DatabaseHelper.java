@@ -249,6 +249,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return result != -1;
     }
+    public boolean updateUserAccount(String firstName, String lastName, String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_FIRST_NAME, firstName);
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_LAST_NAME, lastName);
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_EMAIL, email);
+
+        long result = db.update(DatabaseContract.UserTable.TABLE_NAME, values, null, null);
+
+        return result != -1;
+    }
+
+    public boolean updateUserPassword(String newPassword) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.UserTable.COLUMN_NAME_PASSWORD, newPassword);
+
+        long result = db.update(DatabaseContract.UserTable.TABLE_NAME, values, null, null);
+
+        return result != -1;
+    }
 
     public UserAccount getUserAccount() {
         SQLiteDatabase db = this.getReadableDatabase();

@@ -47,7 +47,6 @@
             android:layout_marginTop="@dimen/space_2">
 
             <View
-                android:id="@+id/view"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/space_0_5"
                 android:background="@color/muted_100"
@@ -66,7 +65,7 @@
                 android:background="@color/neutral_950"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -340,7 +339,6 @@
             android:layout_marginTop="@dimen/space_2">
 
             <View
-                android:id="@+id/view2"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/space_0_5"
                 android:background="@color/muted_100"
@@ -359,7 +357,7 @@
                 android:background="@color/neutral_950"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/space_8"
+    android:paddingTop="@dimen/space_12"
+    android:paddingBottom="@dimen/space_24"
+    android:clipToPadding="false"
+    tools:ignore="HardcodedText,UnusedAttribute,Autofill"
+    tools:context=".EditProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textSize="@dimen/text_4xl"
+            android:textStyle="bold"
+            android:textColor="@color/primary_400"
+            android:layout_marginVertical="@dimen/space_1"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_3">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_2xl"
+                android:textStyle="bold"
+                android:text="First name"
+                android:layout_marginBottom="@dimen/space_2"
+                />
+
+            <EditText
+                android:id="@+id/edit_first_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your first name"
+                android:inputType="text"
+                android:background="@drawable/input_style"
+                android:padding="@dimen/space_4"
+                android:textSize="@dimen/text_xl"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_3">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_2xl"
+                android:textStyle="bold"
+                android:text="Last name"
+                android:layout_marginBottom="@dimen/space_2"
+                />
+
+            <EditText
+                android:id="@+id/edit_last_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your last name"
+                android:inputType="text"
+                android:background="@drawable/input_style"
+                android:padding="@dimen/space_4"
+                android:textSize="@dimen/text_xl"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_3">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_2xl"
+                android:textStyle="bold"
+                android:text="Email"
+                android:layout_marginBottom="@dimen/space_2"
+                />
+
+            <EditText
+                android:id="@+id/edit_email_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your email"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/input_style"
+                android:padding="@dimen/space_4"
+                android:textSize="@dimen/text_xl"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Account"
+            android:backgroundTint="@color/primary_500"
+            android:textColor="@color/text_neutral"
+            android:textSize="@dimen/text_lg"
+            android:layout_marginTop="@dimen/space_3"
+            android:padding="@dimen/space_3"
+            android:layout_marginHorizontal="@dimen/space_8"
+            />
+
+    </LinearLayout>
+
+</ScrollView>
