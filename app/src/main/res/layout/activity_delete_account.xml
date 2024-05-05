@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/space_8"
+    android:paddingTop="@dimen/space_12"
+    android:paddingBottom="@dimen/space_24"
+    android:clipToPadding="false"
+    tools:ignore="HardcodedText,UnusedAttribute,Autofill"
+    tools:context=".DeleteAccountActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        android:textSize="@dimen/text_4xl"
+        android:textStyle="bold"
+        android:textColor="@color/danger_500"
+        android:layout_marginVertical="@dimen/space_1"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Heads up! Deleting your account wipes out everything, no take-backs. Confirm your password to say goodbye."
+        android:textSize="@dimen/text_lg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/space_3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_2xl"
+            android:textStyle="bold"
+            android:text="Password"
+            android:layout_marginBottom="@dimen/space_2"
+            />
+
+        <EditText
+            android:id="@+id/delete_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:background="@drawable/input_style"
+            android:padding="@dimen/space_4"
+            android:textSize="@dimen/text_xl"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        android:backgroundTint="@color/danger_500"
+        android:textColor="@color/text_neutral"
+        android:textSize="@dimen/text_lg"
+        android:layout_marginTop="@dimen/space_3"
+        android:padding="@dimen/space_3"
+        android:layout_marginHorizontal="@dimen/space_8"
+        />
+
+</LinearLayout>

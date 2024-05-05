@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,9 +35,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         String oldPassword = getIntent().getStringExtra("password");
 
-        TextView old_password_input = findViewById(R.id.old_password_input);
-        TextView new_password_input = findViewById(R.id.new_password_input);
-        TextView confirm_password_input = findViewById(R.id.confirm_password_input);
+        EditText old_password_input = findViewById(R.id.old_password_input);
+        EditText new_password_input = findViewById(R.id.new_password_input);
+        EditText confirm_password_input = findViewById(R.id.confirm_password_input);
 
         Button change_password_btn =findViewById(R.id.change_password_btn);
 

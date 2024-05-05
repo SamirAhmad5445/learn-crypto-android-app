@@ -27,9 +27,10 @@ public class DatabaseContract {
                         COLUMN_NAME_USER_LEVEL + " INTEGER," +
                         "FOREIGN KEY (" + COLUMN_NAME_USER_LEVEL + ") REFERENCES " +
                         LevelTable.TABLE_NAME + " (" + LevelTable.COLUMN_NAME_ID + "));";
-        public static final String SQL_DELETE_USER =
+        public static final String SQL_DROP_USER =
                 "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
-
+        public static final String SQL_DELETE_USER =
+                "DELETE FROM " + TABLE_NAME + ";";
         public static final int POINTS_VALUE = 50;
         public static final int LEVEL_MAX = 10;
     }
@@ -44,8 +45,10 @@ public class DatabaseContract {
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_NAME_LEVEL_NAME + " TEXT NOT NULL);";
-        public static final String SQL_DELETE_LEVEL =
+        public static final String SQL_DROP_LEVEL =
                 "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+        public static final String SQL_DELETE_LEVEL =
+                "DELETE FROM " + TABLE_NAME + ";";
     }
 
     // Lesson Table:
@@ -66,8 +69,10 @@ public class DatabaseContract {
                         COLUMN_NAME_FOREIGN_LEVEL_ID + " INTEGER," +
                         "FOREIGN KEY (" + COLUMN_NAME_FOREIGN_LEVEL_ID + ") REFERENCES " +
                         LevelTable.TABLE_NAME + " (" + LevelTable.COLUMN_NAME_ID + "));";
-        public static final String SQL_DELETE_LESSON =
+        public static final String SQL_DROP_LESSON =
                 "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+        public static final String SQL_DELETE_LESSON =
+                "DELETE FROM " + TABLE_NAME + ";";
     }
 
     // Question Table:
@@ -96,7 +101,10 @@ public class DatabaseContract {
                         COLUMN_NAME_FOREIGN_LESSON_ID + " INTEGER," +
                         "FOREIGN KEY (" + COLUMN_NAME_FOREIGN_LESSON_ID + ") REFERENCES " +
                         LessonTable.TABLE_NAME + " (" + LessonTable.COLUMN_NAME_ID + "));";
-        public static final String SQL_DELETE_QUESTION =
+        public static final String SQL_DROP_QUESTION =
                 "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
+        public static final String SQL_DELETE_QUESTION =
+                "DELETE FROM " + TABLE_NAME + ";";
+
     }
 }

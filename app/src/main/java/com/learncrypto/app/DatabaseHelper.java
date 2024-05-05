@@ -41,10 +41,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(DatabaseContract.UserTable.SQL_DELETE_USER);
-        db.execSQL(DatabaseContract.LevelTable.SQL_DELETE_LEVEL);
-        db.execSQL(DatabaseContract.LessonTable.SQL_DELETE_LESSON);
-        db.execSQL(DatabaseContract.QuestionTable.SQL_DELETE_QUESTION);
+        db.execSQL(DatabaseContract.UserTable.SQL_DROP_USER);
+        db.execSQL(DatabaseContract.LevelTable.SQL_DROP_LEVEL);
+        db.execSQL(DatabaseContract.LessonTable.SQL_DROP_LESSON);
+        db.execSQL(DatabaseContract.QuestionTable.SQL_DROP_QUESTION);
         onCreate(db);
     }
 
@@ -393,6 +393,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.update(DatabaseContract.UserTable.TABLE_NAME, values, null, null);
 
         return result != -1;
+    }
+
+    public void deleteUserAccount() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(DatabaseContract.QuestionTable.SQL_DELETE_QUESTION);
+        db.execSQL(DatabaseContract.LessonTable.SQL_DELETE_LESSON);
+        db.execSQL(DatabaseContract.UserTable.SQL_DELETE_USER);
+        db.execSQL(DatabaseContract.LevelTable.SQL_DELETE_LEVEL);
+
+        SharedPreferences.Editor editor = context.getSharedPreferences(DATABASE_PREFERENCES, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(PREFERENCES_IS_EXIST, false);
+        editor.apply();
     }
 
     public Cursor getLessonsData() {

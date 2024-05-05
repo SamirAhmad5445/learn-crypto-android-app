@@ -30,7 +30,6 @@ public class MoreFragment extends Fragment {
 
         Button edit_btn = view.findViewById(R.id.profile_edit_btn);
         Button password_btn = view.findViewById(R.id.profile_password_btn);
-        Button sign_out = view.findViewById(R.id.profile_sign_out);
         Button delete_btn = view.findViewById(R.id.profile_delete_btn);
 
         UserAccount user = dbHelper.getUserAccount();
@@ -64,9 +63,17 @@ public class MoreFragment extends Fragment {
             startActivity(intent);
         });
 
+        delete_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), DeleteAccountActivity.class);
+            if(user != null) {
+                intent.putExtra("password", user.getPassword());
+            }
+            startActivity(intent);
+            getActivity().finish();
+        });
+
         return view;
     }
-
 
     private String getLevelString() {
         int level = dbHelper.getUserLevel();

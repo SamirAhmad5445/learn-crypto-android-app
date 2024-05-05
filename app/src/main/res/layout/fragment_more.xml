@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingVertical="@dimen/space_2">
+                android:padding="@dimen/space_2">
 
                 <TextView
                     android:id="@+id/profile_user_name"
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/space_2"
-                android:text="FINISHED LESSOS"
+                android:text="FINISHED LESSONS"
                 android:textSize="@dimen/text_lg"
                 android:textStyle="bold"
                 android:background="@color/neutral_950"
@@ -253,27 +253,16 @@
             />
 
         <Button
-            android:id="@+id/profile_sign_out"
+            android:id="@+id/profile_delete_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign out"
+            android:text="Delete Account"
             android:backgroundTint="@color/danger_500"
             android:textColor="@color/neutral_100"
             android:textSize="@dimen/text_lg"
             android:padding="@dimen/space_3"
             android:layout_marginTop="@dimen/space_2"
             />
-
-        <Button
-            android:id="@+id/profile_delete_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delete Account"
-            android:backgroundTint="@color/transparent"
-            android:textColor="@color/text_neutral"
-            android:textSize="@dimen/text_lg"
-            />
-
 
     </LinearLayout>
 

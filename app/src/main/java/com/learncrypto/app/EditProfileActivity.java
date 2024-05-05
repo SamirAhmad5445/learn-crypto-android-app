@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +36,9 @@ public class EditProfileActivity extends AppCompatActivity {
         String user_last_name = getIntent().getStringExtra("user_last_name");
         String user_email = getIntent().getStringExtra("user_email");
 
-        TextView first_name_input = findViewById(R.id.edit_first_name_input);
-        TextView last_name_input = findViewById(R.id.edit_last_name_input);
-        TextView email_input = findViewById(R.id.edit_email_input);
+        EditText first_name_input = findViewById(R.id.edit_first_name_input);
+        EditText last_name_input = findViewById(R.id.edit_last_name_input);
+        EditText email_input = findViewById(R.id.edit_email_input);
 
         Button update_btn = findViewById(R.id.update_btn);
 
