@@ -78,7 +78,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/lesson_card_is_success"
+                android:id="@+id/lesson_mark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/corners_lg"
@@ -93,27 +93,6 @@
                     android:paddingVertical="@dimen/space_1"
                     android:paddingHorizontal="@dimen/space_2"
                     android:textColor="@color/primary_950"
-                    android:textStyle="bold"
-                    />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/lesson_card_is_failed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/corners_lg"
-                android:backgroundTint="@color/danger_200"
-                android:layout_marginRight="@dimen/space_2"
-                android:layout_marginEnd="@dimen/space_2">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="failed"
-                    android:paddingVertical="@dimen/space_1"
-                    android:paddingHorizontal="@dimen/space_2"
-                    android:textColor="@color/danger_900"
                     android:textStyle="bold"
                     />
 

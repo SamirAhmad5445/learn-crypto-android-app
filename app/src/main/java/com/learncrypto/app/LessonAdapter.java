@@ -1,5 +1,8 @@
 package com.learncrypto.app;
 
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -43,33 +49,33 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
 
             String lessonCardTitle = lessonId + ". " + lessonName;
             boolean isLessonFinished = dbHelper.isLessonFinished(lessonId);
-            boolean isLessonSuccess = dbHelper.isLessonSuccess(lessonId);
-            boolean isLessonFailed = dbHelper.isLessonFailed(lessonId);
+            int lessonMark = dbHelper.getLessonMark(lessonId);
 
             holder.lesson_card_title.setText(lessonCardTitle);
             holder.lesson_card_level.setText(holder.getLevelString(level));
 
             holder.lesson_card_is_complete.setVisibility(View.VISIBLE);
-            holder.lesson_card_is_success.setVisibility(View.VISIBLE);
-            holder.lesson_card_is_failed.setVisibility(View.VISIBLE);
+            holder.lesson_mark.setVisibility(View.VISIBLE);
+            holder.paintLessonMark(lessonMark > 1);
 
-            if (!isLessonFinished) {
+            if(!isLessonFinished) {
                 holder.lesson_card_is_complete.setVisibility(View.GONE);
             }
 
-            if (!isLessonSuccess || !isLessonFinished) {
-                holder.lesson_card_is_success.setVisibility(View.GONE);
-            }
-
-            if (!isLessonFailed || !isLessonFinished) {
-                holder.lesson_card_is_failed.setVisibility(View.GONE);
+            if(lessonMark == -1) {
+                holder.lesson_mark.setVisibility(View.GONE);
+            } else {
+                String[] messages = {"failed", "nice try", "good job", "full mark"};
+                TextView textView = (TextView) holder.lesson_mark.getChildAt(0);
+                textView.setText(String.format("%s (%d/3)",
+                        messages[lessonMark],
+                        lessonMark));
             }
 
             holder.setFilePath(filePath);
             holder.itemView.setOnClickListener(v -> listener.onItemClick(lesson));
         }
     }
-
 
     @Override
     public int getItemCount() {
@@ -80,27 +86,41 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
         public TextView lesson_card_title;
         public TextView lesson_card_level;
         public CardView lesson_card_is_complete;
-        public CardView lesson_card_is_success;
-        public CardView lesson_card_is_failed;
+        public CardView lesson_mark;
         public String filePath;
         public LessonViewHolder(@NonNull View itemView) {
             super(itemView);
             lesson_card_title = itemView.findViewById(R.id.lesson_card_title);
             lesson_card_level = itemView.findViewById(R.id.lesson_card_level);
             lesson_card_is_complete = itemView.findViewById(R.id.lesson_card_is_complete);
-            lesson_card_is_success = itemView.findViewById(R.id.lesson_card_is_success);
-            lesson_card_is_failed = itemView.findViewById(R.id.lesson_card_is_failed);
+            lesson_mark = itemView.findViewById(R.id.lesson_mark);
         }
 
         public void setFilePath(String filePath) {
             this.filePath = filePath;
         }
 
-
         public String getLevelString(int level) {
             return "Level " + level;
         }
+
+        public void paintLessonMark(boolean isSuccess) {
+            int color = isSuccess
+                    ? ContextCompat.getColor(itemView.getContext(), R.color.primary_950)
+                    : ContextCompat.getColor(itemView.getContext(), R.color.danger_900);
+
+            int background = isSuccess
+                    ? ContextCompat.getColor(itemView.getContext(), R.color.primary_200)
+                    : ContextCompat.getColor(itemView.getContext(), R.color.danger_200);
+
+            TextView text = (TextView) lesson_mark.getChildAt(0);
+
+            text.setTextColor(color);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                lesson_mark.setBackgroundTintList(ColorStateList.valueOf(background));
+            }}
     }
+
 
     public interface OnItemClickListener {
         void onItemClick(Lesson lesson);

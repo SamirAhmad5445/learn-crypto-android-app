@@ -467,14 +467,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean isLessonSuccess(int lessonId) {
-        int correctQuestionCount = getCorrectQuestionCountByLessonId(lessonId);
-        return correctQuestionCount == 3;
+    public int getLessonMark(int lessonId) {
+        if(!isLessonSolved(lessonId)) {
+            return -1;
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT SUM(" + DatabaseContract.QuestionTable.COLUMN_NAME_IS_CORRECT +
+                ") AS total_mark FROM " + DatabaseContract.QuestionTable.TABLE_NAME +
+                " WHERE " + DatabaseContract.QuestionTable.COLUMN_NAME_FOREIGN_LESSON_ID +
+                " = ? AND " + DatabaseContract.QuestionTable.COLUMN_NAME_USER_CHOICE +
+                " IS NOT NULL;";
+
+        Cursor cursor;
+        if(db != null) {
+            cursor = db.rawQuery(query, new String[] {String.valueOf(lessonId)});
+
+            if (cursor != null) {
+                cursor.moveToFirst();
+                return cursor.getInt(0);
+            }
+
+        }
+
+        return 0;
     }
 
-    public boolean isLessonFailed(int lessonId) {
-        int correctQuestionCount = getCorrectQuestionCountByLessonId(lessonId);
-        return correctQuestionCount == 0;
+    public boolean isLessonSolved(int lessonId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int answersCount = 0;
+
+        String query = "SELECT COUNT(" + DatabaseContract.QuestionTable.COLUMN_NAME_ID +
+                ") AS answers_count FROM " + DatabaseContract.QuestionTable.TABLE_NAME +
+                " WHERE " + DatabaseContract.QuestionTable.COLUMN_NAME_FOREIGN_LESSON_ID +
+                " = ? AND " + DatabaseContract.QuestionTable.COLUMN_NAME_USER_CHOICE +
+                " IS NOT NULL";
+
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(lessonId)});
+
+        if (cursor.moveToFirst()) {
+            answersCount = cursor.getInt(0);
+        }
+        cursor.close();
+        return answersCount == 3;
     }
 
     public void resetLessonsData() {
