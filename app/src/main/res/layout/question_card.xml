@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="@color/neutral_900"
     android:layout_margin="@dimen/space_4"
-    app:cardCornerRadius="@dimen/text_lg">
+    app:cardCornerRadius="@dimen/text_lg"
+    tools:ignore="HardcodedText,UnusedAttribute">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,6 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Choice A"
+                android:button="@null"
+                app:buttonCompat="@null"
                 android:paddingLeft="@dimen/space_4"
                 android:paddingStart="@dimen/space_4" />
 
@@ -42,6 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Choice B"
+                android:button="@null"
+                app:buttonCompat="@null"
                 android:paddingLeft="@dimen/space_4"
                 android:paddingStart="@dimen/space_4" />
 
@@ -50,6 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Choice C"
+                android:button="@null"
+                app:buttonCompat="@null"
                 android:paddingLeft="@dimen/space_4"
                 android:paddingStart="@dimen/space_4" />
 

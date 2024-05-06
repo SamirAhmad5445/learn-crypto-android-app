@@ -56,9 +56,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             holder.paintUserChoice(questionId, correctChoice);
 
             holder.question_text.setText(questionText);
-            holder.question_choice_a.setText(choices[0]);
-            holder.question_choice_b.setText(choices[1]);
-            holder.question_choice_c.setText(choices[2]);
+            holder.question_choice_a.setText(String.format("A. %s", choices[0]));
+            holder.question_choice_b.setText(String.format("B. %s", choices[1]));
+            holder.question_choice_c.setText(String.format("C. %s", choices[2]));
         }
     }
 
@@ -196,20 +196,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
             button.setTextColor(color);
             button.setBackground(background);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                button.setButtonTintList(ColorStateList.valueOf(color));
-            }
         }
 
         public void unpaint(RadioButton button) {
             int color = ContextCompat.getColor(itemView.getContext(), R.color.neutral_100);
-//            int background = ContextCompat.getColor(itemView.getContext(), R.color.transparent);
 
             button.setTextColor(color);
             button.setBackground(null);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                button.setButtonTintList(ColorStateList.valueOf(color));
-            }
         }
     }
 }
