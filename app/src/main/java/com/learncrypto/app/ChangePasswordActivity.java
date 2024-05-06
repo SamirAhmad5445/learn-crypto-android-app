@@ -42,9 +42,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
         Button change_password_btn =findViewById(R.id.change_password_btn);
 
         change_password_btn.setOnClickListener(v -> {
+            if(old_password_input.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please enter your old password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             assert oldPassword != null;
             if (!oldPassword.equals(old_password_input.getText().toString())) {
-                Toast.makeText(this, "Please enter your old password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Wrong password, please enter your old password correctly", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -54,7 +59,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             boolean isValid = validatePassword(newPassword);
             if(isValid) {
                 if(!newPassword.equals(confirmPassword)) {
-                    Toast.makeText(this, "Password mismatch, please confirm youe password.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Password mismatch, please confirm your password.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

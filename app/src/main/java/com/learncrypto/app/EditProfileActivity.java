@@ -43,8 +43,11 @@ public class EditProfileActivity extends AppCompatActivity {
         Button update_btn = findViewById(R.id.update_btn);
 
         first_name_input.setHint(user_first_name);
+        first_name_input.setText(user_first_name);
         last_name_input.setHint(user_last_name);
+        last_name_input.setText(user_last_name);
         email_input.setHint(user_email);
+        email_input.setText(user_email);
 
         update_btn.setOnClickListener(v -> {
             boolean isValid = validateInput(
