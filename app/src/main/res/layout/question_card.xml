@@ -20,6 +20,7 @@
             android:text="Question one text?"
             android:textSize="@dimen/text_xl"
             android:textStyle="bold"
+            android:layout_marginBottom="@dimen/space_4"
             />
 
         <RadioGroup
@@ -33,21 +34,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Choice A"
-                />
+                android:paddingLeft="@dimen/space_4"
+                android:paddingStart="@dimen/space_4" />
 
             <RadioButton
                 android:id="@+id/question_choice_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Choice B"
-                />
+                android:paddingLeft="@dimen/space_4"
+                android:paddingStart="@dimen/space_4" />
 
             <RadioButton
                 android:id="@+id/question_choice_c"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Choice C"
-                />
+                android:paddingLeft="@dimen/space_4"
+                android:paddingStart="@dimen/space_4" />
 
         </RadioGroup>
 

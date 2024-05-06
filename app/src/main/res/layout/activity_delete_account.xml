@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:hint="Enter your password"
             android:inputType="textPassword"
-            android:background="@drawable/input_style"
+            android:background="@drawable/input_style_danger"
             android:padding="@dimen/space_4"
             android:textSize="@dimen/text_xl"
             />

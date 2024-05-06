@@ -1,6 +1,7 @@
 package com.learncrypto.app;
 
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -188,7 +189,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                     ? ContextCompat.getColor(itemView.getContext(), R.color.success_400)
                     : ContextCompat.getColor(itemView.getContext(), R.color.danger_500);
 
+            Drawable background = isCorrect
+                    ? ContextCompat.getDrawable(itemView.getContext(), R.drawable.question_correct_background)
+                    : ContextCompat.getDrawable(itemView.getContext(), R.drawable.question_wrong_background);
+
+
             button.setTextColor(color);
+            button.setBackground(background);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 button.setButtonTintList(ColorStateList.valueOf(color));
             }
@@ -196,8 +203,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
         public void unpaint(RadioButton button) {
             int color = ContextCompat.getColor(itemView.getContext(), R.color.neutral_100);
+//            int background = ContextCompat.getColor(itemView.getContext(), R.color.transparent);
 
             button.setTextColor(color);
+            button.setBackground(null);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 button.setButtonTintList(ColorStateList.valueOf(color));
             }
