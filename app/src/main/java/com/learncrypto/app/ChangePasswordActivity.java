@@ -96,14 +96,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     public boolean validatePassword(String password) {
         if (password.isEmpty()) {
-            Toast.makeText(this, "Password can not be empty.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "New password can not be empty.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         boolean hasUppercase = !password.equals(password.toLowerCase());
         boolean hasLowercase = !password.equals(password.toUpperCase());
         boolean hasDigit = password.matches(".*\\d.*");
-        boolean hasSpecial = password.matches(".*[@$!%*?&].*");
+        boolean hasSpecial = password.matches(".*[@\\-_#$!%*?&].*");
 
         if (password.length() < 8) {
             Toast.makeText(this, "Password must be at least 8 characters long.", Toast.LENGTH_LONG).show();
@@ -126,7 +126,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
 
         if (!hasSpecial) {
-            Toast.makeText(this, "Password must contain at least one special character (@$!%*?&).", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Password must contain at least one special character (@-_#$!%*?&).", Toast.LENGTH_LONG).show();
             return false;
         }
 

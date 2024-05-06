@@ -18,7 +18,7 @@ import com.learncrypto.app.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    String currentFragment = "home";
+    String currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
         String intentFragment = getIntent().getStringExtra("fragment");
         if(intentFragment != null) {
             updateFragmentByName(intentFragment);
+            currentFragment = intentFragment;
         } else {
             updateFragmentByName("home");
+            currentFragment = "home";
         }
 
 

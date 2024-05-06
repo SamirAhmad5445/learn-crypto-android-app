@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean hasUppercase = !password.equals(password.toLowerCase());
         boolean hasLowercase = !password.equals(password.toUpperCase());
         boolean hasDigit = password.matches(".*\\d.*");
-        boolean hasSpecial = password.matches(".*[@$!%*?&].*");
+        boolean hasSpecial = password.matches(".*[@\\-_#$!%*?&].*");
 
         if (password.length() < 8) {
             Toast.makeText(this, "Password must be at least 8 characters long.", Toast.LENGTH_LONG).show();
@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (!hasSpecial) {
-            Toast.makeText(this, "Password must contain at least one special character (@$!%*?&).", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Password must contain at least one special character (@-_#$!%*?&).", Toast.LENGTH_LONG).show();
             return false;
         }
 
