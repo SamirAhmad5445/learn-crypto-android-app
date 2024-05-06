@@ -398,14 +398,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteUserAccount() {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.execSQL(DatabaseContract.QuestionTable.SQL_DELETE_QUESTION);
-        db.execSQL(DatabaseContract.LessonTable.SQL_DELETE_LESSON);
         db.execSQL(DatabaseContract.UserTable.SQL_DELETE_USER);
-        db.execSQL(DatabaseContract.LevelTable.SQL_DELETE_LEVEL);
-
-        SharedPreferences.Editor editor = context.getSharedPreferences(DATABASE_PREFERENCES, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(PREFERENCES_IS_EXIST, false);
-        editor.apply();
+        resetLessonsData();
+        resetQuestionsData();
     }
 
     public Cursor getLessonsData() {
@@ -471,15 +466,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return false;
     }
+
     public boolean isLessonSuccess(int lessonId) {
         int correctQuestionCount = getCorrectQuestionCountByLessonId(lessonId);
         return correctQuestionCount == 3;
     }
+
     public boolean isLessonFailed(int lessonId) {
         int correctQuestionCount = getCorrectQuestionCountByLessonId(lessonId);
         return correctQuestionCount == 0;
     }
 
+    public void resetLessonsData() {
+        SQLiteDatabase db  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.putNull(DatabaseContract.LessonTable.COLUMN_NAME_IS_FINISHED);
+
+        db.update(DatabaseContract.LessonTable.TABLE_NAME, values, null, null);
+    }
 
     public Cursor getQuestionByLessonId(int lessonId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -585,5 +589,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return userChoice;
+    }
+    public void resetQuestionsData() {
+        SQLiteDatabase db  = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.putNull(DatabaseContract.QuestionTable.COLUMN_NAME_USER_CHOICE);
+        values.put(DatabaseContract.QuestionTable.COLUMN_NAME_IS_CORRECT, 0);
+
+        db.update(DatabaseContract.QuestionTable.TABLE_NAME, values, null, null);
     }
 }
