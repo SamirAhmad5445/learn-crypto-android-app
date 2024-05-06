@@ -35,11 +35,10 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
     @Override
     public void onBindViewHolder(@NonNull LessonViewHolder holder, int position) {
         Lesson lesson = lessonList.get(position);
-        if(lesson != null) {
+        if (lesson != null) {
             int lessonId = lesson.getId();
             String lessonName = lesson.getLessonName();
             String filePath = lesson.getFilePath();
-            int isComplete = lesson.getIsComplete();
             int level = lesson.getLevel();
 
             String lessonCardTitle = lessonId + ". " + lessonName;
@@ -50,15 +49,19 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
             holder.lesson_card_title.setText(lessonCardTitle);
             holder.lesson_card_level.setText(holder.getLevelString(level));
 
-            if(!isLessonFinished) {
+            holder.lesson_card_is_complete.setVisibility(View.VISIBLE);
+            holder.lesson_card_is_success.setVisibility(View.VISIBLE);
+            holder.lesson_card_is_failed.setVisibility(View.VISIBLE);
+
+            if (!isLessonFinished) {
                 holder.lesson_card_is_complete.setVisibility(View.GONE);
             }
 
-            if(!isLessonSuccess || !isLessonFinished) {
+            if (!isLessonSuccess || !isLessonFinished) {
                 holder.lesson_card_is_success.setVisibility(View.GONE);
             }
 
-            if(!isLessonFailed || !isLessonFinished) {
+            if (!isLessonFailed || !isLessonFinished) {
                 holder.lesson_card_is_failed.setVisibility(View.GONE);
             }
 
@@ -66,6 +69,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
             holder.itemView.setOnClickListener(v -> listener.onItemClick(lesson));
         }
     }
+
 
     @Override
     public int getItemCount() {

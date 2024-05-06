@@ -133,6 +133,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        btn_edit_profile.setOnClickListener(v ->{
+            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+            if(user != null) {
+                intent.putExtra("user_first_name", user.getFirstName());
+                intent.putExtra("user_last_name", user.getLastName());
+                intent.putExtra("user_email", user.getEmail());
+            }
+            startActivity(intent);
+        });
+
         return view;
     }
 

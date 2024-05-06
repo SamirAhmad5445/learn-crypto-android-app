@@ -18,6 +18,7 @@ import com.learncrypto.app.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    String currentFragment = "home";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,25 +51,27 @@ public class MainActivity extends AppCompatActivity {
 
             if(id == R.id.navItemHome) {
                 updateFragment(new HomeFragment());
+                currentFragment = "home";
             } else if(id == R.id.navItemLearn) {
                 updateFragment(new LearnFragment());
+                currentFragment = "learn";
             } else if(id == R.id.navItemEncrypt) {
                 updateFragment(new EncryptFragment());
+                currentFragment = "encrypt";
             } else if(id == R.id.navItemMore) {
                 updateFragment(new MoreFragment());
+                currentFragment = "more";
             }
             return true;
         });
     }
 
-    // In your parent activity
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            recreate();
-        }
+    protected void onResume() {
+        super.onResume();
+        updateFragmentByName(currentFragment);
     }
+
 
     public void updateFragment(Fragment f) {
         FragmentManager m = getSupportFragmentManager();
