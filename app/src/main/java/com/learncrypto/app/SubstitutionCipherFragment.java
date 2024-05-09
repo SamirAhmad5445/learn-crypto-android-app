@@ -100,6 +100,7 @@ public class SubstitutionCipherFragment extends Fragment {
 
         copy_clear.setOnClickListener(v -> {
             text_input.setText("");
+            text_output.setText("");
         });
 
         return view;

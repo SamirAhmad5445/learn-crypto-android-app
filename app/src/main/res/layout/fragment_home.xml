@@ -109,6 +109,7 @@
                         android:textColor="@color/accent_700"
                         android:textSize="@dimen/text_5xl"
                         android:textStyle="bold"
+                        android:paddingTop="@dimen/space_2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -147,6 +148,7 @@
                         android:textColor="@color/primary_900"
                         android:textSize="@dimen/text_5xl"
                         android:textStyle="bold"
+                        android:paddingTop="@dimen/space_2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 

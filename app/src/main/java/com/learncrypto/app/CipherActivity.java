@@ -59,9 +59,6 @@ public class CipherActivity extends AppCompatActivity {
         cipher_back_btn = findViewById(R.id.cipher_back_btn);
         cipher_back_btn.setText(cipherName);
         cipher_back_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(CipherActivity.this, MainActivity.class);
-            intent.putExtra("fragment", "encrypt");
-            startActivity(intent);
             finish();
         });
     }

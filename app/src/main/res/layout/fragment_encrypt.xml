@@ -19,10 +19,9 @@
         android:paddingBottom="@dimen/space_40">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_56"
-            app:cardCornerRadius="@dimen/space_4">
+            app:cardCornerRadius="@dimen/corners_2xl">
 
             <ImageView
                 android:layout_width="match_parent"

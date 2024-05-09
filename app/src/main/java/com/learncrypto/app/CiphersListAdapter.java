@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-public class CiphersListAdapter extends  ArrayAdapter<String> {
+public class CiphersListAdapter extends ArrayAdapter<String> {
 
     public CiphersListAdapter(Context context, String[] ciphers) {
         super(context, 0, ciphers);
