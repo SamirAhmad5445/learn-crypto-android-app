@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
-        if(!isFirstLetterSpecial(firstName.charAt(0))) {
+        if(isFirstLetterSpecial(firstName.charAt(0))) {
             Toast.makeText(this, "Invalid first name, can't start with special character", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
-        if(!isFirstLetterSpecial(lastName.charAt(0))) {
+        if(isFirstLetterSpecial(lastName.charAt(0))) {
             Toast.makeText(this, "Invalid last name, can't start with special character", Toast.LENGTH_SHORT).show();
             return false;
         }
