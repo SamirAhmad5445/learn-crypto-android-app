@@ -91,8 +91,18 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
+        if(!isFirstLetterSpecial(firstName.charAt(0))) {
+            Toast.makeText(this, "Invalid first name, can't start with special character", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         if (lastName.isEmpty()) {
             Toast.makeText(this, "Last name can not be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(!isFirstLetterSpecial(lastName.charAt(0))) {
+            Toast.makeText(this, "Invalid last name, can't start with special character", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -146,5 +156,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private boolean isFirstLetterSpecial(char ch){
+        Character c = new Character(ch);
+        String l = c.toString();
+
+        return l.matches(".*[@\\-_#$!%*?&].*");
     }
 }
