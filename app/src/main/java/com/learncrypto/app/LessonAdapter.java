@@ -67,7 +67,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
             } else {
                 String[] messages = {"failed", "nice try", "good job", "full mark"};
                 TextView textView = (TextView) holder.lesson_mark.getChildAt(0);
-                textView.setText(String.format(messages[lessonMark],"%s (%d/3)",lessonMark));
+                textView.setText(String.format("%s (%d/3)", messages[lessonMark], lessonMark));
             }
 
             holder.setFilePath(filePath);
