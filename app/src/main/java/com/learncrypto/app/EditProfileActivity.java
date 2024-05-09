@@ -66,9 +66,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 );
 
                 if(isAccountUpdated) {
-                    Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
-                    intent.putExtra("fragment", "more");
-                    startActivity(intent);
                     finish();
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

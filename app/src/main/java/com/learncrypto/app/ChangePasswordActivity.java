@@ -68,9 +68,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 boolean isAccountUpdated = dbHelper.updateUserPassword(newPassword);
 
                 if(isAccountUpdated) {
-                    Intent intent = new Intent(ChangePasswordActivity.this, MainActivity.class);
-                    intent.putExtra("fragment", "more");
-                    startActivity(intent);
                     finish();
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
